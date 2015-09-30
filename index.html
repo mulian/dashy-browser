@@ -1,0 +1,25 @@
+<!-- ONLY FOR TEST CASES -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello World!</title>
+  </head>
+  <script>
+    var file = null;
+    function onload() {
+      file = document.getElementById('f');
+    };
+    function handleFiles(file) {
+      // file = document.getElementById('f');
+      // console.log(file[0]);
+      // console.log("jo");
+      console.log(file);
+    }
+  </script>
+  <body onload='onload()'>
+    <h1>Hello World!</h1>
+    We are using io.js <script>document.write(process.version)</script>
+    and Electron <script>document.write(process.versions['electron'])</script>.
+    <input type="file" id="f" onchange="handleFiles(this.files)">
+  </body>
+</html>
