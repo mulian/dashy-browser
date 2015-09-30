@@ -1,0 +1,13 @@
+{
+  "name"    : "daisy-browser",
+  "description": "A Browser for Daisy Web-App. Used with an electronic Blackboard.",
+  "version" : "0.1.0",
+  "main"    : "main.js",
+  "engines": {
+    "electron-prebuilt": ">=0.33.3"
+  },
+  "devDependencies": {
+  },
+  "dependencies": {
+  }
+}
