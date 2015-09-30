@@ -9,5 +9,9 @@
   "devDependencies": {
   },
   "dependencies": {
+  },
+  "flash": {
+    "path": "/Applications/Google Chrome.app/Contents/Versions/45.0.2454.101/Google Chrome Framework.framework/Internet Plug-Ins/PepperFlash/PepperFlashPlayer.plugin",
+    "version": "19.0.0.185"
   }
 }
