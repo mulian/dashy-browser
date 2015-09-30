@@ -1,117 +1,37 @@
 var app = require('app');  // Module to control application life.
 var BrowserWindow = require('browser-window');  // Module to create native browser window.
 var fs = require('fs')
-var packageFile = require('./package.json');
+// var packageFile = require('./package.json');
 
-
-// Report crashes to our server.
+var coffee = require('coffee-script');
+// console.log(coffee);
 require('crash-reporter').start();
+var coffeePath='./lib/', jsPath='./src/'
 
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the JavaScript object is garbage collected.
-var mainWindow = null;
+var numFiles=0;
 
-app.commandLine.appendSwitch('ppapi-flash-path',packageFile.flash.path);
-app.commandLine.appendSwitch('ppapi-flash-version', packageFile.flash.version);
+compileToCoffe = function(file_path,file_name) {
+  // console.log("compileToCoffe: "+file_path+" name: "+file_name);
+  var file_name_js = file_name.slice(0,file_name.length-7)+'.js';
+  // console.log(file_name_js);
+  fs.readFile(file_path,'utf8',function(err,data) {
+    // console.log(data);
+    fs.writeFile(jsPath+file_name_js,coffee.compile(data),function(err) {
+      if(err) throw err;
+      console.log("Compile: "+file_path+" to "+jsPath+file_name_js);
+      numFiles--;
+      //run main.js (aka. main.coffee), after compile
+      if(numFiles==0) require(jsPath+'main.js')(app,BrowserWindow)
+    });
+  });
+};
 
-// Quit when all windows are closed.
-app.on('window-all-closed', function() {
-  // On OS X it is common for applications and their menu bar
-  // to stay active until the user quits explicitly with Cmd + Q
-  if (process.platform != 'darwin') {
-    app.quit();
+fs.readdir(coffeePath,function(err,files) {
+  if(err) throw err;
+  numFiles=files.length;
+  for(var i=0;i<files.length;i++) {
+    var file = files[i];
+    // console.log("compile: "+file);
+    compileToCoffe(coffeePath+file,file);
   }
-});
-
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-app.on('ready', function() {
-  // Create the browser window.
-  mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
-    'web-preferences': {
-      'plugins': true
-    }
-  });
-
-  var webContents = mainWindow.webContents;
-  webContents.enableDeviceEmulation({
-    fitToView: true
-  });
-  // webContents.enableDeviceEmulation({
-  //   screenPosition: 'mobile',
-  //   screenSize: 'mobile',
-  //   viewPosition: 'mobile',
-  //   screenSize: {
-  //     width: 800,
-  //     height: 600
-  //   },
-  //   deviceScaleFactor: 0,
-  //   viewSize: {
-  //     width: 800,
-  //     height: 600
-  //   },
-  //   fitToView: true,
-  //   scale: 1,
-  //   offset: {
-  //     x:0, y:0
-  //   }
-  // });
-
-  // and load the index.html of the app.
-  // mainWindow.loadUrl('http://localhost:8081/');
-  // mainWindow.loadUrl('http://localhost:8085/');
-  mainWindow.loadUrl('http://www.adobe.com/software/flash/about/');
-  mainWindow.loadUrl('https://www.sumopaint.com/home/#app');
-  // mainWindow.loadUrl('http://localhost:8081/daisy-strut/');
-  // mainWindow.loadUrl('http://strut.io/editor/index.html');
-  // mainWindow.loadUrl('file://' + __dirname + '/index.html');
-  // mainWindow.loadUrl('file://' + __dirname + '/file.html');
-  // mainWindow.loadUrl('https://www.mozilla.org/en-US/firefox/new/#download-fx');
-  // mainWindow.loadUrl('https://www.iconfinder.com/iconsets/hawcons');
-  // mainWindow.loadUrl('http://www.pdfmerge.com');
-
-  var menujs = fs.readFileSync(__dirname + '/menu.js');
-  // console.log(menujs.toString());
-
-  webContents.on('did-frame-finish-load', function(event,isMainFrame) {
-    console.log("did-frame-finish-load: "+isMainFrame);
-    if (isMainFrame) webContents.executeJavaScript(menujs.toString());
-  });
-
-  // Open the DevTools.
-  mainWindow.openDevTools();
-
-  var session = webContents.session;
-
-  session.on('will-download',function(event,item,webContents) {
-    console.log("DOWNLOAD: "+item.url);
-    event.preventDefault();
-    // require('request')(item.url, function(data) {
-    //   require('fs').writeFileSync('/somewhere', data);
-    // });
-    //THEN: https://github.com/request/request
-  });
-
-
-  // webContents.on('new-window',function(event) {
-  //   console.log("new-window");
-  //   event.preventDefault();
-  //   console.log(event);
-  // });
-  // webContents.on('did-start-loading',function(event) {
-  //   console.log("did-start-loading");
-  //   event.preventDefault();
-  //   console.log(event);
-  // });
-  //
-
-  // Emitted when the window is closed.
-  mainWindow.on('closed', function() {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
-    mainWindow = null;
-  });
 });
