@@ -10,6 +10,9 @@ require('crash-reporter').start();
 // be closed automatically when the JavaScript object is garbage collected.
 var mainWindow = null;
 
+app.commandLine.appendSwitch('ppapi-flash-path','/Applications/Google Chrome.app/Contents/Versions/45.0.2454.101/Google Chrome Framework.framework/Internet Plug-Ins/PepperFlash/PepperFlashPlayer.plugin');
+app.commandLine.appendSwitch('ppapi-flash-version', '19.0.0.185');
+
 // Quit when all windows are closed.
 app.on('window-all-closed', function() {
   // On OS X it is common for applications and their menu bar
@@ -23,7 +26,13 @@ app.on('window-all-closed', function() {
 // initialization and is ready to create browser windows.
 app.on('ready', function() {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600});
+  mainWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
+    'web-preferences': {
+      'plugins': true
+    }
+  });
 
   var webContents = mainWindow.webContents;
   webContents.enableDeviceEmulation({
@@ -50,7 +59,12 @@ app.on('ready', function() {
   // });
 
   // and load the index.html of the app.
-  mainWindow.loadUrl('http://localhost:8081/');
+  // mainWindow.loadUrl('http://localhost:8081/');
+  // mainWindow.loadUrl('http://localhost:8085/');
+  mainWindow.loadUrl('http://www.adobe.com/software/flash/about/');
+  mainWindow.loadUrl('https://www.sumopaint.com/home/#app');
+  // mainWindow.loadUrl('http://localhost:8081/daisy-strut/');
+  // mainWindow.loadUrl('http://strut.io/editor/index.html');
   // mainWindow.loadUrl('file://' + __dirname + '/index.html');
   // mainWindow.loadUrl('file://' + __dirname + '/file.html');
   // mainWindow.loadUrl('https://www.mozilla.org/en-US/firefox/new/#download-fx');
