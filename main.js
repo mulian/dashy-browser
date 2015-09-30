@@ -1,6 +1,7 @@
 var app = require('app');  // Module to control application life.
 var BrowserWindow = require('browser-window');  // Module to create native browser window.
 var fs = require('fs')
+var packageFile = require('./package.json');
 
 
 // Report crashes to our server.
@@ -10,8 +11,8 @@ require('crash-reporter').start();
 // be closed automatically when the JavaScript object is garbage collected.
 var mainWindow = null;
 
-app.commandLine.appendSwitch('ppapi-flash-path','/Applications/Google Chrome.app/Contents/Versions/45.0.2454.101/Google Chrome Framework.framework/Internet Plug-Ins/PepperFlash/PepperFlashPlayer.plugin');
-app.commandLine.appendSwitch('ppapi-flash-version', '19.0.0.185');
+app.commandLine.appendSwitch('ppapi-flash-path',packageFile.flash.path);
+app.commandLine.appendSwitch('ppapi-flash-version', packageFile.flash.version);
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function() {
