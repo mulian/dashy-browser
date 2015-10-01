@@ -1,5 +1,28 @@
 # TODO
 
+## Notifications
+* Es wird ein Notifications Center erstellt.
+* An den kann ein text gesendet werden
+  * dieser wird 5-10sec angezeigt
+  * dann ausgeblendet
+
+## Apps
+
+### Schnittstelle
+Alle apps bekommen eine FileSave Libary, die durchgereicht wird an Daisy
+* saveFile(app_name,data)
+* Promt: fileName
+
+### Summo (flash)
+* Wenn bestimmte URL erreicht
+  * Triggert daisy->uploadLink(aktuelle_url)
+
+### strut.io
+* Nutzt Schnitstellen FileSave Lib.
+
+### Marvel
+* TODO: Prüfen
+
 ## Desktop Ordner
 Für MS Office, im speziellen Visio.
 * Desktop Ordner "upload"
