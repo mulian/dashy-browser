@@ -3,6 +3,10 @@
 <html>
   <head>
     <title>Hello World!</title>
+    <script src='src/client.js'></script>
+    <link rel="stylesheet" href="css/default.css">
+    <link rel="stylesheet" href="http://localhost:8081/css/style.css">
+    <link rel="stylesheet" href="http://localhost:8081/css/bootstrap.css">
   </head>
   <script>
     var file = null;
@@ -17,10 +21,7 @@
     }
   </script>
   <body onload='onload()'>
-    <h1>Hello World!</h1>
-    We are using io.js <script>document.write(process.version)</script>
-    and Electron <script>document.write(process.versions['electron'])</script>.
-    <input type="file" id="f" onchange="handleFiles(this.files)">
-    <webview src="http://www.adobe.com/software/flash/about/" plugins></webview>
+
+    <webview id="daisy" src="http://localhost:8081/" autosize="on" nodeintegration></webview>
   </body>
 </html>
