@@ -8,9 +8,6 @@ class Guesture
     right : {}
   on : {}
 
-  #@on.left =  (event) ->
-  #@on.right
-  #same for right
   constructor: (options) ->
     {@on,@space,@minActivate} = options
     @addEventListener()
@@ -33,40 +30,23 @@ class Guesture
   mouseDown: (e) =>
     @checkDown 'left', e
     @checkDown 'right', e
-    # if event.left <= @space and @on.left?
-    #   @move.left.start = event.left
-    # else if event.right <= @space and @on.right?
-    #   @move.right.start = event.right
   checkDown: (direction,event) ->
     if event[direction] <= @space and @on[direction]?
       @move[direction].start = event[direction]
+
   mouseMove: (e) =>
     @checkMove 'left', e
     @checkMove 'right', e
-    # @move.left.activate = true if event.diff.left >= @minActivate
-    # @move.right.activate = true if event.diff.right >= @minActivate
-    # if @on.left? and @move.left.activate?
-    #   @on.left event
-    # else if @on.left? and @move.right.activate?
-    #   @on.right event
   checkMove: (direction,event) ->
     @move[direction].activate = true if event.diff[direction] >= @minActivate
     if @on[direction]? and @move[direction].activate?
       @on[direction] event
+
   mouseUp: (e) =>
     e.end = true
     @checkUp 'left', e
     @checkUp 'right', e
-    # if @move.left.activate
-    #   @on.left event
-    #   @stopMove 'left'
-    # if @move.right.activate
-    #   @on.right event
-    #   @stopMove 'right'
   checkUp: (direction,event) ->
     if @move[direction].activate
       @on[direction] event
       @move[direction] = {}
-
-  stopMove: (name) ->
-    @move[name] = {}
