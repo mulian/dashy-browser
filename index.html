@@ -5,23 +5,13 @@
     <title>Hello World!</title>
     <script src='src/client.js'></script>
     <link rel="stylesheet" href="css/default.css">
-    <link rel="stylesheet" href="http://localhost:8081/css/style.css">
-    <link rel="stylesheet" href="http://localhost:8081/css/bootstrap.css">
   </head>
-  <script>
-    var file = null;
-    function onload() {
-      file = document.getElementById('f');
-    };
-    function handleFiles(file) {
-      // file = document.getElementById('f');
-      // console.log(file[0]);
-      // console.log("jo");
-      console.log(file);
-    }
-  </script>
-  <body onload='onload()'>
-
-    <webview id="daisy" src="http://localhost:8081/" autosize="on" nodeintegration></webview>
+  <body>
+    <webview id="daisy" class="app"></webview>
+    <div id='backBtn'>
+      <a href='#'>BACK to</a>
+    </div>
+    <div id='notifications'>
+    </div>
   </body>
 </html>

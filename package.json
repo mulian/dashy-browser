@@ -11,13 +11,14 @@
   "dependencies": {
     "coffee-script":">=1.10.0",
     "less": ">=2.5.3",
-    "jquery": ">=2.1.4"
+    "jquery": ">=2.1.4",
+    "favicon": ">=0.0.2"
   },
   "flash": {
     "path": "/Applications/Google Chrome.app/Contents/Versions/45.0.2454.101/Google Chrome Framework.framework/Internet Plug-Ins/PepperFlash/PepperFlashPlayer.plugin",
     "version": "19.0.0.185"
   },
-  "daisy": {
+  "settings": {
     "url":"http://localhost:8081/"
   },
   "scripts": {
