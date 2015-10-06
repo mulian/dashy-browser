@@ -19,7 +19,11 @@
     "version": "19.0.0.185"
   },
   "settings": {
-    "url":"http://localhost:8081/"
+    "url":"http://localhost:8081/",
+    "guesture": {
+      "space": 20,
+      "minActivate": 40
+    }
   },
   "scripts": {
     "start": "electron ./"

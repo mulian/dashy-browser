@@ -25,13 +25,17 @@ class Client
     @daisy = new MainApp
       id: '#daisy'
     @gesture = new Gesture
-      left: @onLeft
-      # onRight: left
+      space: settings.guesture.space
+      minActivate: settings.guesture.minActivate
+      on:
+        left: @onLeft
+        # onRight: left
 
   onLeft : (e) =>
     e.preventDefault()
     # console.log "LEFT: #{e.clientX}"
-    daisy.css 'left', "#{e.left}px"
+    console.log "#{e.diff.left-e.winWidth}px"
+    @daisy.element.css 'left', "#{e.diff.left-e.winWidth}px"
     if e.end
       console.log "ENDE"
 
