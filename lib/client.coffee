@@ -5,41 +5,44 @@ fs = require 'fs'
 {settings} = require './package.json'
 
 Gesture = require './src/gesture'
-MainApp = require './src/main-app'
+AppManager = require './src/app-manager'
+View = require './src/view'
 
-favicon = require('favicon');
-
-favicon "https://marvelapp.com", (err, favicon_url) ->
-  console.log favicon_url
-
-class Client
+# Client wie be included from ../index.html
+# It initiate the DOM, ....
+class Client extends View
+  # Public: Registrate the Electron events with jQuery
   constructor: ->
-    $(document).ready @initialize
-    $(window).resize @resize
-  initialize: =>
-    @defineVars()
-    @resize() #resize on start up
+    super
+    @appManager = new AppManager()
+  # Private: Starts with document ready
+  # initialize: ->
+  #   @defineVars()
+  #   @resize() #resize on start up
 
-  defineVars: ->
-    @body = $ 'body'
-    @daisy = new MainApp
-      id: '#daisy'
-    @gesture = new Gesture
-      space: settings.guesture.space
-      minActivate: settings.guesture.minActivate
-      on:
-        left: @onLeft
+  # Private: Define The Variables
+  # defineVars: ->
+  #   @body = $ 'body'
+
+    # @gesture = new Gesture
+    #   space: settings.guesture.space
+    #   minActivate: settings.guesture.minActivate
+    #   on:
+    #     left: @onLeft
         # onRight: left
 
-  onLeft : (e) =>
-    e.preventDefault()
-    # console.log "LEFT: #{e.clientX}"
-    console.log "#{e.diff.left-e.winWidth}px"
-    @daisy.element.css 'left', "#{e.diff.left-e.winWidth}px"
-    if e.end
-      console.log "ENDE"
+  # onLeft : (e) =>
+  #   e.preventDefault()
+  #   # console.log "LEFT: #{e.clientX}"
+  #   console.log "#{e.diff.left-e.winWidth}px"
+  #   @daisy.element.css 'left', "#{e.diff.left-e.winWidth}px"
+  #   if e.end
+  #     console.log "ENDE"
 
-  resize: =>
+  # Private: fires on every resize Event from electron
+  resize: ->
+    @body = $('body') if not @body?
+    console.log @body
     @body.width $(window).width()
     @body.height $(window).height()
 new Client()
