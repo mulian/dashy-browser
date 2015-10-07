@@ -1,6 +1,7 @@
 $ = jQuery = require 'jquery'
 {settings} = require '../package.json'
 App = require './app'
+fs = require 'fs'
 
 # The Main App for AppManager
 module.exports =
@@ -31,13 +32,15 @@ class MainApp extends App
     if @on.log
       @dom.addEventListener 'console-message', @on.log
     else @dom.addEventListener 'console-message', @log
-    @dom.addEventListener 'did-frame-finish-load', @on.finishLoad if @on.finishLoad
+    @dom.addEventListener 'did-frame-finish-load', @finishLoad
 
   # newWindow: (e) ->
   #   console.log "new Window"
   #   console.log e
   log: (e) =>
     console.log("#{@name}: #{e.message}")
-  # finishLoad: (event, isMainFrame) ->
-  #   # @dom.executeJavaScript "daisyOnlyShowMenuScript = #{daisyOnlyShowMenuScript.toString()}"
-  #   console.log "finished loading"
+  finishLoad: (event, isMainFrame) =>
+    str = fs.readFileSync './src/daisy-interface.js','utf8'
+    console.log str
+    @dom.executeJavaScript "#{str}"
+    console.log "finished loading"

@@ -8,6 +8,11 @@ Gesture = require './src/gesture'
 AppManager = require './src/app-manager'
 View = require './src/view'
 
+#Eventbus will be added on window.eventbus
+EventBus = require './src/event-bus'
+#Notifications will registrate events
+Notifications = require './src/notifications'
+
 # Client wie be included from ../index.html
 # It initiate the DOM, ....
 class Client extends View

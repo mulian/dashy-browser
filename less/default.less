@@ -7,30 +7,69 @@
   background: #CCC;
   width: (1+1);
 }
+@keyframes showLeft {
+  from {
+    left: -50px;
+  }
+  to {
+    left: 200px;
+  }
+}
+@keyframes showRight {
+  from {
+    right: -50px;
+  }
+  to {
+    right: 200px;
+  }
+}
+
 body {
+  #touch {
+    position: absolute;
+    top: -200px;
+    z-index: 99;
+    width: 100px;
+    height: 100px;
+
+    &.left {
+      top: 50%;
+      animation-duration: 2s;
+      animation-name: showLeft;
+      animation-iteration-count: infinite;
+      animation-direction: normal;
+    }
+    &.right {
+      top: 50%;
+      animation-duration: 2s;
+      animation-name: showRight;
+      animation-iteration-count: infinite;
+      animation-direction: normal;
+    }
+  }
   #app_liste {
     position: absolute;
     top: 0px;
     right: 0px;
     height: 100%;
-    width: 150px;
+    width: 200px;
     z-index: 11;
     background: @std-background;
     // border-left: @red-background 1px solid;
     box-shadow: 0px 3px 2px #aab2bd;
-    opacity: 0.7;
+    opacity: 0.9;
     ul {
        list-style-type: none;
        padding: 15px;
        margin: 0px;
 
        li {
-         opacity: 1;
-         width: 100%;
+         width: 150px;
          background: @item-background;
-         height: 40px;
+         height: 20px;
+         padding: 10px 10px 10px 10px;
          border: 1px solid #bc213f;
-         text-align: center;
+         text-align: left;
          vertical-align: middle;
          &:hover {
            background: @red-background;
@@ -38,8 +77,13 @@ body {
            transition: all 0.5s ease-out;
          }
          img {
-           height: 40px;
-           width: 40px;
+           height: 16px;
+           width: 16px;
+           display: inline-block;
+         }
+         span {
+           margin-left: 10px;
+           display: inline-block;
          }
          cursor: pointer;
        }
@@ -73,5 +117,29 @@ body {
       color: #000;
     }
     border: 1px solid #bc213f;
+  }
+  #notifications {
+    position: absolute;
+    right: 20px;
+    top: -70px;
+    width: 300px;
+    height: 20px;
+    border: @red-background 1px solid;
+    z-index: 99;
+    transition: all 0.5s ease-out;
+    padding: 20px 30px 20px 30px;
+    opacity: 0.9;
+    &.info {
+      top: 20px;
+      background-color: white;
+      color: @red-background;
+      transition: all 0.5s ease-out;
+    }
+    &.error {
+      top: 20px;
+      color: white;
+      background-color: @red-background;
+      transition: all 0.5s ease-out;
+    }
   }
 }

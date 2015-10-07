@@ -5,33 +5,59 @@ favicon = require('favicon');
 module.exports =
 class App extends View
   constructor: ({@name,@src,@withPlugins=true}) ->
-    @id = "app_#{@name}"
+    @setNameByUrl(@src) if not @name?
+    @setId()
     super
-    @setFavIcon()
+
+  setId: (name=@name) ->
+    @id = "app_#{name}"
+
+  setNameByUrl: (url) ->
+    console.log url
+    urlSplit = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?/.exec(url)
+    console.log "ERROR on newApp-> urlSplit" if not urlSplit?
+    @name = urlSplit[2]
 
   initialize: ->
     @getOrCreateElement()
     @createEntry()
+    @dom.addEventListener 'did-finish-load', @loading
 
-  setFavIcon: ->
-    favicon @src, (err, favicon_url) =>
-      @favIcon = favicon_url
+  loading: =>
+    @changeUrl @element.attr('src')
+  changeUrl: (url) ->
+    @name = @setNameByUrl url
+    @changeId()
+    @url = url
+    @setFavIcon url
+  changeId: (name=@name) ->
+    @id = "app_#{@name}"
+    @element.attr 'id',@id
+    @entryName.text @name
+  setFavIcon: (src=@src) ->
+    favicon src, (err, favicon_url) =>
       # console.log @favIcon
       if @entry?
-        fav = $ '<img />', {} =
-          src: @favIcon
-        @entry.prepend fav
+        if not @favIcon?
+          @favIcon = $ '<img />', {} =
+            src: favicon_url
+          @entry.prepend @favIcon
+        else
+          @favIcon.attr 'src', favicon_url
+
 
   createEntry: ->
     @entry = $('<li />')
     if @favIcon?
       fav = $ '<img />', {} =
         src: @favIcon
-    name = $ '<span />', {} =
+    @entryName = $ '<span />', {} =
       text: @name
 
     @entry.append fav
-    @entry.append name
+    @entry.append @entryName
+    @entry.click =>
+      window.eventbus.fire "AppManager",'changeApp',@
 
   #search for app or create if not exist
   getOrCreateElement: ->

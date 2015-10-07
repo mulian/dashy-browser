@@ -10,6 +10,7 @@ MainApp = require './main-app'
 App = require './app'
 AppList = require './app-list'
 Gesture = require './gesture'
+ShowTouch = require './show-touch'
 
 #### Class AppManager
 module.exports =
@@ -25,15 +26,19 @@ class AppManager extends View
         newWindow: @newApp
     @currentApp = @mainApp
     @appList = new AppList()
+    @showTouch = new ShowTouch()
+    window.eventbus.on "AppManager","changeApp", @changeApp
+    # window.eventbus.on "App","entryClick",@onClickApp
+    # window.eventbus.on 'AppManager','newApp',@newApp
 
   initialize: ->
-    console.log "jo"
     @gesture = new Gesture
       space: settings.guesture.space
       minActivate: settings.guesture.minActivate
       on:
         left: @onLeft
         right: @onRight
+    # @showTouch.showLeftAndRight()
 
   leftAction: false
   onLeft: (event) =>
@@ -49,14 +54,15 @@ class AppManager extends View
       if event.end
         if event.left>=80
           @mainApp.element.removeAttr( 'style' );
-          @currentApp.element.hide()
+          @changeApp @mainApp
         else
           @mainApp.element.hide()
         @leftAction=false
 
 
   onRight: (event) =>
-    if not @appList.dom.is(":visible")
+    # if not @appList.dom.is(":visible")
+    if @appList.list.length>0
       event.preventDefault()
       # console.log @appList.dom.width()
       right = event.right-@appList.dom.width()
@@ -70,7 +76,22 @@ class AppManager extends View
           @appList.dom.removeAttr('style')
         else @appList.dom.hide()
 
-
+  changeApp: (app) =>
+    @currentApp.element.hide()
+    app.element.show()
+    @currentApp = app
+  firstTime : true
   newApp: (event) =>
-    @mainApp.element.hide()
-    @currentApp = @appList.add event.url
+    @appList.add event.url
+
+    if @firstTime
+      @firstTime=false
+      @showTutorial()
+
+  showTutorial: ->
+    setTimeout ->
+      window.eventbus.fire 'ShowTouch','left'
+      setTimeout ->
+        window.eventbus.fire 'ShowTouch','right'
+      , 7*1000
+    , 3*1000

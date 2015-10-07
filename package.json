@@ -7,6 +7,7 @@
     "electron-prebuilt": ">=0.33.3"
   },
   "devDependencies": {
+    "docco": ">=0.7.0"
   },
   "dependencies": {
     "coffee-script":">=1.10.0",
@@ -26,6 +27,7 @@
     }
   },
   "scripts": {
-    "start": "electron ./"
+    "start": "electron ./",
+    "doc": "docco ./lib/*.coffee"
   }
 }
