@@ -17,25 +17,17 @@ class AppList extends View
     @dom.append @domList
     $('body').append @dom
 
-  isNameInAppList: (name) ->
+  isAppInAppList: (url) ->
     for item in @list
-      if item.name == name
+      if item.url == url
         return item
     return false
 
   add: (url) ->
-    urlSplit = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?/.exec(url)
-    console.log "ERROR on newApp-> urlSplit" if not urlSplit?
-    name = urlSplit[2]
-
-    if @isNameInAppList(name)==false
-      app = new App
-        name: name
-        src: url
+    app = @isAppInAppList(url)
+    if app==false
+      app = new App {src: url}
       @list.push app
       @domList.append app.entry
       # console.log name
-    else
-      app = @isNameInAppList(name)
-      app.element.show()
-    return app
+    window.eventbus.fire "AppManager","changeApp",app
