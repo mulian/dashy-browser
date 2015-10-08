@@ -40,7 +40,9 @@ class MainApp extends App
   log: (e) =>
     console.log("#{@name}: #{e.message}")
   finishLoad: (event, isMainFrame) =>
-    str = fs.readFileSync './src/daisy-interface.js','utf8'
-    console.log str
-    @dom.executeJavaScript "#{str}"
+    @dom.executeJavaScript fs.readFileSync './src/daisy-interface.js','utf8'
     console.log "finished loading"
+    setTimeout =>
+      console.log "start upload?"
+      @dom.executeJavaScript "window.di.uploadFile('GeileApp','http://www.geileapp.de','DATA!','dateiname','type');"
+    , 20*1000

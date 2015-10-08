@@ -1,10 +1,10 @@
 #Schnittstelle.getUserProjectCalendar user_id, showCalendar
-DaisyInterface =
+class DaisyInterface
   callDaisy: (url, data_array, cb) ->
     #DEBUG  ((a < b) ? 2 : 3);
-    console.log 'DEBUG: Schnittstelle.callDaisy(url=' + url + ',data_array=' + JSON.stringify(data_array) + ',cb=' + (if cb == undefined then 'nicht vorhanden' else 'vorhanden') + ');'
+    console.log 'DEBUG: DaisyInterface.callDaisy(url=' + url + ',data_array=' + JSON.stringify(data_array) + ',cb=' + (if cb == undefined then 'nicht vorhanden' else 'vorhanden') + ');'
     #url = "http://pes.max-n.de/Calendars/"+url;
-    url = '../FileUploadsController/' + url
+    url = '../FileUploads/' + url
     $.ajax(
       'url': url
       'type': 'POST'
@@ -13,14 +13,16 @@ DaisyInterface =
       'async': true
       'cache': false).always cb
 
-  test: "JAJJSAJSJDASD"
-
-  uploadFile: (appName,url,data) ->
-    uploadFile($appname = null, $url = null, $data = null)
+  uploadFile: (appName,url,data,fileName,type) ->
+    # uploadFile($appname = null, $url = null, $data = null)
     @callDaisy 'uploadFile', {} =
       appname: appName
       url: url
-      data: data
+      data:
+        data: data
+        name: fileName
+        type: type
     , (returnObj) ->
+      console.log "return"
       console.log returnObj
-console.log DaisyInterface.test
+window.di = new DaisyInterface()
