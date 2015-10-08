@@ -9,7 +9,10 @@
 }
 @keyframes showLeft {
   from {
-    left: -5%;
+    left: -100px;
+  }
+  10% {
+    left: -50px;
   }
   to {
     left: 20%;
@@ -25,7 +28,10 @@
 }
 @keyframes showRight {
   from {
-    right: -5%;
+    right: -100px;
+  }
+  10% {
+    right: -50px;
   }
   to {
     right: 5%;
@@ -56,14 +62,16 @@ body {
       animation-duration: 2s;
       animation-name: showLeft;
       animation-iteration-count: infinite;
-      animation-direction: normal;
+      animation-direction: alternate;
+      animation-timing-function: ease-in-out;
     }
     &.right {
       top: 50%;
       animation-duration: 2s;
       animation-name: showRight;
       animation-iteration-count: infinite;
-      animation-direction: normal;
+      animation-direction: alternate;
+      animation-timing-function: ease-in-out;
     }
   }
   #app_liste {
@@ -112,7 +120,8 @@ body {
       animation-duration: 2s;
       animation-name: showAppList;
       animation-iteration-count: infinite;
-      animation-direction: normal;
+      animation-direction: alternate;
+      animation-timing-function: ease-in-out;
     }
   }
   margin: 0px;
@@ -137,7 +146,8 @@ body {
       animation-duration: 2s;
       animation-name: showDaisy;
       animation-iteration-count: infinite;
-      animation-direction: normal;
+      animation-direction: alternate;
+      animation-timing-function: ease-in-out;
     }
   }
   #backBtn {
