@@ -3,6 +3,7 @@ $ = jQuery = require 'jquery'
 module.exports =
 class ShowTouch extends View
   gfx: null
+  modules: {}
   constructor: () ->
     super
     window.eventbus.on "ShowTouch","left",@showLeft
@@ -11,6 +12,8 @@ class ShowTouch extends View
   initialize: ->
     @gfx = $('#touch') if not @gfx?
     @label = $('#touch_label') if not @label?
+    @modules['left'] = $('#app_daisy')
+    @modules['right'] = $('#app_liste')
 
   # Show left
   # * options {Object}
@@ -18,15 +21,17 @@ class ShowTouch extends View
   #   * time {Number} secunds to hide
   show: (side,info,{after=undefined,time=4}={}) =>
     @gfx.addClass side
-    window.eventbus.fire 'Notifications','info', info
+    @modules[side].addClass 'flyin'
+    # window.eventbus.fire 'Notifications','info', info
     # @label.text "Return to Dashboard" #later use Notification Center
     setTimeout =>
+      @modules[side].removeClass 'flyin'
       @gfx.removeClass side
       after() if after?
     , time*1000
   # Use Options from show
   showLeft: (options) =>
-    @show "left",'Touch left side to right to return to Dashboard', options
+    @show "left",'[Aktion] Von ganz links nach recht: Dashboard', options
   # Use Options from show
   showRight: (options) =>
-    @show 'right','Touch right side to left to show open apps', options
+    @show 'right','[Aktion] Von ganz rechts nach links: Tab-Menu', options

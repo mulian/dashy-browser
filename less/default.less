@@ -9,22 +9,41 @@
 }
 @keyframes showLeft {
   from {
-    left: -50px;
+    left: -5%;
   }
   to {
-    left: 200px;
+    left: 20%;
+  }
+}
+@keyframes showDaisy {
+  from {
+    left: -100%;
+  }
+  to {
+    left: -60%;
   }
 }
 @keyframes showRight {
   from {
-    right: -50px;
+    right: -5%;
   }
   to {
-    right: 200px;
+    right: 5%;
   }
 }
 
+@keyframes showAppList {
+  from {
+    right: -200px;
+  }
+  to {
+    right: -20px;
+  }
+}
+
+
 body {
+  font-family: 'Ruda', sans-serif;
   #touch {
     position: absolute;
     top: -200px;
@@ -88,6 +107,13 @@ body {
          cursor: pointer;
        }
     }
+    &.flyin {
+      display: block !important;
+      animation-duration: 2s;
+      animation-name: showAppList;
+      animation-iteration-count: infinite;
+      animation-direction: normal;
+    }
   }
   margin: 0px;
   .app {
@@ -99,12 +125,19 @@ body {
     z-index: 1;
     // transition: all 0.5s ease-out;
   }
-  #daisy {
+  #app_daisy {
     z-index: 5;
 
     &.hide {
       left: -@window-width;
       // transition: all 0.5s ease-out;
+    }
+    &.flyin {
+      display:block !important;
+      animation-duration: 2s;
+      animation-name: showDaisy;
+      animation-iteration-count: infinite;
+      animation-direction: normal;
     }
   }
   #backBtn {
@@ -131,8 +164,8 @@ body {
     opacity: 0.9;
     &.info {
       top: 20px;
-      background-color: white;
-      color: @red-background;
+      color: white;
+      background-color: @red-background;
       transition: all 0.5s ease-out;
     }
     &.error {

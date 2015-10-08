@@ -67,6 +67,7 @@ class App extends View
         id : @id
         class : "app"
         src : @src
+        preload: './daisy-execute.js'
       $('body').prepend @element #add to Dom
     else #check src, class
       @element.attr('src',@src) if not @element.attr('src')?
