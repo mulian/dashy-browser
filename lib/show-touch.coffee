@@ -1,5 +1,6 @@
 View = require './view'
 $ = jQuery = require 'jquery'
+{settings} = require '../package.json'
 module.exports =
 class ShowTouch extends View
   gfx: null
@@ -20,15 +21,16 @@ class ShowTouch extends View
   #   * afterThis {Function} Fires after this show event
   #   * time {Number} secunds to hide
   show: (side,info,{after=undefined,time=4}={}) =>
-    @gfx.addClass side
-    @modules[side].addClass 'flyin'
-    # window.eventbus.fire 'Notifications','info', info
-    # @label.text "Return to Dashboard" #later use Notification Center
-    setTimeout =>
-      @modules[side].removeClass 'flyin'
-      @gfx.removeClass side
-      after() if after?
-    , time*1000
+    if settings?.showIntroduction != false
+      @gfx.addClass side
+      @modules[side].addClass 'flyin'
+      # window.eventbus.fire 'Notifications','info', info
+      # @label.text "Return to Dashboard" #later use Notification Center
+      setTimeout =>
+        @modules[side].removeClass 'flyin'
+        @gfx.removeClass side
+        after() if after?
+      , time*1000
   # Use Options from show
   showLeft: (options) =>
     @show "left",'[Aktion] Von ganz links nach recht: Dashboard', options

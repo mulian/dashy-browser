@@ -10,10 +10,10 @@
     "docco": ">=0.7.0"
   },
   "dependencies": {
+    "favicon-and-title": "git+https://github.com/mulian/node-favicon-and-title.git#0605a30",
     "coffee-script":">=1.10.0",
     "less": ">=2.5.3",
-    "jquery": ">=2.1.4",
-    "favicon": ">=0.0.2"
+    "jquery": ">=2.1.4"
   },
   "flash": {
     "path": "/Applications/Google Chrome.app/Contents/Versions/45.0.2454.101/Google Chrome Framework.framework/Internet Plug-Ins/PepperFlash/PepperFlashPlayer.plugin",
@@ -24,6 +24,11 @@
     "guesture": {
       "space": 20,
       "minActivate": 40
+    },
+    "showIntroduction": true,
+    "dirUpload": {
+      "enabled": true,
+      "dir": "/Users/maxh/Desktop"
     }
   },
   "scripts": {

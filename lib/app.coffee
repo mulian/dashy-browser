@@ -1,6 +1,6 @@
 View = require './view'
 $ = jQuery = require 'jquery'
-favicon = require('favicon');
+FavTitle = require('favicon');
 
 module.exports =
 class App extends View
@@ -35,9 +35,10 @@ class App extends View
     @element.attr 'id',@id
     @entryName.text @name
   setFavIcon: (src=@src) ->
-    favicon src, (err, favicon_url) =>
+    FavTitle src, (err, favicon_url,title) =>
       # console.log @favIcon
       if @entry?
+        @entryName.text title
         if not @favIcon?
           @favIcon = $ '<img />', {} =
             src: favicon_url
@@ -67,9 +68,10 @@ class App extends View
         id : @id
         class : "app"
         src : @src
-        preload: './daisy-execute.js'
+        preload: @getPreload() if @getPreload?
       $('body').prepend @element #add to Dom
     else #check src, class
+      @element.attr('preload',@getPreload()) if @getPreload?
       @element.attr('src',@src) if not @element.attr('src')?
       @element.addClass 'app' if not @element.hasClass 'app'
     @element.attr('plugins','') if @withPlugins

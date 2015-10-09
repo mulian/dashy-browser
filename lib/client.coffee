@@ -12,6 +12,7 @@ View = require './src/view'
 EventBus = require './src/event-bus'
 #Notifications will registrate events
 Notifications = require './src/notifications'
+DirectoryUpload = require './src/directory-upload'
 
 # Client wie be included from ../index.html
 # It initiate the DOM, ....
@@ -20,6 +21,7 @@ class Client extends View
   constructor: ->
     super
     @appManager = new AppManager()
+    @directoryUpload = new DirectoryUpload()
   # Private: Starts with document ready
   # initialize: ->
   #   @defineVars()
