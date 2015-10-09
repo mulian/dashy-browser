@@ -1,10 +1,9 @@
 # TODO
 
-Google Suche im Liste
+(REMOVED: "favicon": ">=0.0.2",)
+## ein/ausblenden
 
-## Menu ein/ausblenden
-
-### Was soll es können?
+### Was soll es können? - "fertig"
 Wenn eine Andere Applikation geöffnet ist:
   * Wird mit einem "swypw" von ganz links nach rechts das Menu von Daisy eingeblendet
     * Beim Tippen auf das Menu:
@@ -13,18 +12,21 @@ Wenn eine Andere Applikation geöffnet ist:
           * Daraufhin soll die app wieder in den vordergrund
       * Der entsprechende Menu Punkt wird aufgerufen
 
-### Umsetzung
+### Daisy ein/ausblenden
+Bei einem swype von ganz links zur mitte (bzw. rechts), wird Daisy angezeigt.
 
-#### Idee 1
-Beim einsteigen in eine App:
-  * wird eine Kopie des Menu's auf root ebene gepackt und manipuliert:
-    * Die a tags verweisen auf die a-tags des Originals
-    * mit klick auf einen a tag wird das Dashboard (Daisy) gezeigt.
-    * es wird ausserdem beim Original Menu, ein Item erstellt mit "zurück zu xx App"
-      * durch klick kommt man wieder zur App
-Das Swypen habe ich ja praktisch schon. Sollte nur verbessert werden
+### App Menu ein/ausblenden
+Beim swype von ganz rechts zur mitte (bzw. links), wird ein App Menu angezeigt.
 
-## Notifications
+#### Inhalt des Menus
+* Alle apps (ähnlich zu Tabs im Browser)
+* Google Suche?
+* Daisy Beenden hinzufügen?
+
+##### Alle Apps
+Es wird
+
+## Notifications - fertig
 * Es wird ein Notifications Center erstellt.
 * An den kann ein text gesendet werden
   * dieser wird 5-10sec angezeigt
@@ -47,7 +49,7 @@ Alle apps bekommen eine FileSave Libary, die durchgereicht wird an Daisy
 ### Marvel
 * TODO: Prüfen
 
-## Desktop Ordner
+## Desktop Ordner - fast fertig
 Für MS Office, im speziellen Visio.
 * Desktop Ordner "upload"
   * wird mit der Applikation erstellt
