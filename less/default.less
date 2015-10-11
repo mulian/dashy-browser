@@ -34,16 +34,16 @@
     right: -50px;
   }
   to {
-    right: 5%;
+    right: 100px;
   }
 }
 
 @keyframes showAppList {
   from {
-    right: -200px;
+    right: -400px;
   }
   to {
-    right: -20px;
+    right: -160px;
   }
 }
 
@@ -79,7 +79,7 @@ body {
     top: 0px;
     right: 0px;
     height: 100%;
-    width: 200px;
+    width: 360px;
     z-index: 11;
     background: @std-background;
     // border-left: @red-background 1px solid;
@@ -91,10 +91,14 @@ body {
        margin: 0px;
 
        li {
-         width: 150px;
+         display: inline-flex;
+         width: 95%;
          background: @item-background;
-         height: 20px;
+         min-height: 20px;
+         max-height: 60px;
          padding: 10px 10px 10px 10px;
+         margin-bottom: 5px;
+         box-shadow: 0px 3px 2px #aab2bd;
          border: 1px solid #bc213f;
          text-align: left;
          vertical-align: middle;
@@ -103,13 +107,19 @@ body {
            color: #FFF;
            transition: all 0.5s ease-out;
          }
+
          img {
+           position: relative;
+           left: 0px;
+           top: 0px;
            height: 16px;
            width: 16px;
-           display: inline-block;
+          //  display: inline-block;
          }
          span {
-           margin-left: 10px;
+           position: relative;
+           left: 20px;
+           width: calc(~"100% - 30px");
            display: inline-block;
          }
          cursor: pointer;
