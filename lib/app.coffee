@@ -38,7 +38,7 @@ class App extends View
     FavTitle src, (err, favicon_url,title) =>
       # console.log @favIcon
       if @entry?
-        @entryName.text title
+        @entryName.text title if title.length>0
         if not @favIcon?
           @favIcon = $ '<img />', {} =
             src: favicon_url
