@@ -1,17 +1,5 @@
 # TODO
 
-## App Tabs überarbeiten
-### Grundlegende änderungen
-* Jede aufgerufene app bekommt eine Feste ID und wird ggf. nur wieder angezeigt. ✓
-* Jede Über google geöffnete App ist Frei (ungebunden) und wird nicht wieder gefunden ✓
-* Seitenmenu kann von links nach rechts geschlossen werden 
-### Inhalt des App-Menus
-* Alle apps (ähnlich zu Tabs im Browser) x
-* Google Suche? x
-* Daisy Beenden hinzufügen? ✓
-* Vor-/Rück-wärts navigieren ✓
-* aktuelle URL **nur anzeige** x
-
 ## Apps
 ### Schnittstelle
 Alle apps bekommen eine FileSave Libary, die durchgereicht wird an Daisy
@@ -32,6 +20,18 @@ Alle apps bekommen eine FileSave Libary, die durchgereicht wird an Daisy
 * mit von ganz oben nach unten Taucht "Schlißen" und ggf. "Settings" auf
 
 # Erledigt
+
+## App Tabs überarbeiten
+### Grundlegende änderungen
+* Jede aufgerufene app bekommt eine Feste ID und wird ggf. nur wieder angezeigt. ✓
+* Jede Über google geöffnete App ist Frei (ungebunden) und wird nicht wieder gefunden ✓
+* Seitenmenu kann von links nach rechts geschlossen werden ✓
+### Inhalt des App-Menus
+* Alle apps (ähnlich zu Tabs im Browser) x
+* Google Suche? x
+* Daisy Beenden hinzufügen? ✓
+* Vor-/Rück-wärts navigieren ✓
+* aktuelle URL **nur anzeige** x
 
 ## Desktop Ordner
 Für MS Office, im speziellen Visio.

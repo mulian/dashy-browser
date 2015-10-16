@@ -7,32 +7,44 @@ Gesture = require './gesture'
 
 module.exports =
 class GuestureSide extends Gesture
+  space: 20
+  minActivate: 40
+  on : {}
+  active:
+    left: {}
+    right: {}
+
   constructor: (options) ->
+    {@on,@space,@minActivate} = options
+    options.element = document.body
     super options
-    @addEventListener()
 
-  #Private: register the Mouse Events to MainPage (Electron)
-  addEventListener: ->
-    addEventListener = document.body.addEventListener
-    addEventListener 'mousedown', (e) => @fortifyEvent e,@mouseDown
-    addEventListener 'mousemove', (e) => @fortifyEvent e,@mouseMove
-    addEventListener 'mouseup', (e) => @fortifyEvent e,@mouseUp
-
-  #Public: On Mouse press down, check if on left/right side.
-  # * `e` {Object} the Event from MainPage (electron)
   mouseDown: (e) =>
-    @checkDown 'left', e
-    @checkDown 'right', e
+    if e.left<=@space
+      @active.left.down = true
+    if e.right<=@space
+      @active.right.down = true
 
-  #Public: On Mouse move, check it was pressed and apply @on[direction] function
+  #Override: On Mouse move, check it was pressed and apply @on[direction] function
   # * `event` {Object} the transmitted event
   mouseMove: (e) =>
-    @checkMove 'left', e
-    @checkMove 'right', e
+    if @active.left.down
+      if not @active.left.active? and e.diff.left>=@minActivate
+        @active.left.active=true
+      if @active.left.active
+        @on.left e
+    if @active.right.down
+      if not @active.right.active? and e.diff.right>=@minActivate
+        @active.right.active=true
+      if @active.right.active
+        @on.right e
+
 
   #Public: On Mouse Up, send last event with event.end=true and uncheck left/right side press.
   # * `event` {Object} the transmitted event
   mouseUp: (e) =>
-    e.end = true
-    @checkUp 'left', e
-    @checkUp 'right', e
+    @on.left e if @active.left.active
+    @on.right e if @active.right.active
+    @active = {} =
+      left: {}
+      right: {}

@@ -5,12 +5,11 @@
 
 module.exports =
 class Guesture
-  space: 20
-  minActivate: 40
   move :
     left : {}
     right : {}
-  on : {}
+
+  start: null
 
 
   #### Construction and other initialize Methode
@@ -25,32 +24,28 @@ class Guesture
   #     * `right` {Function}
   #       * `event` {Object} the transmitted event
   constructor: (options) ->
-    {@on,@space,@minActivate} = options
+    {@minActivate,@element} = options
+    @addEventListener()
+
+  #Private: register the Mouse Events to MainPage (Electron)
+  addEventListener: (element=@element)->
+    @addEvent element, 'mousedown', @mouseDown
+    @addEvent element, 'mousemove', @mouseMove
+    @addEvent element, 'mouseup', @mouseUp
+
+  #
+  # Add event (name) to element, with callback
+  # * element {HTMLElement}:
+  # * name {String}: the event Name
+  # * callback {Function}: the called Function
+  addEvent: (element,name,callBack) ->
+    element.addEventListener name, (e) => @fortifyEvent e,callBack
 
   #### Event Functions
 
-  #Private: summery of mouseDown check for every directions
-  # * `direction` {String} the direction left/right
-  # * `event` {Object} the transmitted event
-  checkDown: (direction,event) ->
-    if event[direction] <= @space and @on[direction]?
-      @move[direction].start = event[direction]
-
-  #Private: summery of mouseMove check for every directions
-  # * `direction` {String} the direction left/right
-  # * `event` {Object} the transmitted event
-  checkMove: (direction,event) ->
-    @move[direction].activate = true if event.diff[direction] >= @minActivate or event.diff[direction] <= -parseInt(@minActivate)
-    if @on[direction]? and @move[direction].activate?
-      @on[direction] event
-
-  #Private: summery of mouseUp check for every directions
-  # * `direction` {String} the direction left/right
-  # * `event` {Object} the transmitted event
-  checkUp: (direction,event) ->
-    if @move[direction].activate
-      @on[direction] event
-      @move[direction] = {}
+  mouseDown: (event) -> #override me
+  mouseMove: (event) -> #override me
+  mouseUp: (event) -> #override me
 
   #### Private
 
@@ -59,27 +54,37 @@ class Guesture
   # * `callFunction` {Function} Executeted function after fortify the event Object
   #   * `event` {Object} the fortifyed transmitted event Object
   fortifyEvent: (event,callFunction) ->
+    #window size
+    event.win = {} =
+      width: window.innerWidth
+      height: window.innerHeight
+    #Start
+    if event.type == 'mousedown'
+      @start = {} =
+        left: event.clientX
+        right: event.win.width-event.clientX
+        top: event.clientY
+        bottom: event.win.height-event.clientY
+
     #X Axis
     event.left = event.clientX
-    event.winWidth = window.innerWidth
-    event.right = event.winWidth-event.left
+    event.right = event.win.width-event.left
     #Y Axis
     event.top = event.clientY
-    event.winHeight = window.innerHeight
-    event.bottom = event.winHeight-event.top
+    event.bottom = event.win.height-event.top
 
-    event.diff = {}
-    addDiff = (direction) =>
-      if @move[direction]?.start?
-        event.diff[direction] =  (event[direction]-@move[direction].start)
-      else event.diff[direction] = undefined
-    addDiff 'left'
-    addDiff 'right'
-    addDiff 'top'
-    addDiff 'bottom'
-    # event.diff = {} =
-    #   left : if @move.left.start? then (event.left-@move.left.start) else undefined
-    #   right : if @move.right.start? then (event.right-@move.right.start) else undefined
-    #   top: if @move.top.start? then (event.top-@move.top.start) else undefined
-    #   top: if @move.top.start? then (event.top-@move.top.start) else undefined
+    if @start?
+      event.start = @start
+      #Diff from start
+      event.diff = {} =
+        left: (event.left-event.start.left)
+        right: (event.right-event.start.right)
+        top: (event.top-event.start.top)
+        bottom: (event.bottom-event.start.bottom)
+
+    if event.type == 'mouseup'
+      event.end = true
+      @start = null
+    # console.log event
+
     callFunction event
