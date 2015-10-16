@@ -4,13 +4,13 @@
 ### Grundlegende änderungen
 * Jede aufgerufene app bekommt eine Feste ID und wird ggf. nur wieder angezeigt. ✓
 * Jede Über google geöffnete App ist Frei (ungebunden) und wird nicht wieder gefunden ✓
-* Seitenmenu kann von links nach rechts geschlossen werden
+* Seitenmenu kann von links nach rechts geschlossen werden 
 ### Inhalt des App-Menus
-* Alle apps (ähnlich zu Tabs im Browser)
-* Google Suche?
-* Daisy Beenden hinzufügen?
-* Vor-/Rück-wärts navigieren
-* aktuelle URL **nur anzeige**
+* Alle apps (ähnlich zu Tabs im Browser) x
+* Google Suche? x
+* Daisy Beenden hinzufügen? ✓
+* Vor-/Rück-wärts navigieren ✓
+* aktuelle URL **nur anzeige** x
 
 ## Apps
 ### Schnittstelle
