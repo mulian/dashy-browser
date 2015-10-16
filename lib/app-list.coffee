@@ -1,6 +1,8 @@
 App = require './app'
 $ = jQuery = require 'jquery'
 View = require './view'
+GestureItem = require './gesture-item'
+{settings} = require '../package.json'
 
 module.exports =
 class AppList extends View
@@ -30,6 +32,25 @@ class AppList extends View
     @mainApp.entry.attr 'id','listMainApp'
     @domList.append @mainApp.entry
     @initEndButton()
+
+    @gesture = new GestureItem
+      space: settings.guesture.space
+      minActivate: settings.guesture.minActivate
+      element : @dom[0]
+      moveX: @moveX
+
+  moveX: (event) =>
+    # console.log "moveX"
+    # console.log event
+
+    @dom.css 'right',"#{event.diff.right}px"
+    if event.end
+      if event.diff.left > 100
+        #hide
+        @dom.hide()
+      else
+         @dom.removeAttr 'style'
+    # @dom.css 'right',@dom.css('right')+event.diff.right
 
   setMainApp: (@mainApp)->
 
