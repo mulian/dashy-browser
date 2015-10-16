@@ -28,6 +28,7 @@ class AppManager extends View
     @appList = new AppList()
     @showTouch = new ShowTouch()
     window.eventbus.on "AppManager","changeApp", @changeApp
+
     # window.eventbus.on "App","entryClick",@onClickApp
     # window.eventbus.on 'AppManager','newApp',@newApp
 
@@ -82,6 +83,7 @@ class AppManager extends View
     @currentApp = app
   firstTime : true
   newApp: (event) =>
+    console.log @appList
     @appList.add event.url
 
     if @firstTime

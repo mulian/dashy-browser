@@ -4,39 +4,50 @@ FavTitle = require('favicon');
 
 module.exports =
 class App extends View
-  constructor: ({@name,@src,@withPlugins=true}) ->
-    @setNameByUrl(@src) if not @name?
+  # * options{Object}:
+  #   * src {String}: Is the Url and necessary!
+  #   * reUse {Boolean}: If you call this src again, use the first used source. Even if the Url has changed.
+  #   * withPlugins{boolean}: Use Plugins
+  constructor: ({@src,@withPlugins=true,@reUse=true,@nodeintegration=false}) ->
     @setId()
+    @firstSrc=@src
     super
 
-  setId: (name=@name) ->
-    @id = "app_#{name}"
-
-  setNameByUrl: (url) ->
-    console.log url
-    urlSplit = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?/.exec(url)
-    console.log "ERROR on newApp-> urlSplit" if not urlSplit?
-    @name = urlSplit[2]
+  setId: (preId=@src) ->
+    preId=preId.replace /:/g,'_'
+    preId=preId.replace /\//g,'-'
+    preId=preId.replace /&/g,'-'
+    preId=preId.replace /\?/g,'_'
+    preId=preId.replace /\=/g,'_'
+    preId=preId.replace /\./g,'-'
+    @id = "app_#{preId}"
 
   initialize: ->
     @getOrCreateElement()
     @createEntry()
-    @dom.addEventListener 'did-finish-load', @loading
+    @dom.addEventListener 'did-finish-load', @afterPageLoad
 
-  loading: (event) =>
-    @changeUrl @element.attr('src')
-    @setFavIcon @dom.getUrl()
-    @entryName.text @dom.getTitle()
+  afterPageLoad: (event) =>
+    @changeUrl @dom.getUrl()
+    @changeName @dom.getTitle()
 
+  getSrcId: ->
+    if @reUse
+      return @firstSrc
+    else return @url
+
+  changeName: (name=@name) ->
+    @name = name
+    @entryName.text @name
   changeUrl: (url) ->
-    @name = @setNameByUrl url
     @changeId()
     @url = url
     @setFavIcon url
-  changeId: (name=@name) ->
-    @id = "app_#{@name}"
-    @element.attr 'id',@id
-    @entryName.text @name
+  changeId: (preId=@src,force=false) ->
+    if not @reUse or force
+      @setId preId
+      @element.attr 'id',@id
+
   setFavIcon: (src=@src) ->
     FavTitle src, (err, favicon_url,title) =>
       # console.log @favIcon
@@ -78,4 +89,5 @@ class App extends View
       @element.attr('src',@src) if not @element.attr('src')?
       @element.addClass 'app' if not @element.hasClass 'app'
     @element.attr('plugins','') if @withPlugins
+    @element.attr('nodeintegration','') if @nodeintegration
     @dom = @element[0]

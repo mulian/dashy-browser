@@ -19,7 +19,7 @@ class AppList extends View
 
   isAppInAppList: (url) ->
     for item in @list
-      if item.url == url
+      if item.getSrcId() == url
         return item
     return false
 
