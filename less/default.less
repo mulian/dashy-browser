@@ -85,11 +85,36 @@ body {
     // border-left: @red-background 1px solid;
     box-shadow: 0px 3px 2px #aab2bd;
     opacity: 0.9;
+    #appListNavigation {
+      padding-left: 15px;
+      padding-right: 15px;
+      padding-top: 5px;
+      padding-bottom: 0px;
+      margin: 0px;
+
+      button {
+        width: 50%;
+        height: 30px;
+      }
+    }
+    #end {
+      background: red;
+      width: 80%;
+      height: 30px;
+
+      bottom: 5px;
+      left: 10%;
+      position: absolute;
+    }
     ul {
        list-style-type: none;
-       padding: 15px;
+       padding-left: 15px;
+       padding-right: 15px;
        margin: 0px;
 
+       #listMainApp {
+         margin-bottom: 15px;
+       }
        li {
          display: inline-flex;
          width: 95%;
@@ -97,7 +122,7 @@ body {
          min-height: 20px;
          max-height: 60px;
          padding: 10px 10px 10px 10px;
-         margin-bottom: 5px;
+         margin-bottom: 3px;
          box-shadow: 0px 3px 2px #aab2bd;
          border: 1px solid #bc213f;
          text-align: left;
