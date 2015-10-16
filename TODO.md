@@ -5,19 +5,22 @@
 Alle apps bekommen eine FileSave Libary, die durchgereicht wird an Daisy
 * saveFile(app_name,data)
 * Promt: fileName
-### Summo (flash)
+#### Summo (flash)
 * Wenn bestimmte URL erreicht
   * Triggert daisy->uploadLink(aktuelle_url)
-### strut.io
+#### strut.io
 * Nutzt Schnitstellen FileSave Lib.
-### Marvel
+#### Marvel
 * TODO: Prüfen
 
+### Start Native Apps
+Starten von z.B. Visio
+#### inklusive Datei upload
 
-# Nice to have FEATURES
-## Zusätzliche Navigation
-* mit von ganz unten nach oben Taucht eine Navigations inkl. URL auf
-* mit von ganz oben nach unten Taucht "Schlißen" und ggf. "Settings" auf
+
+## End
+* Rename to Dashy
+* Use on Windows with icon: gfx/Dashy.ico
 
 # Erledigt
 
