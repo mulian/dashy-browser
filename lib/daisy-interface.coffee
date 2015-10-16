@@ -26,17 +26,19 @@ class DaisyInterface
   #   * fileName {String}
   #   * type {string}
   uploadFile: (options) =>
-    {appName,url,data,fileName,type} = options
-    @callDaisy 'uploadFile', {} =
+    {appName,url,data,filename,type} = options
+    upload = {} =
       appname: appName
       url: url
       data:
         data: data
-        name: fileName
+        name: filename
         type: type
+    @callDaisy 'uploadFile',
+    options.upload = upload
     , (returnObj) ->
       options.return = returnObj
-      options.data = 'deletet from daisy'
+      # options.data = 'deletet from daisy'
       window.eventbus.fire "DaisyInterface","uploadFileReady", options
       # console.log JSON.stringify returnObj
 
