@@ -79,9 +79,12 @@ class AppManager extends View
         else @appList.dom.hide()
 
   changeApp: (app) =>
+    @currentApp.entry.removeClass('active')
     @currentApp.element.hide()
+    app.entry.addClass('active')
     app.element.show()
     @currentApp = app
+
   firstTime : true
   newApp: (event) =>
     # console.log @appList
