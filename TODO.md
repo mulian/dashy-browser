@@ -2,8 +2,8 @@
 
 ## App Tabs überarbeiten
 ### Grundlegende änderungen
-* Jede aufgerufene app bekommt eine Feste ID und wird ggf. nur wieder angezeigt.
-* Jede Über google geöffnete App ist Frei (ungebunden) und wird nicht wieder gefunden
+* Jede aufgerufene app bekommt eine Feste ID und wird ggf. nur wieder angezeigt. ✓
+* Jede Über google geöffnete App ist Frei (ungebunden) und wird nicht wieder gefunden ✓
 * Seitenmenu kann von links nach rechts geschlossen werden
 ### Inhalt des App-Menus
 * Alle apps (ähnlich zu Tabs im Browser)

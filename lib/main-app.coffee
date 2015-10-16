@@ -17,8 +17,9 @@ class MainApp extends App
   #     * `finishLoad` {Function}
   #       * `event` {Object}
   constructor: (options={}) ->
-    {@on} = options
+    {@on,@name} = options
     options.withPlugins = false
+    options.nodeintegration=true
     super options
     # @initElements()
     window.eventbus.on 'MainApp','uploadFile', @uploadFile
@@ -29,6 +30,7 @@ class MainApp extends App
   initialize: ->
     super
     @initEvent()
+    @changeId @name,true
 
 
   initEvent: ->
@@ -41,7 +43,7 @@ class MainApp extends App
 
   ipcMsg: (event) =>
     if event.channel == 'uploadReady'
-      console.log event
+      # console.log event
       window.eventbus.fire "Notifications","info","UPLOAD READY!"
 
   ipcSend: (channel,args) ->
