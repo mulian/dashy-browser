@@ -84,10 +84,24 @@ class Guesture
   # * `callFunction` {Function} Executeted function after fortify the event Object
   #   * `event` {Object} the fortifyed transmitted event Object
   fortifyEvent: (event,callFunction) ->
+    #X Axis
     event.left = event.clientX
     event.winWidth = window.innerWidth
     event.right = event.winWidth-event.left
-    event.diff = {} =
-      left : if @move.left.start? then (event.left-@move.left.start) else undefined
-      right : if @move.right.start? then (event.right-@move.right.start) else undefined
+    #Y Axis
+    event.top = event.clientY
+    event.winHeight = window.innerHeight
+    event.bottom = event.innerHeight-event.top
+
+    addDiff = (direction) ->
+      event.diff[direction] = if @move[direction]start? then (event[direction]-@move[direction]start) else undefined
+    addDiff 'left'
+    addDiff 'right'
+    addDiff 'top'
+    addDiff 'bottom'
+    # event.diff = {} =
+    #   left : if @move.left.start? then (event.left-@move.left.start) else undefined
+    #   right : if @move.right.start? then (event.right-@move.right.start) else undefined
+    #   top: if @move.top.start? then (event.top-@move.top.start) else undefined
+    #   top: if @move.top.start? then (event.top-@move.top.start) else undefined
     callFunction event
