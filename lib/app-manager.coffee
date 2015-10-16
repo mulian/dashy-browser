@@ -9,7 +9,7 @@ View = require './view'
 MainApp = require './main-app'
 App = require './app'
 AppList = require './app-list'
-Gesture = require './gesture'
+GestureSide = require './gesture-side'
 ShowTouch = require './show-touch'
 
 #### Class AppManager
@@ -34,7 +34,7 @@ class AppManager extends View
     # window.eventbus.on 'AppManager','newApp',@newApp
 
   initialize: ->
-    @gesture = new Gesture
+    @gesture = new GestureSide
       space: settings.guesture.space
       minActivate: settings.guesture.minActivate
       on:

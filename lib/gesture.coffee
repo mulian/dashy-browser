@@ -1,5 +1,4 @@
 # Guesture
-# fires events on gestures from left and right
 
 # Use Settings from package.json
 {settings} = require '../package.json'
@@ -27,22 +26,9 @@ class Guesture
   #       * `event` {Object} the transmitted event
   constructor: (options) ->
     {@on,@space,@minActivate} = options
-    @addEventListener()
-
-  #Private: register the Mouse Events to MainPage (Electron)
-  addEventListener: ->
-    addEventListener = document.body.addEventListener
-    addEventListener 'mousedown', (e) => @fortifyEvent e,@mouseDown
-    addEventListener 'mousemove', (e) => @fortifyEvent e,@mouseMove
-    addEventListener 'mouseup', (e) => @fortifyEvent e,@mouseUp
 
   #### Event Functions
 
-  #Public: On Mouse press down, check if on left/right side.
-  # * `e` {Object} the Event from MainPage (electron)
-  mouseDown: (e) =>
-    @checkDown 'left', e
-    @checkDown 'right', e
   #Private: summery of mouseDown check for every directions
   # * `direction` {String} the direction left/right
   # * `event` {Object} the transmitted event
@@ -50,11 +36,6 @@ class Guesture
     if event[direction] <= @space and @on[direction]?
       @move[direction].start = event[direction]
 
-  #Public: On Mouse move, check it was pressed and apply @on[direction] function
-  # * `event` {Object} the transmitted event
-  mouseMove: (e) =>
-    @checkMove 'left', e
-    @checkMove 'right', e
   #Private: summery of mouseMove check for every directions
   # * `direction` {String} the direction left/right
   # * `event` {Object} the transmitted event
@@ -63,12 +44,6 @@ class Guesture
     if @on[direction]? and @move[direction].activate?
       @on[direction] event
 
-  #Public: On Mouse Up, send last event with event.end=true and uncheck left/right side press.
-  # * `event` {Object} the transmitted event
-  mouseUp: (e) =>
-    e.end = true
-    @checkUp 'left', e
-    @checkUp 'right', e
   #Private: summery of mouseUp check for every directions
   # * `direction` {String} the direction left/right
   # * `event` {Object} the transmitted event
@@ -91,10 +66,13 @@ class Guesture
     #Y Axis
     event.top = event.clientY
     event.winHeight = window.innerHeight
-    event.bottom = event.innerHeight-event.top
+    event.bottom = event.winHeight-event.top
 
-    addDiff = (direction) ->
-      event.diff[direction] = if @move[direction]start? then (event[direction]-@move[direction]start) else undefined
+    event.diff = {}
+    addDiff = (direction) =>
+      if @move[direction]?.start?
+        event.diff[direction] =  (event[direction]-@move[direction].start)
+      else event.diff[direction] = undefined
     addDiff 'left'
     addDiff 'right'
     addDiff 'top'
