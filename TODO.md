@@ -4,6 +4,7 @@
 ### Grundlegende änderungen
 * Jede aufgerufene app bekommt eine Feste ID und wird ggf. nur wieder angezeigt.
 * Jede Über google geöffnete App ist Frei (ungebunden) und wird nicht wieder gefunden
+* Seitenmenu kann von links nach rechts geschlossen werden
 ### Inhalt des App-Menus
 * Alle apps (ähnlich zu Tabs im Browser)
 * Google Suche?
@@ -24,6 +25,11 @@ Alle apps bekommen eine FileSave Libary, die durchgereicht wird an Daisy
 ### Marvel
 * TODO: Prüfen
 
+
+# Nice to have FEATURES
+## Zusätzliche Navigation
+* mit von ganz unten nach oben Taucht eine Navigations inkl. URL auf
+* mit von ganz oben nach unten Taucht "Schlißen" und ggf. "Settings" auf
 
 # Erledigt
 
