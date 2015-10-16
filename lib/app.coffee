@@ -23,8 +23,11 @@ class App extends View
     @createEntry()
     @dom.addEventListener 'did-finish-load', @loading
 
-  loading: =>
+  loading: (event) =>
     @changeUrl @element.attr('src')
+    @setFavIcon @dom.getUrl()
+    @entryName.text @dom.getTitle()
+
   changeUrl: (url) ->
     @name = @setNameByUrl url
     @changeId()
@@ -38,7 +41,7 @@ class App extends View
     FavTitle src, (err, favicon_url,title) =>
       # console.log @favIcon
       if @entry?
-        @entryName.text title if title.length>0
+        # @entryName.text title if title.length>0
         if not @favIcon?
           @favIcon = $ '<img />', {} =
             src: favicon_url
