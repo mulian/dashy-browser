@@ -13,6 +13,7 @@ GestureSide = require './gesture-side'
 ShowTouch = require './show-touch'
 SumoSave = require './sumo-save'
 StrutSave = require './strut-save'
+NativeAppStarter = require './native-app-starter'
 
 #### Class AppManager
 module.exports =
@@ -39,6 +40,7 @@ class AppManager extends View
   startPlugins: ->
     @sumoSave = new SumoSave()
     @strutSave = new StrutSave()
+    @nativeAppStarter = new NativeAppStarter()
 
   initialize: ->
     @gesture = new GestureSide
@@ -94,12 +96,15 @@ class AppManager extends View
 
   firstTime : true
   newApp: (event) =>
+    nativeRE= /^([\w]*):$/
     # console.log @appList
-    @appList.add event.url
+    window.eventbus.fire "AppManager","newApp",event.url
+    if not nativeRE.test event.url
+      @appList.add event.url
 
-    if @firstTime
-      @firstTime=false
-      @showTutorial()
+      if @firstTime
+        @firstTime=false
+        @showTutorial()
 
   showTutorial: ->
     setTimeout ->
