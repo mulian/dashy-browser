@@ -26,10 +26,16 @@ class App extends View
     @getOrCreateElement()
     @createEntry()
     @dom.addEventListener 'did-finish-load', @afterPageLoad
+    @dom.addEventListener 'plugin-crashed', @onCrash if @withPlugins
+
+  onCrash: (event) ->
+    window.eventbus.fire "Notifications",'info', "Flash ist abgestürtzt. Die Seite wird neu geladen."
+    @dom.reload()
 
   afterPageLoad: (event) =>
     @changeUrl @dom.getUrl()
     @changeName @dom.getTitle()
+    window.eventbus.fire "App","afterPageLoad", @
 
   getSrcId: ->
     if @reUse
