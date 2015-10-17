@@ -11,6 +11,8 @@ App = require './app'
 AppList = require './app-list'
 GestureSide = require './gesture-side'
 ShowTouch = require './show-touch'
+SumoSave = require './sumo-save'
+StrutSave = require './strut-save'
 
 #### Class AppManager
 module.exports =
@@ -29,9 +31,14 @@ class AppManager extends View
     @appList.setMainApp @mainApp
     @showTouch = new ShowTouch()
     window.eventbus.on "AppManager","changeApp", @changeApp
+    @startPlugins()
 
     # window.eventbus.on "App","entryClick",@onClickApp
     # window.eventbus.on 'AppManager','newApp',@newApp
+
+  startPlugins: ->
+    @sumoSave = new SumoSave()
+    @strutSave = new StrutSave()
 
   initialize: ->
     @gesture = new GestureSide

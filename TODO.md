@@ -5,8 +5,9 @@
 Alle apps bekommen eine FileSave Libary, die durchgereicht wird an Daisy
 * saveFile(app_name,data)
 * Promt: fileName
-#### Summo (flash)
+#### Summo (flash) ✓
 * Wenn bestimmte URL erreicht
+  * Öffnen: http://www.sumopaint.com/paint/?url=http://www.sumopaint.com/images/temp/xzmrhlxxtpgmhseo.png&target=/act/saved.php
   * Triggert daisy->uploadLink(aktuelle_url)
 #### strut.io
 * Nutzt Schnitstellen FileSave Lib.
