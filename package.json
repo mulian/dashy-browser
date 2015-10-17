@@ -29,6 +29,10 @@
     "dirUpload": {
       "enabled": true,
       "dir": "/Users/maxh/Desktop"
+    },
+    "nativeApps" : {
+      "visio" : "/path/to/Visio",
+      "calc" : "/path/calc"
     }
   },
   "scripts": {
