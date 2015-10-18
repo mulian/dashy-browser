@@ -20,6 +20,7 @@ class AppList extends View
       #   @forward.removeAttr 'disabled'
       # else @forward.attr 'disabled','true'
 
+
   initialize: ->
     @dom = $ '<div />', {} =
       id: 'app_liste'
@@ -38,6 +39,17 @@ class AppList extends View
       minActivate: settings.guesture.minActivate
       element : @dom[0]
       moveX: @moveX
+
+  remove: (app) ->
+    # console.log "remove!"
+    for item, pos in @list
+      if app.src == item.src
+        # console.log "find: remove! #{pos} with src: #{item.src}"
+        app.entry.remove()
+        @list.splice pos,1
+        return
+
+    console.log "there is no app to close"
 
   moveX: (event) =>
     # console.log "moveX"

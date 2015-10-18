@@ -31,3 +31,4 @@ class NativeAppStarter
       console.log "stderr: #{stderr}"
       if error?
         console.log "exec error: #{error}"
+        window.eventbus.fire "Notifications","error",error

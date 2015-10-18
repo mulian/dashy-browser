@@ -32,6 +32,8 @@ class AppManager extends View
     @appList.setMainApp @mainApp
     @showTouch = new ShowTouch()
     window.eventbus.on "AppManager","changeApp", @changeApp
+    window.eventbus.on "AppManager","closeCurrentWindow", @closeCurrentWindow
+    window.eventbus.on "AppManager","closeWindow", @closeWindow
     @startPlugins()
 
     # window.eventbus.on "App","entryClick",@onClickApp
@@ -73,19 +75,18 @@ class AppManager extends View
 
   onRight: (event) =>
     # if not @appList.dom.is(":visible")
-    if @appList.list.length>0
-      event.preventDefault()
-      # console.log @appList.dom.width()
-      right = event.right-@appList.dom.width()
-      right = right+event.right*3
-      right = 0 if right>0
-      # console.log right
-      @appList.dom.show()
-      @appList.dom.css('right',right)
-      if event.end
-        if event.right > 80
-          @appList.dom.removeAttr('style')
-        else @appList.dom.hide()
+    event.preventDefault()
+    # console.log @appList.dom.width()
+    right = event.right-@appList.dom.width()
+    right = right+event.right*3
+    right = 0 if right>0
+    # console.log right
+    @appList.dom.show()
+    @appList.dom.css('right',right)
+    if event.end
+      if event.right > 80
+        @appList.dom.removeAttr('style')
+      else @appList.dom.hide()
 
   changeApp: (app) =>
     @currentApp.entry.removeClass('active')
@@ -93,6 +94,18 @@ class AppManager extends View
     app.entry.addClass('active')
     app.element.show()
     @currentApp = app
+
+  closeWindow: (app) =>
+    if app.src == @mainApp.src
+      window.eventbus.fire "Notifications","error","Die Hauptapplikation kann nicht geschlossen werden."
+    else
+      @appList.remove app
+      app.element.remove()
+      window.eventbus.fire "AppManager","changeApp", @mainApp
+
+  closeCurrentWindow: =>
+    # console.log "REMOVE"
+    @closeWindow @currentApp
 
   firstTime : true
   newApp: (event) =>

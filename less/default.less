@@ -122,6 +122,7 @@ body {
            border-color: white;
            color: white;
            font-weight: bold;
+           transition: all 0.5s ease-out;
          }
          display: inline-flex;
          width: 95%;
@@ -141,18 +142,24 @@ body {
          }
 
          img {
-           position: relative;
+          //  position: relative;
+          margin-right: 10px;
            left: 0px;
            top: 0px;
            height: 16px;
            width: 16px;
           //  display: inline-block;
          }
-         span {
-           position: relative;
-           left: 20px;
-           width: calc(~"100% - 30px");
+         span.title {
+          //  position: relative;
+          //  left: 20px;
+           width: calc(~"100% - 50px");
            display: inline-block;
+         }
+         span.closeBtn {
+           width: 20px;
+           text-align: center;
+          //  border: 1px white solid;
          }
          cursor: pointer;
        }
@@ -207,8 +214,10 @@ body {
     position: absolute;
     right: 20px;
     top: -70px;
-    width: 300px;
-    height: 20px;
+    min-width: 300px;
+    max-width: 800px;
+    min-height: 20px;
+    max-height: 60px;
     border: @red-background 1px solid;
     z-index: 99;
     transition: all 0.5s ease-out;

@@ -14,6 +14,8 @@ EventBus = require './src/event-bus'
 Notifications = require './src/notifications'
 DirectoryUpload = require './src/directory-upload'
 
+ipc = require 'ipc'
+
 # Client wie be included from ../index.html
 # It initiate the DOM, ....
 class Client extends View
@@ -22,6 +24,16 @@ class Client extends View
     super
     @appManager = new AppManager()
     @directoryUpload = new DirectoryUpload()
+    @regIPC()
+
+  regIPC: ->
+    ipc.on 'closeCurrentWindow', ->
+      window.eventbus.fire "AppManager","closeCurrentWindow"
+
+    ipc.on 'info', (msg) ->
+      window.eventbus.fire "Notifications","info", msg
+    ipc.on 'error', (msg) ->
+      window.eventbus.fire "Notifications","error", msg
   # Private: Starts with document ready
   # initialize: ->
   #   @defineVars()

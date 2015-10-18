@@ -46,6 +46,6 @@ class Notifications extends View
     @addQue "info","#{str}"
 
   error: (str) =>
-    @addQue "error","Error: #{str}"
+    @addQue "error","Fehler: #{str}"
 
 new Notifications()
