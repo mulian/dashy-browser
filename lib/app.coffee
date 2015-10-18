@@ -20,6 +20,7 @@ class App extends View
     preId=preId.replace /\?/g,'_'
     preId=preId.replace /\=/g,'_'
     preId=preId.replace /\./g,'-'
+    preId=preId.replace /%/g,'-'
     @id = "app_#{preId}"
 
   initialize: ->
@@ -74,11 +75,20 @@ class App extends View
         src: @favIcon
     @entryName = $ '<span />', {} =
       text: @name
+      class: "title"
+    @entryClose = $ '<span />', {} =
+      class: 'closeBtn'
+      text: "X"
 
     @entry.append fav
     @entry.append @entryName
+    @entry.append @entryClose
     @entry.click =>
       window.eventbus.fire "AppManager",'changeApp',@
+    @entryClose.click =>
+      console.log "click"
+      window.eventbus.fire "AppManager","closeWindow", @
+
 
   #search for app or create if not exist
   getOrCreateElement: ->

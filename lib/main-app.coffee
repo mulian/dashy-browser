@@ -31,6 +31,7 @@ class MainApp extends App
     super
     @initEvent()
     @changeId @name,true
+    @entryClose.remove() if @entryClose?
 
 
   initEvent: ->
@@ -40,6 +41,8 @@ class MainApp extends App
     else @dom.addEventListener 'console-message', @log
     @dom.addEventListener 'did-frame-finish-load', @finishLoad
     @dom.addEventListener 'ipc-message', @ipcMsg
+
+
 
   ipcMsg: (event) =>
     if event.channel == 'uploadReady'
