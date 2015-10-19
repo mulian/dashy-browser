@@ -8,18 +8,18 @@ var fs = require('fs')
 var coffee = require('coffee-script');
 // console.log(coffee);
 
-var coffeePath='/lib/', jsPath='/src/'
+var coffeePath=__dirname+'/lib/', jsPath=__dirname+'/src/'
 
-if (process.platform == 'win32') {
-  coffeePath = __dirname+coffeePath;
-  jsPath = __dirname+jsPath;
-
-  //coffeePath.replace(/\//g,'\\');
-  //jsPath.replace(/\//g,'\\');
-} else {
-  coffeePath = '.'+coffeePath;
-  jsPath = '.'+jsPath;
-}
+// if (process.platform == 'win32') {
+//   coffeePath = __dirname+coffeePath;
+//   jsPath = __dirname+jsPath;
+//
+//   //coffeePath.replace(/\//g,'\\');
+//   //jsPath.replace(/\//g,'\\');
+// } else {
+//   coffeePath = '.'+coffeePath;
+//   jsPath = '.'+jsPath;
+// }
 
 
 compileToCoffe = function(file_path,file_name) {
@@ -38,14 +38,14 @@ for(var i=0;i<files.length;i++) {
 }
 
 //LESS
-var lessPath='/less/', cssPath='/css/'
-if (process.platform == 'win32') {
-  lessPath = __dirname+lessPath;
-  cssPath = __dirname+cssPath;
-} else {
-  lessPath = '.'+lessPath;
-  cssPath = '.'+cssPath;
-}
+var lessPath=__dirname+'/less/', cssPath=__dirname+'/css/'
+// if (process.platform == 'win32') {
+//   lessPath = __dirname+lessPath;
+//   cssPath = __dirname+cssPath;
+// } else {
+//   lessPath = '.'+lessPath;
+//   cssPath = '.'+cssPath;
+// }
 var less = require('less');
 files = fs.readdirSync(lessPath);
 for(var i=0;i<files.length;i++) {
