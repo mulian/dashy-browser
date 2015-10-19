@@ -32,7 +32,7 @@
     },
     "nativeApps" : {
       "visio" : "/path/to/Visio",
-      "calc" : "/path/calc"
+      "calc" : "/Applications/Calculator.app"
     }
   },
   "scripts": {
