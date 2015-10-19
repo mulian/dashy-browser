@@ -20,6 +20,7 @@
     "version": "19.0.0.185"
   },
   "settings": {
+    "debug": true,
     "url":"http://localhost:8081/",
     "guesture": {
       "space": 20,
