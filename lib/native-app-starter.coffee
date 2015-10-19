@@ -15,7 +15,7 @@ class NativeAppStarter
     if settings.nativeApps[name]?
       @execute settings.nativeApps[name]
     else
-      window.eventbus.fire "Notifications","error","#{name} kann nicht geöffnet werden."
+      window.eventbus.fire "Notifications","error","Kein Pfard für #{name} hinterlegt."
     # switch name
     #   when 'visio:' then @exec '/test/visio'
     #   when 'adobe:' then @exec '/adobe/path'
@@ -26,6 +26,7 @@ class NativeAppStarter
 
   execute: (path) ->
     # console.log path
+    path = "open #{path}" if process.platform == 'darwin'
     exec path, (error, stdout, stderr) ->
       console.log "stdout: #{stdout}"
       console.log "stderr: #{stderr}"
