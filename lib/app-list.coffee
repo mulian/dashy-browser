@@ -94,6 +94,8 @@ class AppList extends View
     @endButton = $ '<button />', {} =
       text: 'Beenden'
       id: 'end'
+    @endButton.click ->
+      window.close() #TODO: Nur die Seite ist geschlossen?
     @dom.append @endButton
 
   add: (url) ->
