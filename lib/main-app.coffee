@@ -46,7 +46,7 @@ class MainApp extends App
 
   ipcMsg: (event) =>
     if event.channel == 'uploadReady'
-      # console.log event
+      console.log event
       window.eventbus.fire "Notifications","info","UPLOAD READY!"
 
   ipcSend: (channel,args) ->

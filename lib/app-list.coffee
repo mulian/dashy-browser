@@ -57,7 +57,7 @@ class AppList extends View
 
     @dom.css 'right',"#{event.diff.right}px"
     if event.end
-      if event.diff.left > 100
+      if event.right <= 200
         #hide
         @dom.hide()
       else
