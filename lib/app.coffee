@@ -15,12 +15,12 @@ class App extends View
 
   setId: (preId=@src) ->
     preId=preId.replace /:/g,'_'
-    preId=preId.replace /\//g,'-'
-    preId=preId.replace /&/g,'-'
-    preId=preId.replace /\?/g,'_'
-    preId=preId.replace /\=/g,'_'
-    preId=preId.replace /\./g,'-'
-    preId=preId.replace /%/g,'-'
+    .replace /\//g,'-'
+    .replace /&/g,'-'
+    .replace /\?/g,'_'
+    .replace /\=/g,'_'
+    .replace /\./g,'-'
+    .replace /%/g,'-'
     @id = "app_#{preId}"
 
   initialize: ->
