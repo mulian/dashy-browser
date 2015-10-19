@@ -10,13 +10,14 @@ class SumoSave extends Save
 
   #Will call if after every page load
   check: (app) =>
-    if @saveStartUrlRE.test app.dom.getUrl()
+    appUrl = app.dom.getUrl()
+    if @saveStartUrlRE.test appUrl
       @insertSaveAction app
-    else if @saveUrlRE.test app.dom.getUrl()
-      name = @saveUrlRE.exec url
+    else if @saveUrlRE.test appUrl
+      name = @saveUrlRE.exec appUrl
       @save
         appName: 'sumo'
-        url: app.dom.getUrl()
+        url: appUrl
         data: ''
         fileName: "Sumo_#{name[1]}"
         type: 'url'
