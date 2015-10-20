@@ -32,7 +32,6 @@ class AppList extends View
 
     @mainApp.entry.attr 'id','listMainApp'
     @domList.append @mainApp.entry
-    @initEndButton()
 
     @gesture = new GestureItem
       space: settings.guesture.space
@@ -86,6 +85,8 @@ class AppList extends View
       @currentApp.dom.goBack()
     @forward.click =>
       @currentApp.dom.goForward()
+
+    @initEndButton()
     @navigation.append @back
     @navigation.append @forward
     @dom.append @navigation
