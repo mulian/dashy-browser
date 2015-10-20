@@ -16,9 +16,9 @@ class GuestureSide extends Gesture
     top: {}
 
   constructor: (options) ->
-    document.body.addEventListener 'touchmove', (e) ->
-      console.log 'touchmove'
-      console.log e
+    # document.body.addEventListener 'touchmove', (e) ->
+      # console.log 'touchmove'
+      # console.log e
     console.log "GuestureSide aktivate"
     {@on,@space,@minActivate} = options
     options.element = document.body
