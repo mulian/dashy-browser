@@ -26,6 +26,7 @@ class GuestureSide extends Gesture
     if e.right<=@space
       @active.right.down = true
     if e.top<=@space
+      console.log "Activate top"
       @active.top.down = true
 
   #Override: On Mouse move, check it was pressed and apply @on[direction] function
@@ -45,6 +46,7 @@ class GuestureSide extends Gesture
       if not @active.top.active? and e.diff.top>=@minActivate
         @active.top.active=true
       if @active.top.active
+        console.log "move top"
         @on.top e
 
 
@@ -54,6 +56,7 @@ class GuestureSide extends Gesture
     @on.left e if @active.left.active
     @on.right e if @active.right.active
     @on.top e if @active.top.active
+    console.log "deactivate all"
     @active = {} =
       left: {}
       right: {}
