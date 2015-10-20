@@ -37,7 +37,7 @@ class AppList extends View
       space: settings.guesture.space
       minActivate: settings.guesture.minActivate
       element : @dom[0]
-      moveX: @moveX
+      moveY: @moveY
 
   remove: (app) ->
     # console.log "remove!"
@@ -50,13 +50,13 @@ class AppList extends View
 
     console.log "there is no app to close"
 
-  moveX: (event) =>
+  moveY: (event) =>
     # console.log "moveX"
     # console.log event
-
-    @dom.css 'right',"#{event.diff.right}px"
+    console.log "moveY"
+    @dom.css 'top',"#{event.diff.top}px"
     if event.end
-      if event.right <= 200
+      if event.top <= 200
         #hide
         @dom.hide()
       else
