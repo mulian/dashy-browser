@@ -40,8 +40,8 @@ class TouchGesture
       sumX+=touch.clientX
       sumY+=touch.clientY
     return {} =
-      sumX : sumX/touches.lenght
-      sumY : sumY/touches.lenght
+      sumX : sumX/touches.length
+      sumY : sumY/touches.length
   fortifyEvent: (event,callFunction) ->
     if event.type=='touchstart' and @startTouches==null
       @startTouches = @sum event.touches
