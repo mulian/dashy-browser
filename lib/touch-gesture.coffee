@@ -43,6 +43,6 @@ class TouchGesture
     event.top = currentTouch.clientY
 
     event.diff = {} =
-      left: @startTouches[0].clientX-event.left
-      top: @startTouches[0].clientY-event.right
+      left: event.left-@startTouches[0].clientX
+      top: event.right-@startTouches[0].clientY
     callFunction event
