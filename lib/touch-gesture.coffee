@@ -19,7 +19,9 @@ class TouchGesture
     @threeActive=on if e.touches.length==3
 
   touchMove: (e) ->
-    console.log "jo" if @threeActive
+    if @threeActive
+      console.log "jo"
+      console.log e.diff.left
   touchEnd: (e) ->
     @threeActive=off
 
@@ -27,8 +29,18 @@ class TouchGesture
   addEvent: (name,callBack) ->
     @element.addEventListener name, (e) => @fortifyEvent e,callBack
 
-  start: null
+  startTouches: null
   fortifyEvent: (event,callFunction) ->
     console.log event
-    # if event.
+    if event.type=='touchstart'
+      @startTouches = event.touches
+    else if event.type =='touchend'
+      @startTouches = null
+    currentTouch = event.touches[0]
+    event.left = currentTouch.clientX
+    event.top = currentTouch.clientY
+
+    event.diff = {} =
+      left: @startTouches[0].clientX-event.left
+      top: @startTouches[0].clientY-event.right
     callFunction event
