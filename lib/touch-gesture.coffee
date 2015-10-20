@@ -25,7 +25,7 @@ class TouchGesture
       console.log "move"
       console.log e.diff.left
   touchEnd: (e) ->
-    @threeActive=off if e.touches.length==2
+    @threeActive=off if e.touches.length==0
 
 
   addEvent: (name,callBack) ->
