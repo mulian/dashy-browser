@@ -38,7 +38,9 @@ class TouchGesture
       @startTouches = event.touches
     else if event.type =='touchend' and event.touches.lenght>0
       @startTouches = null
-    currentTouch = event.touches[0]
+
+    @currentTouch = event.touches[0] if event.touches.lenght>0
+
     event.left = currentTouch.clientX
     event.top = currentTouch.clientY
 
