@@ -36,8 +36,6 @@ class TouchGesture
     console.log event
     if event.type=='touchstart' and @startTouches==null
       @startTouches = event.touches
-    else if event.type =='touchend' and event.touches.lenght>0
-      @startTouches = null
 
     @currentTouch = event.touches[0] if event.touches.lenght>0
 
@@ -47,4 +45,8 @@ class TouchGesture
     event.diff = {} =
       left: event.left-@startTouches[0].clientX
       top: event.top-@startTouches[0].clientY
+
+    if event.type =='touchend' and event.touches.lenght>0
+      @startTouches = null
+
     callFunction event
