@@ -15,17 +15,17 @@ class TouchGesture
     @addEvent 'touchend',@touchEnd
 
   threeActive: false
-  touchStart: (e) ->
+  touchStart: (e) =>
     if e.touches.length==3
       @threeActive=on
       @onThreeTouch e
       # console.log "three touch"
 
-  touchMove: (e) ->
+  touchMove: (e) =>
     if @threeActive
       @onThreeTouch e
       # console.log e.diff.left
-  touchEnd: (e) ->
+  touchEnd: (e) =>
     @threeActive=off if e.touches.length==0
 
 
