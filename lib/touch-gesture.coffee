@@ -49,13 +49,11 @@ class TouchGesture
 
     @currentTouch = event.touches if event.touches.length>0
     s = @sum @currentTouch
-
-    event.directions = {} =
-      left : s.sumX
-      event.right : @element.offsetWidth-event.left
-      event.top : s.sumY
-      event.bottom : @element.offsetHeight-event.top
-    console.log event.directions
+    console.log s
+    event.left = s.sumX
+    event.right = @element.offsetWidth-event.left
+    event.top = s.sumY
+    event.bottom = @element.offsetHeight-event.top
 
     event.diff = {} =
       left: event.left-@startTouches.sumX
