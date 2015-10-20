@@ -39,7 +39,6 @@ class TouchGesture
     for touch in touches
       sumX+=touch.clientX
       sumY+=touch.clientY
-    console.log sumX
     return {} =
       sumX : sumX/touches.lenght
       sumY : sumY/touches.lenght
@@ -50,6 +49,7 @@ class TouchGesture
 
     @currentTouch = event.touches if event.touches.length>0
     s = @sum @currentTouch
+    console.log s
     event.left = s.sumX
     event.right = @element.offsetWidth-event.left
     event.top = s.sumY
