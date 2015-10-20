@@ -33,7 +33,7 @@ class TouchGesture
     @element.addEventListener name, (e) => @fortifyEvent e,callBack
 
   startTouches: null
-  sum : (event) ->
+  sum : (touches) ->
     sumX = 0
     sumY = 0
     for touch in touches
