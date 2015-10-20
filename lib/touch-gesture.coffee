@@ -8,7 +8,7 @@ Gesture = require './gesture'
 module.exports =
 class TouchGesture
   constructor: (options) ->
-    {@onThreeLeft,@element} = options
+    {@onThreeLeft,@element=document.body} = options
 
     @addEvent 'touchstart',@touchStart
     @addEvent 'touchmove',@touchMove
