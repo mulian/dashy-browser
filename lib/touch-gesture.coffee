@@ -33,22 +33,22 @@ class TouchGesture
     @element.addEventListener name, (e) => @fortifyEvent e,callBack
 
   startTouches: null
-  sum : (touches) ->
+  sum : (event) ->
     sumX = 0
     sumY = 0
-    for touch in touches
-      console.log sumX
+    for touch in event.touches
       sumX+=touch.clientX
       sumY+=touch.clientY
+      console.log sumX
     return {} =
-      sumX : sumX/touches.lenght
-      sumY : sumY/touches.lenght
+      sumX : sumX/event.touches.lenght
+      sumY : sumY/event.touches.lenght
   fortifyEvent: (event,callFunction) ->
     if event.type=='touchstart' and @startTouches==null
       @startTouches = @sum event.touches
       event.start = true
 
-    @currentTouch = event.touches[0] if event.touches.length>0
+    @currentTouch = event.touches if event.touches.length>0
     s = @sum @currentTouch
     event.left = s.sumX
     event.right = @element.offsetWidth-event.left
