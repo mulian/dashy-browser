@@ -27,6 +27,7 @@ compileToCoffe = function(file_path,file_name) {
   var file_name_js = file_name.slice(0,file_name.length-6)+'js';
   // console.log(file_name_js);
   var data=fs.readFileSync(file_path,'utf8');
+  console.log(jsPath+file_name_js);
   fs.writeFileSync(jsPath+file_name_js,coffee.compile(data));
 };
 

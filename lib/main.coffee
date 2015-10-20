@@ -37,6 +37,7 @@ app.on 'ready', ->
     fullscreen: true
     icon: "#{__dirname}/../gfx/Dashy.ico"
     'web-preferences': 'plugins': true
+    'always-on-top' : false
   webContents = mainWindow.webContents
   webContents.enableDeviceEmulation fitToView: true
   mainWindow.loadUrl('file://' + __dirname + '/../index.html');
