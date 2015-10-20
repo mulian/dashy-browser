@@ -34,7 +34,7 @@ class TouchGesture
   startTouches: null
   fortifyEvent: (event,callFunction) ->
     console.log event
-    if event.type=='touchstart'
+    if event.type=='touchstart' and @startTouches==null
       @startTouches = event.touches
     else if event.type =='touchend' and event.touches.lenght>0
       @startTouches = null
