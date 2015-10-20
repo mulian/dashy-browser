@@ -16,14 +16,16 @@ class TouchGesture
 
   threeActive: false
   touchStart: (e) ->
-    @threeActive=on if e.touches.length==3
+    if e.touches.length==3
+      @threeActive=on
+      console.log "three touch"
 
   touchMove: (e) ->
     if @threeActive
-      console.log "jo"
+      console.log "move"
       console.log e.diff.left
   touchEnd: (e) ->
-    @threeActive=off
+    @threeActive=off if e.touches.length==2
 
 
   addEvent: (name,callBack) ->
