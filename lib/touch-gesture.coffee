@@ -34,7 +34,7 @@ class TouchGesture
 
   startTouches: null
   fortifyEvent: (event,callFunction) ->
-    sum : (touches) ->
+    sum = (touches) ->
       sumX = 0
       sumY = 0
       for touch in touches
