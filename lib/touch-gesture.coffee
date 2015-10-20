@@ -14,11 +14,14 @@ class TouchGesture
     @addEvent 'touchmove',@touchMove
     @addEvent 'touchend',@touchEnd
 
+  threeActive: false
   touchStart: (e) ->
     console.log e.touches
-    console.log "3Finger" if e.touches.length==3
+    @threeActive=on if e.touches.length==3
   touchMove: (e) ->
+    console.log "jo" if @threeActive
   touchEnd: (e) ->
+    @threeActive=off
 
 
   addEvent: (name,callBack) ->
