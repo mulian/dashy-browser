@@ -30,16 +30,19 @@ app.on 'window-all-closed', ->
 # console.log "funzt"
 app.on 'ready', ->
   # Create the browser window.
+  console.log "#{__dirname}/gfx/Dashy.ico"
   mainWindow = new BrowserWindow {} =
     width: 1920
     height: 1080
+    fullscreen: true
+    icon: "#{__dirname}/../gfx/Dashy.ico"
     'web-preferences': 'plugins': true
   webContents = mainWindow.webContents
   webContents.enableDeviceEmulation fitToView: true
   mainWindow.loadUrl('file://' + __dirname + '/../index.html');
 
   # Open the DevTools.
-  mainWindow.openDevTools()
+  mainWindow.openDevTools() if settings.debug
   session = webContents.session
   executeFile = (path) ->
     # console.log path
