@@ -44,7 +44,7 @@ class AppList extends View
       onThreeTouch: @touch
 
   touch: (e) ->
-    @dom.css. 'right',"#{event.diff.right}px"
+    @dom.css 'right',"#{event.diff.right}px"
 
 
   remove: (app) ->
