@@ -40,10 +40,10 @@ class AppList extends View
     #   minActivate: settings.guesture.minActivate
     #   element : @dom[0]
     #   moveX: @moveX
-    @touch = new TouchGesture
+    @touch = new TouchGesture {} =
       onThreeTouch: @touch
 
-  touch: (e) ->
+  touch: (e) =>
     @dom.css 'right',"#{event.diff.right}px"
 
 
