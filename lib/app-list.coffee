@@ -33,18 +33,19 @@ class AppList extends View
 
     @mainApp.entry.attr 'id','listMainApp'
     @domList.append @mainApp.entry
+    @initEndButton()
 
-    @gesture = new GestureItem
-      space: settings.guesture.space
-      minActivate: settings.guesture.minActivate
-      element : @dom[0]
-      moveY: @moveY
-
+    # @gesture = new GestureItem
+    #   space: settings.guesture.space
+    #   minActivate: settings.guesture.minActivate
+    #   element : @dom[0]
+    #   moveX: @moveX
     @touch = new TouchGesture
-      onThreeLeft: @touch
+      onThreeTouch: @touch
 
   touch: (e) ->
-    console.log e
+    @dom.css. 'right',"#{event.diff.right}px"
+
 
   remove: (app) ->
     # console.log "remove!"
@@ -57,13 +58,13 @@ class AppList extends View
 
     console.log "there is no app to close"
 
-  moveY: (event) =>
+  moveX: (event) =>
     # console.log "moveX"
     # console.log event
-    console.log "moveY"
-    @dom.css 'top',"#{event.diff.top}px"
+
+    @dom.css 'right',"#{event.diff.right}px"
     if event.end
-      if event.top <= 200
+      if event.right <= 200
         #hide
         @dom.hide()
       else
@@ -92,8 +93,6 @@ class AppList extends View
       @currentApp.dom.goBack()
     @forward.click =>
       @currentApp.dom.goForward()
-
-    @initEndButton()
     @navigation.append @back
     @navigation.append @forward
     @dom.append @navigation
