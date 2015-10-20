@@ -29,9 +29,9 @@ class Guesture
 
   #Private: register the Mouse Events to MainPage (Electron)
   addEventListener: (element=@element)->
-    @addEvent element, 'touchstart', @mouseDown
-    @addEvent element, 'touchmove', @mouseMove
-    @addEvent element, 'touchend', @mouseUp
+    @addEvent element, 'mousedown', @mouseDown
+    @addEvent element, 'mousemove', @mouseMove
+    @addEvent element, 'mouseup', @mouseUp
 
   #
   # Add event (name) to element, with callback
