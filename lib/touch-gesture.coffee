@@ -38,6 +38,7 @@ class TouchGesture
       sumX = 0
       sumY = 0
       for touch in touches
+        console.log sumX
         sumX+=touch.clientX
         sumY+=touch.clientY
       return {} =
