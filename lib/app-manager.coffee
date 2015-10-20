@@ -50,7 +50,7 @@ class AppManager extends View
       minActivate: settings.guesture.minActivate
       on:
         left: @onLeft
-        right: @onRight
+        top: @onTop
     # @showTouch.showLeftAndRight()
 
   leftAction: false
@@ -73,18 +73,18 @@ class AppManager extends View
         @leftAction=false
 
 
-  onRight: (event) =>
+  onTop: (event) =>
     # if not @appList.dom.is(":visible")
     event.preventDefault()
     # console.log @appList.dom.width()
-    right = event.right-@appList.dom.width()
-    right = right+event.right*3
-    right = 0 if right>0
-    # console.log right
+    top = event.top-@appList.dom.height()
+    top = top+event.top*2
+    top = 0 if top>0
+    # console.log top
     @appList.dom.show()
-    @appList.dom.css('right',right)
+    @appList.dom.css('top',top)
     if event.end
-      if event.right > 80
+      if event.top > 80
         @appList.dom.removeAttr('style')
       else @appList.dom.hide()
 

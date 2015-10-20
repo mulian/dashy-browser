@@ -13,6 +13,7 @@ class GuestureSide extends Gesture
   active:
     left: {}
     right: {}
+    top: {}
 
   constructor: (options) ->
     {@on,@space,@minActivate} = options
@@ -24,6 +25,8 @@ class GuestureSide extends Gesture
       @active.left.down = true
     if e.right<=@space
       @active.right.down = true
+    if e.top<=@space
+      @active.top.down = true
 
   #Override: On Mouse move, check it was pressed and apply @on[direction] function
   # * `event` {Object} the transmitted event
@@ -38,6 +41,11 @@ class GuestureSide extends Gesture
         @active.right.active=true
       if @active.right.active
         @on.right e
+    if @active.top.down
+      if not @active.top.active? and e.diff.top>=@minActivate
+        @active.top.active=true
+      if @active.top.active
+        @on.top e
 
 
   #Public: On Mouse Up, send last event with event.end=true and uncheck left/right side press.
@@ -45,6 +53,8 @@ class GuestureSide extends Gesture
   mouseUp: (e) =>
     @on.left e if @active.left.active
     @on.right e if @active.right.active
+    @on.top e if @active.top.active
     @active = {} =
       left: {}
       right: {}
+      top: {}

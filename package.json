@@ -20,8 +20,8 @@
     "version": "19.0.0.185"
   },
   "settings": {
-    "debug": false,
-    "url":"http://localhost:8081/",
+    "debug": true,
+    "url":"http://pemela.max-n.de/",
     "guesture": {
       "space": 20,
       "minActivate": 40
