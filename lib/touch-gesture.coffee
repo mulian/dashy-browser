@@ -14,9 +14,12 @@ class TouchGesture
     @addEvent 'touchmove',@touchMove
     @addEvent 'touchend',@touchEnd
 
-  touchStart: (event) ->
-    console.log event.touches
-    console.log "3Finger" if event.touches.length==3
+  touchStart: (e) ->
+    console.log e.touches
+    console.log "3Finger" if e.touches.length==3
+  touchMove: (e) ->
+  touchEnd: (e) ->
+
 
   addEvent: (name,callBack) ->
     @element.addEventListener name, (e) => @fortifyEvent e,callBack
