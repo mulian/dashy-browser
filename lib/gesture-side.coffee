@@ -16,6 +16,7 @@ class GuestureSide extends Gesture
     top: {}
 
   constructor: (options) ->
+    console.log "GuestureSide aktivate"
     {@on,@space,@minActivate} = options
     options.element = document.body
     super options
