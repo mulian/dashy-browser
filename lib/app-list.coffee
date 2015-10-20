@@ -45,7 +45,7 @@ class AppList extends View
 
   touch: (e) =>
     console.log "TOUCH"
-    console.log e
+    console.log e.diff
     @dom.css 'right',"#{event.diff.right}px"
 
 
