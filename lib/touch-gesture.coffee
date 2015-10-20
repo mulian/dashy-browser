@@ -10,9 +10,9 @@ class TouchGesture
   constructor: (options) ->
     {@onThreeLeft,@element} = options
 
-    addEvent 'touchstart',@touchStart
-    addEvent 'touchmove',@touchMove
-    addEvent 'touchend',@touchEnd
+    @addEvent 'touchstart',@touchStart
+    @addEvent 'touchmove',@touchMove
+    @addEvent 'touchend',@touchEnd
 
   touchStart: (event) ->
     console.log event.touches
