@@ -5,6 +5,8 @@ GestureItem = require './gesture-item'
 {settings} = require '../package.json'
 TouchGesture = require './touch-gesture'
 
+Touch = require './touch'
+
 module.exports =
 class AppList extends View
   list: []
@@ -23,6 +25,7 @@ class AppList extends View
 
 
   initialize: ->
+
     @dom = $ '<div />', {} =
       id: 'app_liste'
     @dom.hide()
@@ -40,8 +43,8 @@ class AppList extends View
     #   minActivate: settings.guesture.minActivate
     #   element : @dom[0]
     #   moveX: @moveX
-    @touch = new TouchGesture {} =
-      onThreeTouch: @touch
+    # @touch = new TouchGesture {} =
+    #   onThreeTouch: @touch
 
   touch: (e) =>
     console.log "TOUCH"
