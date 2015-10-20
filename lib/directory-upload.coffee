@@ -15,6 +15,7 @@ class DirectoryUpload
 
   createSubDir: ->
     @uploadDir = "#{@uploadDir}/upload"
+    console.log "upload Dir: #{@uploadDir}"
     if not fs.existsSync @uploadDir
       fs.mkdirSync @uploadDir
   rmSubDir: ->
