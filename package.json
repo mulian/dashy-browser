@@ -21,7 +21,7 @@
   },
   "settings": {
     "debug": true,
-    "url":"http://pemela.max-n.de/",
+    "url":"http://localhost:8081/",
     "guesture": {
       "space": 20,
       "minActivate": 40

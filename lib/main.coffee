@@ -34,7 +34,7 @@ app.on 'ready', ->
   mainWindow = new BrowserWindow {} =
     width: 1920
     height: 1080
-    fullscreen: true
+    # fullscreen: true
     icon: "#{__dirname}/../gfx/Dashy.ico"
     'web-preferences': 'plugins': true
     'always-on-top' : false
