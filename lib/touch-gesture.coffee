@@ -43,7 +43,6 @@ class TouchGesture
       return {} =
         sumX : sumX/touches.lenght
         sumY : sumY/touches.lenght
-    console.log event
     if event.type=='touchstart' and @startTouches==null
       @startTouches = sum event.touches
       event.start = true
@@ -65,4 +64,5 @@ class TouchGesture
       event.end = true
       @startTouches = null
 
+    console.log event
     callFunction event
