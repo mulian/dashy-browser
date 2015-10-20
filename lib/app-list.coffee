@@ -3,6 +3,7 @@ $ = jQuery = require 'jquery'
 View = require './view'
 GestureItem = require './gesture-item'
 {settings} = require '../package.json'
+TouchGesture = require './touch-gesture'
 
 module.exports =
 class AppList extends View
@@ -38,6 +39,12 @@ class AppList extends View
       minActivate: settings.guesture.minActivate
       element : @dom[0]
       moveY: @moveY
+
+    @touch = new TouchGesture
+      onThreeLeft: @touch
+
+  touch: (e) ->
+    console.log e
 
   remove: (app) ->
     # console.log "remove!"
