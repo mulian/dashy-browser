@@ -36,7 +36,7 @@ class TouchGesture
     console.log event
     if event.type=='touchstart'
       @startTouches = event.touches
-    else if event.type =='touchend'
+    else if event.type =='touchend' and event.touches.lenght>0
       @startTouches = null
     currentTouch = event.touches[0]
     event.left = currentTouch.clientX
