@@ -41,8 +41,8 @@ class TouchGesture
 
     @currentTouch = event.touches[0] if event.touches.lenght>0
 
-    event.left = currentTouch.clientX
-    event.top = currentTouch.clientY
+    event.left = @currentTouch.clientX
+    event.top = @currentTouch.clientY
 
     event.diff = {} =
       left: event.left-@startTouches[0].clientX
