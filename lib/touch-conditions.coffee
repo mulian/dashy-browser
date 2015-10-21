@@ -4,7 +4,7 @@
 module.exports =
 class TouchConditions
   _initConditions: ->
-    @conditions= {} =
+    @conditions= {} = #there is no nee for others then touchstart or?
       touchstart: {}
       touchmove: {}
       touchend: {}
@@ -15,9 +15,9 @@ class TouchConditions
 
   constructor: ->
     @_initConditions()
-    @onMove() #default
+    @onStart() #default
     @fingers.head = @
-    @move.head = @
+    # @move.head = @
     @from.head = @
 
     return @
@@ -38,33 +38,33 @@ class TouchConditions
 
   #move from
   from: {} =
-    left: ->
+    left: (distance) ->
       @head._addCondition 'from', {} =
-        left: true
+        left: distance
       return @head
-    right: ->
+    right: (distance) ->
       @head._addCondition 'from', {} =
-        right: true
+        right: distance
       return @head
-    top: ->
+    top: (distance) ->
       @head._addCondition 'from', {} =
-        top: true
+        top: distance
       return @head
-    bottom: ->
+    bottom: (distance) ->
       @head._addCondition 'from', {} =
-        bottom: true
+        bottom: distance
       return @head
 
   #move with distance to activate
-  move: {} =
-    X: (distance) ->
-      @head._addCondition 'move', {} =
-        X: distance
-      return @head
-    Y: (distance) ->
-      @head._addCondition 'move', {} =
-        Y: distance
-      return @head
+  # move: {} =
+  #   X: (distance) ->
+  #     @head._addCondition 'move', {} =
+  #       X: distance
+  #     return @head
+  #   Y: (distance) ->
+  #     @head._addCondition 'move', {} =
+  #       Y: distance
+  #     return @head
 
   fingers: {} =
     betweene: (from,to) ->

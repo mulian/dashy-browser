@@ -9,7 +9,7 @@ View = require './view'
 MainApp = require './main-app'
 App = require './app'
 AppList = require './app-list'
-GestureSide = require './gesture-side'
+# GestureSide = require './gesture-side'
 ShowTouch = require './show-touch'
 SumoSave = require './sumo-save'
 StrutSave = require './strut-save'
@@ -45,12 +45,12 @@ class AppManager extends View
     @nativeAppStarter = new NativeAppStarter()
 
   initialize: ->
-    @gesture = new GestureSide
-      space: settings.guesture.space
-      minActivate: settings.guesture.minActivate
-      on:
-        left: @onLeft
-        top: @onTop
+    # @gesture = new GestureSide
+    #   space: settings.guesture.space
+    #   minActivate: settings.guesture.minActivate
+    #   on:
+    #     left: @onLeft
+    #     top: @onTop
     # @showTouch.showLeftAndRight()
 
   leftAction: false
