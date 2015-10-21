@@ -14,14 +14,14 @@ class Touch
   call: null
   trigger: (e) =>
     if @call==null
-      @check.allConditionsCheck @check.checkStartConditions,e if e.start
+      @check.allConditionsCheck e if e.start
     else
       @call e
 
     if e.end
       @call = null
       @check.resetConditions()
-    console.log e
+    # console.log e
 
   newCondition: ->
     con = new TouchConditions()

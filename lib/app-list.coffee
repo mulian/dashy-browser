@@ -1,9 +1,9 @@
 App = require './app'
 $ = jQuery = require 'jquery'
 View = require './view'
-GestureItem = require './gesture-item'
+# GestureItem = require './gesture-item'
 {settings} = require '../package.json'
-TouchGesture = require './touch-gesture'
+# TouchGesture = require './touch-gesture'
 
 Touch = require './touch'
 
@@ -24,6 +24,7 @@ class AppList extends View
       # else @forward.attr 'disabled','true'
 
 
+
   initialize: ->
 
     @dom = $ '<div />', {} =
@@ -38,6 +39,7 @@ class AppList extends View
     @domList.append @mainApp.entry
     @initEndButton()
 
+    console.log touch.on(document.body).fingers.eq(1).call(@touchDown)
     # @gesture = new GestureItem
     #   space: settings.guesture.space
     #   minActivate: settings.guesture.minActivate
@@ -46,10 +48,26 @@ class AppList extends View
     # @touch = new TouchGesture {} =
     #   onThreeTouch: @touch
 
-  touch: (e) =>
-    console.log "TOUCH"
-    console.log e.diff
-    @dom.css 'right',"#{event.diff.right}px"
+  lastRight: null
+  touchDown: (e) =>
+    if not e.end
+      @dom.show()
+      width = @dom.width()
+      right = e.avg.diff.x*-1 - width
+      if right<0 and right>width*-1
+        @dom.css 'right',"#{right}px"
+      else if right>0
+        @dom.css 'right',"0px"
+
+      @lastRight = right
+
+    else
+      console.log @lastRight
+      if (@lastRight*-1)/2 > (width/2)
+        @dom.css 'right',"0px"
+      else
+        @dom.hide()
+
 
 
   remove: (app) ->
