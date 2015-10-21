@@ -121,8 +121,5 @@ class AppManager extends View
 
   showTutorial: ->
     setTimeout ->
-      window.eventbus.fire 'ShowTouch','left'
-      setTimeout ->
-        window.eventbus.fire 'ShowTouch','right'
-      , 7*1000
+      window.eventbus.fire 'ShowTouch','menu'
     , 3*1000
