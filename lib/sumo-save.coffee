@@ -14,22 +14,24 @@ class SumoSave extends Save
     if @saveStartUrlRE.test appUrl
       @insertSaveAction app
     else if @saveUrlRE.test appUrl
-      name = @saveUrlRE.exec appUrl
-      @save
-        appName: 'sumo'
-        url: appUrl
-        data: ''
-        fileName: "Sumo_#{name[1]}"
-        type: 'url'
+      @saveUrl = appUrl
+      eventbus.fire 'Notifications','getName','Dateiname:',@saveFile
 
     else if @sumoUrlRE.test app.dom.getUrl()
       @onSumoStart app
+  saveFile: (name) =>
+    @save
+      appName: 'sumo'
+      url: @saveUrl
+      data: ''
+      fileName: name
+      type: 'url'
   insertSaveAction: (app) ->
-    console.log "var run = #{@getCode.toString()}; run()"
+    # console.log "var run = #{@getCode.toString()}; run()"
     app.dom.executeJavaScript "var run = #{@getCode.toString()}; run()"
   onSumoStart: (app) ->
     app.dom.executeJavaScript "sumopaint();"
-    window.eventbus.fire "Notifications",'info', "Zum speichern auf File > Save to Cloud clicken."
+    window.eventbus.fire "Notifications",'info', "Um zu speichern auf: 'File > Save to Cloud' tippen."
 
   #Will be inserted on save
   #It search the editor URL and redirect to it, to get the URL on next afterPageLoad

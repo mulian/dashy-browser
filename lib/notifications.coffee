@@ -13,33 +13,57 @@ class Notifications extends View
     @eventBus.on "Notifications", "info", @info
     @eventBus.on "Notifications", "error", @error
     @eventBus.on "Notifications", "setTime", @setTime
+    @eventBus.on "Notifications", "getName", @getName
 
   initialize: ->
     @dom = $('#notifications')
+    @input = $('#nInput')
+    @text = $('#nText')
+
+    @input.hide()
+    @input.keyup (e) =>
+      if(e.keyCode == 13)
+        @callback @input.val()
+        @callback=null
+        @input.val('')
+        @prepareNext()
+        @input.hide()
+
+  getName: (msg,callback) =>
+    @addQue "getName",msg,callback
 
   setTime: (time) ->
     @time = time
 
+  prepareNext: =>
+    @dom.removeAttr "class"
+    setTimeout @next, 500
   next: =>
     if @dom?
-
       if @que.length>0
-        note = @que.pop()
-        @dom.text note.msg
+        note = @que.shift()
+
+        @text.text note.msg
         @dom.addClass note.type
         @nextActive=true
-        setTimeout =>
-          @dom.removeAttr "class"
-        , (@time*1000)-500
-        setTimeout @next, @time*1000
+
+        if note.type=='getName'
+          @input.show()
+          # setTimeout @input.focus(), 50
+          @input.focus()
+          @callback = note.callback
+        else
+          setTimeout @prepareNext, @time*1000
+
       else
-        @dom.text ""
+        @text.text ""
         @nextActive=false
 
-  addQue: (type,msg) ->
+  addQue: (type,msg,callback=null) ->
     @que.push {} =
       type: type
       msg: msg
+      callback: callback
     @next() if not @nextActive
 
   info: (str) =>

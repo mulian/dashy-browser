@@ -10,5 +10,5 @@
 
 ## Max
 * Touch events
-* Auto Login
-* Save, name abfragen
+* Auto Login ✓
+* Save, name abfragen ✓
