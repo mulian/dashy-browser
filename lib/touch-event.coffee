@@ -1,5 +1,6 @@
 # touch-event.coffee
 # Erweitert das event object und gibt es an touch.coffee zurück.
+
 $ = jQuery = require 'jquery'
 module.exports =
 class TouchEvent
