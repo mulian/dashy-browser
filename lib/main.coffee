@@ -53,6 +53,7 @@ app.on 'ready', ->
     height: 1080
     # fullscreen: true
     icon: "#{__dirname}/../gfx/Dashy.ico"
+    plugins: true
     'web-preferences':
       plugins: true
     'always-on-top' : false
