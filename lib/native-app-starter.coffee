@@ -12,6 +12,8 @@ class NativeAppStarter
       name = @nativeRE.exec url
       @run name[1]
   run: (name) ->
+    console.log name
+    console.log settings.nativeApps
     if settings.nativeApps[name]?
       @execute settings.nativeApps[name]
     else
