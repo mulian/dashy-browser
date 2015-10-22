@@ -163,22 +163,8 @@ Prüft die check-conditions.coffee ob sie dem Touch entsprechen.</p>
     <span class="hljs-keyword">for</span> con <span class="hljs-keyword">in</span> <span class="hljs-property">@conditions</span>
       <span class="hljs-property">@checkStartConditions</span> con,e
   <span class="hljs-attribute">checkStartConditions</span>: <span class="hljs-function"><span class="hljs-params">(con,e)</span> -&gt;</span>
-    con.checkBit=<span class="hljs-literal">true</span></pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-2">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-2">&#182;</a>
-              </div>
-              <p>check element?</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>    obj = con.conditions[e.type]
+    con.checkBit=<span class="hljs-literal">true</span>
+    obj = con.conditions[e.type]
 
     <span class="hljs-keyword">if</span> con.checkBit <span class="hljs-keyword">and</span> obj.fingers?
       <span class="hljs-property">@checkFingers</span>(con,e)
@@ -198,6 +184,7 @@ Prüft die check-conditions.coffee ob sie dem Touch entsprechen.</p>
        (from.bottom? <span class="hljs-keyword">and</span> e.direction.bottom&gt;from.bottom)
       con.checkBit=<span class="hljs-literal">false</span>
 
+
   <span class="hljs-attribute">checkFingers</span>: <span class="hljs-function"><span class="hljs-params">(con,e)</span> -&gt;</span>
     fingers = con.conditions[e.type].fingers
     fingerCount = e.touches.length
@@ -212,11 +199,11 @@ Prüft die check-conditions.coffee ob sie dem Touch entsprechen.</p>
         </li>
         
         
-        <li id="section-3">
+        <li id="section-2">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-3">&#182;</a>
+                <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
               <p>check</p>
 

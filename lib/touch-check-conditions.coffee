@@ -14,7 +14,6 @@ class TouchCheckConditions
       @checkStartConditions con,e
   checkStartConditions: (con,e) ->
     con.checkBit=true
-    #check element?
     obj = con.conditions[e.type]
 
     if con.checkBit and obj.fingers?
@@ -34,6 +33,7 @@ class TouchCheckConditions
        (from.top? and e.direction.top>from.top) or
        (from.bottom? and e.direction.bottom>from.bottom)
       con.checkBit=false
+
 
   checkFingers: (con,e) ->
     fingers = con.conditions[e.type].fingers
