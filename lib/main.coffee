@@ -32,6 +32,7 @@ console.log "use ppapi-flash-version: #{flashVersion}"
 
 app.commandLine.appendSwitch 'ppapi-flash-path', flashPath
 app.commandLine.appendSwitch 'ppapi-flash-version', flashVersion
+app.commandLine.appendSwitch 'register-pepper-plugins', ';application/x-shockwave-flash'
 # Quit when all windows are closed.
 app.on 'window-all-closed', ->
   # On OS X it is common for applications and their menu bar
