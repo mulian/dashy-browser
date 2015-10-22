@@ -1,5 +1,7 @@
 # daisy-browser (Dashboard Browser)
 
+## [Documentationen](http://rawgit.com/mulian/daisy-browser/master/docs/app-list.html)
+
 ## Flash
 change package.json -> **flash.path** and **flash.version** with your installed chrome Browser's Version (chrome://plugins/).
 Note: This will currently not work with Electron- Windowsx64 Build. Only with ia32.
