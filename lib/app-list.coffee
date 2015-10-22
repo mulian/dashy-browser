@@ -39,7 +39,7 @@ class AppList extends View
     @domList.append @mainApp.entry
     @initEndButton()
 
-    console.log touch.on(document.body).fingers.eq(1).call(@touchDown)
+    console.log touch.on(document.body).fingers.eq(3).call(@touchDown)
     # @gesture = new GestureItem
     #   space: settings.guesture.space
     #   minActivate: settings.guesture.minActivate
