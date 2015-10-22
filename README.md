@@ -1,6 +1,6 @@
 # daisy-browser (Dashboard Browser)
 
-## [Documentationen](http://rawgit.com/mulian/daisy-browser/master/docs/app-list.html)
+## [Documentation](http://rawgit.com/mulian/daisy-browser/master/docs/app-list.html)
 
 ## Informationen zu package.json
 
