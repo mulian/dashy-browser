@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>main.coffee</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page_wrapper">
+            <div id="jump_page">
+              
+                
+                <a class="source" href="app-list.html">
+                  app-list.coffee
+                </a>
+              
+                
+                <a class="source" href="app-manager.html">
+                  app-manager.coffee
+                </a>
+              
+                
+                <a class="source" href="app.html">
+                  app.coffee
+                </a>
+              
+                
+                <a class="source" href="client.html">
+                  client.coffee
+                </a>
+              
+                
+                <a class="source" href="daisy-execute.html">
+                  daisy-execute.coffee
+                </a>
+              
+                
+                <a class="source" href="daisy-interface.html">
+                  daisy-interface.coffee
+                </a>
+              
+                
+                <a class="source" href="daisy-ipc.html">
+                  daisy-ipc.coffee
+                </a>
+              
+                
+                <a class="source" href="directory-upload.html">
+                  directory-upload.coffee
+                </a>
+              
+                
+                <a class="source" href="event-bus.html">
+                  event-bus.coffee
+                </a>
+              
+                
+                <a class="source" href="main-app.html">
+                  main-app.coffee
+                </a>
+              
+                
+                <a class="source" href="main.html">
+                  main.coffee
+                </a>
+              
+                
+                <a class="source" href="native-app-starter.html">
+                  native-app-starter.coffee
+                </a>
+              
+                
+                <a class="source" href="notifications.html">
+                  notifications.coffee
+                </a>
+              
+                
+                <a class="source" href="save.html">
+                  save.coffee
+                </a>
+              
+                
+                <a class="source" href="show-touch.html">
+                  show-touch.coffee
+                </a>
+              
+                
+                <a class="source" href="sumo-save.html">
+                  sumo-save.coffee
+                </a>
+              
+                
+                <a class="source" href="touch-check-conditions.html">
+                  touch-check-conditions.coffee
+                </a>
+              
+                
+                <a class="source" href="touch-conditions.html">
+                  touch-conditions.coffee
+                </a>
+              
+                
+                <a class="source" href="touch-event.html">
+                  touch-event.coffee
+                </a>
+              
+                
+                <a class="source" href="touch.html">
+                  touch.coffee
+                </a>
+              
+                
+                <a class="source" href="view.html">
+                  view.coffee
+                </a>
+              
+            </div>
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>main.coffee</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <p>main.coffee
+Main JS from Electron-Browser</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+app = <span class="hljs-built_in">require</span> <span class="hljs-string">'app'</span>
+BrowserWindow = <span class="hljs-built_in">require</span> <span class="hljs-string">'browser-window'</span>
+fs = <span class="hljs-built_in">require</span> <span class="hljs-string">'fs'</span>
+{exec} = <span class="hljs-built_in">require</span> <span class="hljs-string">'child_process'</span>
+
+packageFile = <span class="hljs-built_in">require</span> <span class="hljs-string">'../package.json'</span>
+settings = packageFile.settings</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>Report crashes to our server.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">require</span>(<span class="hljs-string">'crash-reporter'</span>).start();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>Report crashes to our server.
+require(‘crash-reporter’).start()
+Keep a global reference of the window object, if you don’t, the window will
+be closed automatically when the JavaScript object is garbage collected.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>mainWindow = <span class="hljs-literal">null</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>require “C:\Users\wii\AppData\Local\Google\Chrome\User\ Data\PepperFlash\19.0.0.226\manifest.json”</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>initiate Flash</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>app.commandLine.appendSwitch <span class="hljs-string">'ppapi-flash-path'</span>, packageFile.flash.path
+app.commandLine.appendSwitch <span class="hljs-string">'ppapi-flash-version'</span>, packageFile.flash.version</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>Quit when all windows are closed.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>app.<span class="hljs-literal">on</span> <span class="hljs-string">'window-all-closed'</span>, <span class="hljs-function">-&gt;</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>On OS X it is common for applications and their menu bar
+to stay active until the user quits explicitly with Cmd + Q</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">if</span> process.platform != <span class="hljs-string">'darwin'</span>
+    app.quit()</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>This method will be called when Electron has finished
+initialization and is ready to create browser windows.
+console.log “funzt”</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>app.<span class="hljs-literal">on</span> <span class="hljs-string">'ready'</span>, <span class="hljs-function">-&gt;</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>Create the browser window.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  mainWindow = <span class="hljs-keyword">new</span> BrowserWindow {} =
+    <span class="hljs-attribute">width</span>: <span class="hljs-number">1920</span>
+    <span class="hljs-attribute">height</span>: <span class="hljs-number">1080</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>fullscreen: true</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-attribute">icon</span>: <span class="hljs-string">"<span class="hljs-subst">#{__dirname}</span>/../gfx/Dashy.ico"</span>
+    <span class="hljs-attribute">plugins</span>: <span class="hljs-literal">true</span>
+    <span class="hljs-string">'web-preferences'</span>:
+      <span class="hljs-attribute">plugins</span>: <span class="hljs-literal">true</span>
+    <span class="hljs-string">'always-on-top'</span> : <span class="hljs-literal">false</span>
+  webContents = mainWindow.webContents
+  webContents.enableDeviceEmulation <span class="hljs-attribute">fitToView</span>: <span class="hljs-literal">true</span>
+  mainWindow.loadUrl(<span class="hljs-string">'file://'</span> + __dirname + <span class="hljs-string">'/../index.html'</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>Open the DevTools.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  mainWindow.openDevTools() <span class="hljs-keyword">if</span> settings.debug
+  session = webContents.session</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>execute a Native File</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-function">  <span class="hljs-title">executeFile</span> = <span class="hljs-params">(path)</span> -&gt;</span>
+    path = <span class="hljs-string">"open <span class="hljs-subst">#{path}</span>"</span> <span class="hljs-keyword">if</span> process.platform == <span class="hljs-string">'darwin'</span>
+    exec path, <span class="hljs-function"><span class="hljs-params">(error, stdout, stderr)</span> -&gt;</span>
+      <span class="hljs-built_in">console</span>.log <span class="hljs-string">"stdout: <span class="hljs-subst">#{stdout}</span>"</span>
+      <span class="hljs-built_in">console</span>.log <span class="hljs-string">"stderr: <span class="hljs-subst">#{stderr}</span>"</span>
+      <span class="hljs-keyword">if</span> error?
+        <span class="hljs-built_in">console</span>.log <span class="hljs-string">"exec error: <span class="hljs-subst">#{error}</span>"</span>
+        webContents.send <span class="hljs-string">"error"</span>,<span class="hljs-string">"Beim ausführen von <span class="hljs-subst">#{path}</span>."</span>
+      <span class="hljs-keyword">else</span>
+        webContents.send <span class="hljs-string">"info"</span>,<span class="hljs-string">"Datei <span class="hljs-subst">#{path}</span> wird ausgeführt."</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>on file Download</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  session.<span class="hljs-literal">on</span> <span class="hljs-string">'will-download'</span>, <span class="hljs-function"><span class="hljs-params">(event, item, downloadWebContents)</span> -&gt;</span>
+    downloadFolder = <span class="hljs-string">"<span class="hljs-subst">#{settings.dirUpload.dir}</span>/download"</span>
+    item.<span class="hljs-literal">on</span> <span class="hljs-string">'done'</span>, <span class="hljs-function"><span class="hljs-params">(e, state)</span> -&gt;</span>
+      <span class="hljs-keyword">if</span> (state == <span class="hljs-string">"completed"</span>)
+        webContents.send <span class="hljs-string">"info"</span>, <span class="hljs-string">"<span class="hljs-subst">#{item.getFilename()}</span> erfolgreich heruntergeladen."</span>
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Download successfully"</span>);
+        executeFile <span class="hljs-string">"<span class="hljs-subst">#{downloadFolder}</span>/<span class="hljs-subst">#{item.getFilename()}</span>"</span>
+      <span class="hljs-keyword">else</span>
+        webContents.send <span class="hljs-string">"error"</span>, <span class="hljs-string">"beim herunterladen von <span class="hljs-subst">#{item.getFilename()}</span>."</span>
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> fs.existsSync downloadFolder
+      fs.mkdirSync downloadFolder
+    item.setSavePath <span class="hljs-string">"<span class="hljs-subst">#{downloadFolder}</span>/<span class="hljs-subst">#{item.getFilename()}</span>"</span>
+
+    webContents.send <span class="hljs-string">"closeCurrentWindow"</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <p>on Window Close</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  mainWindow.<span class="hljs-literal">on</span> <span class="hljs-string">'closed'</span>, <span class="hljs-function">-&gt;</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <p>Dereference the window object, usually you would store windows
+in an array if your app supports multi windows, this is the time
+when you should delete the corresponding element.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    mainWindow = <span class="hljs-literal">null</span></pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

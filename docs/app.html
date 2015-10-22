@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>app.coffee</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page_wrapper">
+            <div id="jump_page">
+              
+                
+                <a class="source" href="app-list.html">
+                  app-list.coffee
+                </a>
+              
+                
+                <a class="source" href="app-manager.html">
+                  app-manager.coffee
+                </a>
+              
+                
+                <a class="source" href="app.html">
+                  app.coffee
+                </a>
+              
+                
+                <a class="source" href="client.html">
+                  client.coffee
+                </a>
+              
+                
+                <a class="source" href="daisy-execute.html">
+                  daisy-execute.coffee
+                </a>
+              
+                
+                <a class="source" href="daisy-interface.html">
+                  daisy-interface.coffee
+                </a>
+              
+                
+                <a class="source" href="daisy-ipc.html">
+                  daisy-ipc.coffee
+                </a>
+              
+                
+                <a class="source" href="directory-upload.html">
+                  directory-upload.coffee
+                </a>
+              
+                
+                <a class="source" href="event-bus.html">
+                  event-bus.coffee
+                </a>
+              
+                
+                <a class="source" href="main-app.html">
+                  main-app.coffee
+                </a>
+              
+                
+                <a class="source" href="main.html">
+                  main.coffee
+                </a>
+              
+                
+                <a class="source" href="native-app-starter.html">
+                  native-app-starter.coffee
+                </a>
+              
+                
+                <a class="source" href="notifications.html">
+                  notifications.coffee
+                </a>
+              
+                
+                <a class="source" href="save.html">
+                  save.coffee
+                </a>
+              
+                
+                <a class="source" href="show-touch.html">
+                  show-touch.coffee
+                </a>
+              
+                
+                <a class="source" href="sumo-save.html">
+                  sumo-save.coffee
+                </a>
+              
+                
+                <a class="source" href="touch-check-conditions.html">
+                  touch-check-conditions.coffee
+                </a>
+              
+                
+                <a class="source" href="touch-conditions.html">
+                  touch-conditions.coffee
+                </a>
+              
+                
+                <a class="source" href="touch-event.html">
+                  touch-event.coffee
+                </a>
+              
+                
+                <a class="source" href="touch.html">
+                  touch.coffee
+                </a>
+              
+                
+                <a class="source" href="view.html">
+                  view.coffee
+                </a>
+              
+            </div>
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>app.coffee</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>$ = jQuery = <span class="hljs-built_in">require</span> <span class="hljs-string">'jquery'</span>
+View = <span class="hljs-built_in">require</span> <span class="hljs-string">'./view'</span>
+favicon = <span class="hljs-built_in">require</span> <span class="hljs-string">'favicon'</span>
+
+<span class="hljs-built_in">module</span>.exports =
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">App</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">View</span></span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <h3 id="initial-funktionen">Initial Funktionen</h3>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>Constructor</p>
+<ul>
+<li>obj {Object}<ul>
+<li>src {String}: Die Source URL</li>
+<li>withPlugins {Boolean}: True falls die App Flash benutzt</li>
+<li>reUse {Boolean}: Soll der Tab wieder benutzt werden, falls noch mal die gleiche src aufgerufen wird?</li>
+<li>nodeintegration: Mit Nodeintegration</li>
+</ul>
+</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-attribute">constructor</span>: <span class="hljs-function"><span class="hljs-params">({<span class="hljs-property">@src</span>,<span class="hljs-property">@withPlugins</span>=<span class="hljs-literal">true</span>,<span class="hljs-property">@reUse</span>=<span class="hljs-literal">true</span>,<span class="hljs-property">@nodeintegration</span>=<span class="hljs-literal">false</span>})</span> -&gt;</span>
+    <span class="hljs-property">@setId</span>()
+    <span class="hljs-property">@firstSrc</span>=<span class="hljs-property">@src</span>
+    <span class="hljs-keyword">super</span>
+
+  <span class="hljs-attribute">initialize</span>: <span class="hljs-function">-&gt;</span>
+    <span class="hljs-property">@getOrCreateElement</span>()
+    <span class="hljs-property">@createEntry</span>()
+    <span class="hljs-property">@dom</span>.addEventListener <span class="hljs-string">'did-finish-load'</span>, <span class="hljs-property">@afterPageLoad</span>
+    <span class="hljs-property">@dom</span>.addEventListener <span class="hljs-string">'plugin-crashed'</span>, <span class="hljs-property">@onCrash</span> <span class="hljs-keyword">if</span> <span class="hljs-property">@withPlugins</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>Gibt eine Information herraus, dass Flash abgestuerzt ist.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-attribute">onCrash</span>: <span class="hljs-function"><span class="hljs-params">(event)</span> -&gt;</span>
+    <span class="hljs-built_in">window</span>.eventbus.fire <span class="hljs-string">"Notifications"</span>,<span class="hljs-string">'error'</span>, <span class="hljs-string">"Flash ist abgestürtzt. Die Seite wird neu geladen."</span>
+    <span class="hljs-property">@dom</span>.reload()</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>Nach jedem Seiten Laden</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-attribute">afterPageLoad</span>: <span class="hljs-function"><span class="hljs-params">(event)</span> =&gt;</span>
+    <span class="hljs-property">@changeUrl</span> <span class="hljs-property">@dom</span>.getUrl()
+    <span class="hljs-property">@setName</span> <span class="hljs-property">@dom</span>.getTitle()
+    <span class="hljs-built_in">window</span>.eventbus.fire <span class="hljs-string">"App"</span>,<span class="hljs-string">"afterPageLoad"</span>, @</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>###Setter und Getter</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>Setzt die ID anhand des @src Attributs</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-attribute">setId</span>: <span class="hljs-function"><span class="hljs-params">(preId=<span class="hljs-property">@src</span>)</span> -&gt;</span>
+    preId=preId.replace <span class="hljs-regexp">/:/g</span>,<span class="hljs-string">'_'</span>
+    .replace <span class="hljs-regexp">/\//g</span>,<span class="hljs-string">'-'</span>
+    .replace <span class="hljs-regexp">/&amp;/g</span>,<span class="hljs-string">'-'</span>
+    .replace <span class="hljs-regexp">/\?/g</span>,<span class="hljs-string">'_'</span>
+    .replace <span class="hljs-regexp">/\=/g</span>,<span class="hljs-string">'_'</span>
+    .replace <span class="hljs-regexp">/\./g</span>,<span class="hljs-string">'-'</span>
+    .replace <span class="hljs-regexp">/%/g</span>,<span class="hljs-string">'-'</span>
+    <span class="hljs-property">@id</span> = <span class="hljs-string">"app_<span class="hljs-subst">#{preId}</span>"</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>Gibt die Url zurück, falls @reUse</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-attribute">getSrcId</span>: <span class="hljs-function">-&gt;</span>
+    <span class="hljs-keyword">if</span> <span class="hljs-property">@reUse</span>
+      <span class="hljs-keyword">return</span> <span class="hljs-property">@firstSrc</span>
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-property">@url</span>
+
+  <span class="hljs-attribute">setName</span>: <span class="hljs-function"><span class="hljs-params">(name=<span class="hljs-property">@name</span>)</span> -&gt;</span>
+    <span class="hljs-property">@name</span> = name
+    <span class="hljs-property">@entryName</span>.text <span class="hljs-property">@name</span>
+  <span class="hljs-attribute">changeUrl</span>: <span class="hljs-function"><span class="hljs-params">(url)</span> -&gt;</span>
+    <span class="hljs-property">@changeId</span>()
+    <span class="hljs-property">@url</span> = url
+    <span class="hljs-property">@setFavIcon</span> url
+  <span class="hljs-attribute">changeId</span>: <span class="hljs-function"><span class="hljs-params">(preId=<span class="hljs-property">@src</span>,force=<span class="hljs-literal">false</span>)</span> -&gt;</span>
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-property">@reUse</span> <span class="hljs-keyword">or</span> force
+      <span class="hljs-property">@setId</span> preId
+      <span class="hljs-property">@element</span>.attr <span class="hljs-string">'id'</span>,<span class="hljs-property">@id</span>
+
+  <span class="hljs-attribute">setFavIcon</span>: <span class="hljs-function"><span class="hljs-params">(src=<span class="hljs-property">@src</span>)</span> -&gt;</span>
+    favicon src, <span class="hljs-function"><span class="hljs-params">(err, favicon_url,title)</span> =&gt;</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>console.log @favIcon</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">if</span> <span class="hljs-property">@entry</span>?</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>@entryName.text title if title.length&gt;0</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-property">@favIcon</span>?
+          <span class="hljs-property">@favIcon</span> = $ <span class="hljs-string">'&lt;img /&gt;'</span>, {} =
+            <span class="hljs-attribute">src</span>: favicon_url
+          <span class="hljs-property">@entry</span>.prepend <span class="hljs-property">@favIcon</span>
+        <span class="hljs-keyword">else</span>
+          <span class="hljs-property">@favIcon</span>.attr <span class="hljs-string">'src'</span>, favicon_url</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <h3 id="create-funktionen">Create Funktionen</h3>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>Erstellt den eintrag fuer die App-Liste</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  createEntry: -&gt;
+    @entry = $('&lt;li /&gt;')
+    if @favIcon?
+      fav = $ '&lt;img /&gt;', {} =
+        src: @favIcon
+    @entryName = $ '&lt;span /&gt;', {} =
+      text: @name
+      class: "title"
+    @entryClose = $ '&lt;span /&gt;', {} =
+      class: 'closeBtn'
+      text: "X"
+    @entry.append fav
+    @entry.append @entryName
+    @entry.append @entryClose
+    @entry.click =&gt;
+      window.eventbus.fire "AppManager",'changeApp',@
+    @entryClose.click =&gt;
+      window.eventbus.fire "AppManager","closeWindow", @</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>Sehr wichtige Funktion.
+Erstellt eine App anhand seiner gesetzten eigenschaften</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  getOrCreateElement: -&gt;
+    @element = $ "##{@id}"
+    if not @element[0]? #if there is no with app id on dom
+      @element = $ "&lt;webview /&gt;", {} =
+        id : @id
+        class : "app"
+        src : @src
+        plugins: ''
+        preload: @getPreload() if @getPreload?
+      $('body').prepend @element #add to Dom
+    else #check src, class
+      @element.attr('preload',@getPreload()) if @getPreload?
+      @element.attr('src',@src) if not @element.attr('src')?
+      @element.addClass 'app' if not @element.hasClass 'app'
+    @element.removeAttr('plugins') if not @withPlugins
+    @element.attr('nodeintegration','') if @nodeintegration
+    @dom = @element[0]</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
