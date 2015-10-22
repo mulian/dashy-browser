@@ -20,7 +20,7 @@ console.log "Joo"
 # Keep a global reference of the window object, if you don't, the window will
 # be closed automatically when the JavaScript object is garbage collected.
 mainWindow = null
-require "C:\\Users\\wii\\AppData\\Google\\Chrome\\User\ Data\\PepperFlash\\19.0.0.226\\manifest.json"
+require "C:\\Users\\wii\\AppData\\Local\\Google\\Chrome\\User\ Data\\PepperFlash\\19.0.0.226\\manifest.json"
 
 console.log "use ppapi-flash-path: #{packageFile.flash.path}"
 console.log "use ppapi-flash-version: #{packageFile.flash.version}"
