@@ -21,8 +21,10 @@ class TouchCheckConditions
     if con.checkBit and obj.from?
       @checkFrom(con,e)
 
-    if con.checkBit
-      @setCall con.callback if con.checkBit
+    @accept(con,e) if con.checkBit
+
+  accept: (con,e) ->
+    @setCall con.callback, e
 
   checkFrom: (con,e) ->
     from = con.conditions[e.type].from

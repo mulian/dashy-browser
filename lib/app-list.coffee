@@ -49,7 +49,56 @@ class AppList extends View
     #   onThreeTouch: @touch
 
   lastRight: null
+
+  leftToRight: (x,end=false) ->
+    right = x*-1
+    if right<0
+      @dom.css 'right', right
+    if end
+      if (x)>(@domWidth/2)
+        @dom.hide()
+      else
+        @dom.css 'right', 0
+
+
+  rightToLeft: (x,end=false) ->
+    right = x*-1-@domWidth
+    if right<0
+      @dom.css 'right', right
+    else
+      @dom.css 'right', 0
+
+    if end
+      if (right*-1)>(@domWidth/2)
+        @dom.hide()
+      else
+        @dom.css 'right', 0
+
+  setDom: ->
+    @domWidth = @dom.width()
+    if @dom.is(':visible') #hide
+      @touchFunction = @leftToRight
+    else
+      @dom.show()
+      @touchFunction = @rightToLeft
+
   touchDown: (e) =>
+    e.preventDefault()
+    if e.start
+      @setDom()
+    if not e.end or e.start
+      @touchFunction e.avg.diff.x
+      # console.log e.avg.diff.x
+    else
+      left = e.lastTouchEvent.avg.diff.x * -1
+      @touchFunction e.lastTouchEvent.avg.diff.x, true
+      # console.log left
+      # console.log @domWidth
+      # console.log left>(@domWidth/2)
+      # if not (left>(@domWidth/2))
+      #   @dom.hide()
+
+  touchDownOld: (e) =>
     if not e.end
       @dom.show()
       width = @dom.width()
