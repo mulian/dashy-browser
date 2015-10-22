@@ -1,4 +1,5 @@
-# Touch
+# touch-check-conditions.coffee
+# Prüft die check-conditions.coffee ob sie dem Touch entsprechen.
 
 module.exports =
 class TouchCheckConditions

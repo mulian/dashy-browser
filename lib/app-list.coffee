@@ -1,32 +1,30 @@
-App = require './app'
+# app-list.coffee
+# Hier wird die Applist definiert.
 $ = jQuery = require 'jquery'
 View = require './view'
-# GestureItem = require './gesture-item'
-{settings} = require '../package.json'
-# TouchGesture = require './touch-gesture'
-
+App = require './app'
 Touch = require './touch'
+{settings} = require '../package.json'
 
 module.exports =
 class AppList extends View
   list: []
   dom: null
+
+  #### Initial Funktionen
+
   constructor: ->
     super
     window.eventbus.on "AppManager","changeApp", (app) =>
       @currentApp = app
-      # console.log @currentApp
-      # if @currentApp.dom?.canGoBack()
-      #   @back.removeAttr 'disabled'
-      # else @back.attr 'disabled','true'
-      # if @currentApp.dom?.canGoForward()
-      #   @forward.removeAttr 'disabled'
-      # else @forward.attr 'disabled','true'
 
-
-
+  #Wird erst nach dem Dom geladen ist ausgefuehrt.
   initialize: ->
+    @initDom()
+    touch.on(document.body).fingers.eq(1).call(@touchDown)
 
+  #Erstellt die App-Liste im DOM
+  initDom: ->
     @dom = $ '<div />', {} =
       id: 'app_liste'
     @dom.hide()
@@ -39,17 +37,55 @@ class AppList extends View
     @domList.append @mainApp.entry
     @initEndButton()
 
-    touch.on(document.body).fingers.eq(3).call(@touchDown)
-    # @gesture = new GestureItem
-    #   space: settings.guesture.space
-    #   minActivate: settings.guesture.minActivate
-    #   element : @dom[0]
-    #   moveX: @moveX
-    # @touch = new TouchGesture {} =
-    #   onThreeTouch: @touch
+  #Initalisiert die Navigationsbutton
+  initNavigation: ->
+    @navigation = $ '<div />', {} =
+      id: 'appListNavigation'
+    @back = $ '<button />', {} =
+      text: 'Zurück'
+    @forward = $ '<button />', {} =
+      text: 'Vor'
+    @back.click =>
+      @currentApp.dom.goBack()
+    @forward.click =>
+      @currentApp.dom.goForward()
+    @navigation.append @back
+    @navigation.append @forward
+    @dom.append @navigation
 
-  lastRight: null
+  #Initialisiert den Ende Button, der zur Zeit ausgeblendet wird durch css
+  initEndButton: ->
+    @endButton = $ '<button />', {} =
+      text: 'Beenden'
+      id: 'end'
+    @endButton.click ->
+      window.close() #TODO: Nur die Seite ist geschlossen?
+    @dom.append @endButton
 
+  #Setzt die Main App
+  setMainApp: (@mainApp)->
+
+  #### TOUCH Functionen
+
+  #Wird ausgefuehrt, wenn 3 Finger gedrueckt wurden
+  touchDown: (e) =>
+    e.preventDefault()
+    if e.start
+      @setTouchDirection()
+    if not e.end or e.start
+      @touchFunction e.avg.diff.x
+    else
+      left = e.lastTouchEvent.avg.diff.x * -1
+      @touchFunction e.lastTouchEvent.avg.diff.x, true
+  #Feststelle, welche richtung ausgefuehrt wird.
+  setTouchDirection: ->
+    @domWidth = @dom.width()
+    if @dom.is(':visible') #hide
+      @touchFunction = @leftToRight
+    else
+      @dom.show()
+      @touchFunction = @rightToLeft
+  #Wenn es von links nach recht geht
   leftToRight: (x,end=false) ->
     right = x*-1
     if right<0
@@ -59,8 +95,7 @@ class AppList extends View
         @dom.hide()
       else
         @dom.css 'right', 0
-
-
+  #Wenn es von recht nach links geht
   rightToLeft: (x,end=false) ->
     right = x*-1-@domWidth
     if right<0
@@ -74,109 +109,26 @@ class AppList extends View
       else
         @dom.css 'right', 0
 
-  setDom: ->
-    @domWidth = @dom.width()
-    if @dom.is(':visible') #hide
-      @touchFunction = @leftToRight
-    else
-      @dom.show()
-      @touchFunction = @rightToLeft
+  #### App Listen Funktionen
 
-  touchDown: (e) =>
-    e.preventDefault()
-    if e.start
-      @setDom()
-    if not e.end or e.start
-      @touchFunction e.avg.diff.x
-      # console.log e.avg.diff.x
-    else
-      left = e.lastTouchEvent.avg.diff.x * -1
-      @touchFunction e.lastTouchEvent.avg.diff.x, true
-      # console.log left
-      # console.log @domWidth
-      # console.log left>(@domWidth/2)
-      # if not (left>(@domWidth/2))
-      #   @dom.hide()
-
-  touchDownOld: (e) =>
-    if not e.end
-      @dom.show()
-      width = @dom.width()
-      right = e.avg.diff.x*-1 - width
-      if right<0 and right>width*-1
-        @dom.css 'right',"#{right}px"
-      else if right>0
-        @dom.css 'right',"0px"
-
-      @lastRight = right
-
-    else
-      console.log @lastRight
-      if (@lastRight*-1)/2 > (width/2)
-        @dom.css 'right',"0px"
-      else
-        @dom.hide()
-
-
-
-  remove: (app) ->
-    # console.log "remove!"
-    for item, pos in @list
-      if app.src == item.src
-        # console.log "find: remove! #{pos} with src: #{item.src}"
-        app.entry.remove()
-        @list.splice pos,1
-        return
-
-    console.log "there is no app to close"
-
-  moveX: (event) =>
-    # console.log "moveX"
-    # console.log event
-
-    @dom.css 'right',"#{event.diff.right}px"
-    if event.end
-      if event.right <= 200
-        #hide
-        @dom.hide()
-      else
-         @dom.removeAttr 'style'
-    # @dom.css 'right',@dom.css('right')+event.diff.right
-
-  setMainApp: (@mainApp)->
-
+  #Findet herraus ob die App mit entsprechender URL schon vorhanden und gibt sie ggf. zurueck
   isAppInAppList: (url) ->
     for item in @list
       if item.getSrcId() == url
         return item
     return false
 
-  initNavigation: ->
-    @navigation = $ '<div />', {} =
-      id: 'appListNavigation'
-    @back = $ '<button />', {} =
-      text: 'Zurück'
-      # 'disabled': 'true'
-    @forward = $ '<button />', {} =
-      text: 'Vor'
-      # 'disabled': 'true'
-    @back.click =>
-      # console.log "ZURÜCK #{@currentApp.name}"
-      @currentApp.dom.goBack()
-    @forward.click =>
-      @currentApp.dom.goForward()
-    @navigation.append @back
-    @navigation.append @forward
-    @dom.append @navigation
+  #Loescht die uebergebene App aus der @list
+  remove: (app) ->
+    for item, pos in @list
+      if app.src == item.src
+        app.entry.remove()
+        @list.splice pos,1
+        return
+    console.log "there is no app to close"
 
-  initEndButton: ->
-    @endButton = $ '<button />', {} =
-      text: 'Beenden'
-      id: 'end'
-    @endButton.click ->
-      window.close() #TODO: Nur die Seite ist geschlossen?
-    @dom.append @endButton
-
+  #Initalisiert neue App mit url, falls die URL noch nicht vorhanden ist.
+  #Ansonsten wird die vorhanden App angezeigt
   add: (url) ->
     app = @isAppInAppList(url)
     if app==false

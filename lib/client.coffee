@@ -1,67 +1,38 @@
-#Included from Electron->index.html
-$ = jQuery = require 'jquery'
-bla = require './src/test'
-fs = require 'fs'
-{settings} = require './package.json'
+#client.coffee
+#Wird von der index.html eingebunden
 
-Gesture = require './src/gesture'
+$ = jQuery = require 'jquery'
 AppManager = require './src/app-manager'
 View = require './src/view'
-
-#Eventbus will be added on window.eventbus
 EventBus = require './src/event-bus'
-#Notifications will registrate events
 Notifications = require './src/notifications'
 DirectoryUpload = require './src/directory-upload'
-
 ipc = require 'ipc'
 
-# Client wie be included from ../index.html
-# It initiate the DOM, ....
 class Client extends View
-  # Public: Registrate the Electron events with jQuery
   constructor: ->
     super
+    window.eventbus = new EventBus()
+    new Notifications()
     @appManager = new AppManager()
     @directoryUpload = new DirectoryUpload()
     @regIPC()
 
+
+  #Registriere die IPC Calls die von aussen (App Schale) kommen koennen
   regIPC: ->
     ipc.on 'closeCurrentWindow', ->
       window.eventbus.fire "AppManager","closeCurrentWindow"
-
     ipc.on 'info', (msg) ->
       window.eventbus.fire "Notifications","info", msg
     ipc.on 'error', (msg) ->
       window.eventbus.fire "Notifications","error", msg
-  # Private: Starts with document ready
-  # initialize: ->
-  #   @defineVars()
-  #   @resize() #resize on start up
 
-  # Private: Define The Variables
-  # defineVars: ->
-  #   @body = $ 'body'
-
-    # @gesture = new Gesture
-    #   space: settings.guesture.space
-    #   minActivate: settings.guesture.minActivate
-    #   on:
-    #     left: @onLeft
-        # onRight: left
-
-  # onLeft : (e) =>
-  #   e.preventDefault()
-  #   # console.log "LEFT: #{e.clientX}"
-  #   console.log "#{e.diff.left-e.winWidth}px"
-  #   @daisy.element.css 'left', "#{e.diff.left-e.winWidth}px"
-  #   if e.end
-  #     console.log "ENDE"
-
-  # Private: fires on every resize Event from electron
+  # Wird bei jedem 'resize' event aufgerufen und am anfang.
   resize: ->
     @body = $('body') if not @body?
-    console.log @body
     @body.width $(window).width()
     @body.height $(window).height()
+
+#Startet sich selbst nach aufruf.
 new Client()

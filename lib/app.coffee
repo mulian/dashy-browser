@@ -1,18 +1,43 @@
-View = require './view'
 $ = jQuery = require 'jquery'
-FavTitle = require('favicon');
+View = require './view'
+favicon = require 'favicon'
 
 module.exports =
 class App extends View
-  # * options{Object}:
-  #   * src {String}: Is the Url and necessary!
-  #   * reUse {Boolean}: If you call this src again, use the first used source. Even if the Url has changed.
-  #   * withPlugins{boolean}: Use Plugins
+
+  #### Initial Funktionen
+
+  # Constructor
+  # * obj {Object}
+  #   * src {String}: Die Source URL
+  #   * withPlugins {Boolean}: True falls die App Flash benutzt
+  #   * reUse {Boolean}: Soll der Tab wieder benutzt werden, falls noch mal die gleiche src aufgerufen wird?
+  #   * nodeintegration: Mit Nodeintegration
   constructor: ({@src,@withPlugins=true,@reUse=true,@nodeintegration=false}) ->
     @setId()
     @firstSrc=@src
     super
 
+  initialize: ->
+    @getOrCreateElement()
+    @createEntry()
+    @dom.addEventListener 'did-finish-load', @afterPageLoad
+    @dom.addEventListener 'plugin-crashed', @onCrash if @withPlugins
+
+  #Gibt eine Information herraus, dass Flash abgestuerzt ist.
+  onCrash: (event) ->
+    window.eventbus.fire "Notifications",'error', "Flash ist abgestürtzt. Die Seite wird neu geladen."
+    @dom.reload()
+
+  #Nach jedem Seiten Laden
+  afterPageLoad: (event) =>
+    @changeUrl @dom.getUrl()
+    @setName @dom.getTitle()
+    window.eventbus.fire "App","afterPageLoad", @
+
+  ####Setter und Getter
+
+  #Setzt die ID anhand des @src Attributs
   setId: (preId=@src) ->
     preId=preId.replace /:/g,'_'
     .replace /\//g,'-'
@@ -23,27 +48,13 @@ class App extends View
     .replace /%/g,'-'
     @id = "app_#{preId}"
 
-  initialize: ->
-    @getOrCreateElement()
-    @createEntry()
-    @dom.addEventListener 'did-finish-load', @afterPageLoad
-    @dom.addEventListener 'plugin-crashed', @onCrash if @withPlugins
-
-  onCrash: (event) ->
-    window.eventbus.fire "Notifications",'info', "Flash ist abgestürtzt. Die Seite wird neu geladen."
-    @dom.reload()
-
-  afterPageLoad: (event) =>
-    @changeUrl @dom.getUrl()
-    @changeName @dom.getTitle()
-    window.eventbus.fire "App","afterPageLoad", @
-
+  #Gibt die Url zurück, falls @reUse
   getSrcId: ->
     if @reUse
       return @firstSrc
     else return @url
 
-  changeName: (name=@name) ->
+  setName: (name=@name) ->
     @name = name
     @entryName.text @name
   changeUrl: (url) ->
@@ -56,7 +67,7 @@ class App extends View
       @element.attr 'id',@id
 
   setFavIcon: (src=@src) ->
-    FavTitle src, (err, favicon_url,title) =>
+    favicon src, (err, favicon_url,title) =>
       # console.log @favIcon
       if @entry?
         # @entryName.text title if title.length>0
@@ -67,7 +78,9 @@ class App extends View
         else
           @favIcon.attr 'src', favicon_url
 
+  #### Create Funktionen
 
+  #Erstellt den eintrag fuer die App-Liste
   createEntry: ->
     @entry = $('<li />')
     if @favIcon?
@@ -79,18 +92,16 @@ class App extends View
     @entryClose = $ '<span />', {} =
       class: 'closeBtn'
       text: "X"
-
     @entry.append fav
     @entry.append @entryName
     @entry.append @entryClose
     @entry.click =>
       window.eventbus.fire "AppManager",'changeApp',@
     @entryClose.click =>
-      console.log "click"
       window.eventbus.fire "AppManager","closeWindow", @
 
-
-  #search for app or create if not exist
+  # Sehr wichtige Funktion.
+  # Erstellt eine App anhand seiner gesetzten eigenschaften
   getOrCreateElement: ->
     @element = $ "##{@id}"
     if not @element[0]? #if there is no with app id on dom
@@ -105,7 +116,6 @@ class App extends View
       @element.attr('preload',@getPreload()) if @getPreload?
       @element.attr('src',@src) if not @element.attr('src')?
       @element.addClass 'app' if not @element.hasClass 'app'
-    # @element.attr('plugins','') if @withPlugins
     @element.removeAttr('plugins') if not @withPlugins
     @element.attr('nodeintegration','') if @nodeintegration
     @dom = @element[0]

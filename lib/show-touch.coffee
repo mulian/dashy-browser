@@ -1,10 +1,17 @@
-View = require './view'
+#show-touch.coffee
+# Show Touch Tutorial
+
 $ = jQuery = require 'jquery'
+View = require './view'
 {settings} = require '../package.json'
+
 module.exports =
 class ShowTouch extends View
   gfx: null
   modules: {}
+
+  #### Initiat Functions
+
   constructor: () ->
     super
     window.eventbus.on "ShowTouch","menu",@showMenu
@@ -12,6 +19,8 @@ class ShowTouch extends View
   initialize: ->
     @gfx = $('#touch') if not @gfx?
     @menu = $('#app_liste')
+
+  #### Show Functions
 
   # Show left
   # * options {Object}

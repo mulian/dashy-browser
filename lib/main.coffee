@@ -1,15 +1,13 @@
+#main.coffee
 #Main JS from Electron-Browser
 
 app = require 'app'
-# Module to control application life.
 BrowserWindow = require 'browser-window'
-# Module to create native browser window.
 fs = require 'fs'
-packageFile = require '../package.json'
-
-{settings} = require '../package.json'
-
 {exec} = require 'child_process'
+
+packageFile = require '../package.json'
+settings = packageFile.settings
 
 # Report crashes to our server.
 require('crash-reporter').start();
@@ -21,19 +19,9 @@ require('crash-reporter').start();
 mainWindow = null
 # require "C:\\Users\\wii\\AppData\\Local\\Google\\Chrome\\User\ Data\\PepperFlash\\19.0.0.226\\manifest.json"
 
-flashPath = packageFile.flash.path
-flashVersion = packageFile.flash.version
-# if process.platform == 'win32'
-#   console.log "Joo"
-#   flashPath = "'C:\\Users\\wii\\AppData\\Local\\Google\\Chrome\\User\ Data\\PepperFlash\\19.0.0.226\\pepflashplayer.dll'"
-
-# console.log "''"
-console.log "use ppapi-flash-path: #{flashPath}"
-console.log "use ppapi-flash-version: #{flashVersion}"
-
-# app.commandLine.appendSwitch 'register-pepper-plugins', ';application/x-shockwave-flash'
-app.commandLine.appendSwitch 'ppapi-flash-path', flashPath
-app.commandLine.appendSwitch 'ppapi-flash-version', flashVersion
+# initiate Flash
+app.commandLine.appendSwitch 'ppapi-flash-path', packageFile.flash.path
+app.commandLine.appendSwitch 'ppapi-flash-version', packageFile.flash.version
 
 # Quit when all windows are closed.
 app.on 'window-all-closed', ->
@@ -47,7 +35,6 @@ app.on 'window-all-closed', ->
 # console.log "funzt"
 app.on 'ready', ->
   # Create the browser window.
-  console.log "#{__dirname}/gfx/Dashy.ico"
   mainWindow = new BrowserWindow {} =
     width: 1920
     height: 1080
@@ -64,8 +51,9 @@ app.on 'ready', ->
   # Open the DevTools.
   mainWindow.openDevTools() if settings.debug
   session = webContents.session
+
+  #execute a Native File
   executeFile = (path) ->
-    # console.log path
     path = "open #{path}" if process.platform == 'darwin'
     exec path, (error, stdout, stderr) ->
       console.log "stdout: #{stdout}"
@@ -75,6 +63,8 @@ app.on 'ready', ->
         webContents.send "error","Beim ausführen von #{path}."
       else
         webContents.send "info","Datei #{path} wird ausgeführt."
+
+  # on file Download
   session.on 'will-download', (event, item, downloadWebContents) ->
     downloadFolder = "#{settings.dirUpload.dir}/download"
     item.on 'done', (e, state) ->
@@ -87,10 +77,10 @@ app.on 'ready', ->
     if not fs.existsSync downloadFolder
       fs.mkdirSync downloadFolder
     item.setSavePath "#{downloadFolder}/#{item.getFilename()}"
-    # console.log 'DOWNLOAD: ' + item.url
+
     webContents.send "closeCurrentWindow"
-    # webContents.executeJavaScript 'window.eventbus.on("AppManager","closeCurrentWindow");'
-    # event.preventDefault()
+
+  # on Window Close
   mainWindow.on 'closed', ->
     # Dereference the window object, usually you would store windows
     # in an array if your app supports multi windows, this is the time

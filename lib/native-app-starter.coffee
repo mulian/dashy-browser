@@ -1,4 +1,6 @@
-$ = jQuery = require 'jquery'
+#native-app-starter.coffee
+# Startet die Nativ Apps
+
 {settings} = require '../package.json'
 {exec} = require 'child_process'
 
@@ -7,25 +9,23 @@ class NativeAppStarter
   nativeRE: /^([\w]*):$/
   constructor: ->
     window.eventbus.on "AppManager","newApp", @check
+
+  # Prüft ob es eine Nativ App URL ist und filtert das : raus
   check: (url) =>
     if @nativeRE.test url
       name = @nativeRE.exec url
       @run name[1]
+
+  # Sucht den entsprechenden App-Path von settings.nativeApps
   run: (name) ->
-    console.log name
-    console.log settings.nativeApps
+    # console.log name
+    # console.log settings.nativeApps
     if settings.nativeApps[name]?
       @execute settings.nativeApps[name]
     else
       window.eventbus.fire "Notifications","error","Kein Pfard für #{name} hinterlegt."
-    # switch name
-    #   when 'visio:' then @exec '/test/visio'
-    #   when 'adobe:' then @exec '/adobe/path'
-    #   when 'fb292065597989:' then @exec '/adobe/photoshop/path'
-    #   when 'skype:' then @exec '/skype/path'
-    #   when 'calc:' then @exec '/path/to/calc'
-    #   when 'irfanview:' then @exec '/path/to/Irfanview'
 
+  # Startet die Native App
   execute: (path) ->
     # console.log path
     path = "open #{path}" if process.platform == 'darwin'

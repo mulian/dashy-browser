@@ -1,95 +1,91 @@
+//Set Vers
 @window-width: 800px;
 @std-background: #f2f2f2;
 @item-background: #FFF;
 @red-background: #d9534f;
+@shadow: #aab2bd;
 
-.test {
-  background: #CCC;
-  width: (1+1);
+//Set Mixins
+.setAni(@animation) {
+  animation-duration: 2s;
+  animation-name: @animation;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
 }
+.touch() {
+  width: 50px;
+  height: 50px;
+}
+
+//Fuer die ShowTouch animation
 @keyframes showMenuTouch {
   from {
-    left: 740px;
+    left: 700px;
     opacity: 0;
   }
-  10% {
-    opacity: 1;
-  }
-  to {
-    left: 400px;
-  }
+  10% { opacity: 1; }
+  to { left: 300px; }
 }
-
 @keyframes showAppList {
-  from {
-    right: -340px;
-  }
-  to {
-    right: 0px;
-  }
+  from { right: -400px; }
+  to { right: 0px; }
 }
-
 
 body {
   font-family: 'Ruda', sans-serif;
   overflow: hidden;
+  margin: 0px;
+  //Fuer showTouch
   #touch {
     position: absolute;
     top: -200px;
-    // top: 0px;
     z-index: 99;
     width: 200px;
     height: 100px;
 
     #touch1 {
-      width: 50px;
-      height: 50px;
+      .touch();
     }
     #touch2 {
       position: relative;
-      width: 50px;
-      height: 50px;
       top: -10px;
+      .touch();
     }
     #touch3 {
-      width: 50px;
-      height: 50px;
+      .touch();
     }
 
+    //Diese Classe wird zu #touch hinzugefuegt, um die Animation zu starten.
     &.menu {
       top: 50%;
-
-      animation-duration: 2s;
-      animation-name: showMenuTouch;
-      animation-iteration-count: infinite;
-      animation-direction: alternate;
-      animation-timing-function: ease-in-out;
+      .setAni(showMenuTouch);
     }
   }
+  //Die App-liste oder Tab liste die von links auftaucht.
   #app_liste {
     position: absolute;
     top: 0px;
     right: 0px;
     height: 100%;
-    width: 500px;
+    width: 400px;
     z-index: 11;
     background: @std-background;
-    // border-left: @red-background 1px solid;
-    box-shadow: 0px 3px 2px #aab2bd;
+    box-shadow: 0px 3px 2px @shadow;
     opacity: 0.9;
+    //Dort sind die Zurueck und Vor Buttons zu finden
     #appListNavigation {
-      padding-left: 15px;
-      padding-right: 15px;
-      padding-top: 5px;
-      padding-bottom: 5px;
+      padding: 5px 15px 5px 15px;
       margin: 0px;
-
       button {
         width: 50%;
         height: 30px;
       }
     }
+    //Beenden Button, wird normalerweisse ausgestell
     #end {
+      display: none; //Durch auskommentieren oder loeschen wird der Beenden Button hinzugefuegt.
+      position: absolute;
       background: @red-background;
       width: 80%;
       height: 30px;
@@ -97,17 +93,19 @@ body {
       font-weight: bolder;
       bottom: 5px;
       left: 10%;
-      position: absolute;
     }
+    //Die App Liste selber
     ul {
        list-style-type: none;
        padding-left: 15px;
        padding-right: 15px;
        margin: 0px;
 
+       //Die Main- App (ganz oben)
        #listMainApp {
          margin-bottom: 15px;
        }
+       //Die Anderen App's
        li {
          &.active {
            background-color: @red-background;
@@ -123,7 +121,7 @@ body {
          max-height: 60px;
          padding: 10px 10px 10px 10px;
          margin-bottom: 3px;
-         box-shadow: 0px 3px 2px #aab2bd;
+         box-shadow: 0px 3px 2px @shadow;
          border: 1px solid #bc213f;
          text-align: left;
          vertical-align: middle;
@@ -134,38 +132,30 @@ body {
          }
 
          img {
-          //  position: relative;
-          margin-right: 10px;
+           margin-right: 10px;
            left: 0px;
            top: 0px;
            height: 16px;
            width: 16px;
-          //  display: inline-block;
          }
          span.title {
-          //  position: relative;
-          //  left: 20px;
            width: calc(~"100% - 50px");
            display: inline-block;
          }
          span.closeBtn {
            width: 20px;
            text-align: center;
-          //  border: 1px white solid;
          }
          cursor: pointer;
        }
     }
+    //Die Class wird hinzugefuegt, damit die Liste 'hereinfliegt'
     &.flyin {
       display: block !important;
-      animation-duration: 2s;
-      animation-name: showAppList;
-      animation-iteration-count: infinite;
-      animation-direction: alternate;
-      animation-timing-function: ease-in-out;
+      .setAni(showAppList);
     }
   }
-  margin: 0px;
+  //Jede App hat diese Grunddefinition
   .app {
     position: absolute;
     left: 0px;
@@ -173,27 +163,16 @@ body {
     width: 100%;
     height: 100%;
     z-index: 1;
-    // transition: all 0.5s ease-out;
   }
+  //Dies ist speziell fuer die MainApp
   #app_daisy {
     z-index: 5;
 
     &.hide {
       left: -@window-width;
-      // transition: all 0.5s ease-out;
     }
   }
-  #backBtn {
-    position: absolute;
-    left: 0px;
-    bottom: 0px;
-    z-index: 10;
-    background-color: #FFF;
-    a {
-      color: #000;
-    }
-    border: 1px solid #bc213f;
-  }
+  //Fuer den Notifications Center
   #notifications {
     position: absolute;
     right: 20px;
@@ -207,9 +186,11 @@ body {
     transition: all 0.5s ease-out;
     padding: 20px 30px 20px 30px;
     opacity: 0.9;
+    //Ist der Input, der ggf. bei einer Abfrage angezeigt wird.
     #nInput {
       width: 90%;
     }
+    //Diese Klassen blenden die Notifications ein.
     &.info {
       top: 20px;
       color: white;

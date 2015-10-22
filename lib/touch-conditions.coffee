@@ -1,5 +1,5 @@
-# TouchConditions
-
+# touch-conditions.coffee
+# Hiermit werden die Conditions erstellt.
 
 module.exports =
 class TouchConditions
