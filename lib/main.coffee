@@ -20,7 +20,8 @@ console.log "Joo"
 # Keep a global reference of the window object, if you don't, the window will
 # be closed automatically when the JavaScript object is garbage collected.
 mainWindow = null
-packageFile.flash.path = packageFile.flash.path.replace(/ /g, '\\ ');
+packageFile.flash.path = packageFile.flash.path.replace(/ /g, '\ ');
+packageFile.flash.path = packageFile.flash.path.replace(/\\/g, '\\');
 console.log "use ppapi-flash-path: #{packageFile.flash.path}"
 console.log "use ppapi-flash-version: #{packageFile.flash.version}"
 app.commandLine.appendSwitch 'ppapi-flash-path', packageFile.flash.path
