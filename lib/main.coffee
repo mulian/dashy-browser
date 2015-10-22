@@ -11,6 +11,9 @@ packageFile = require '../package.json'
 
 {exec} = require 'child_process'
 
+// Report crashes to our server.
+require('crash-reporter').start();
+
 # Report crashes to our server.
 # require('crash-reporter').start()
 # Keep a global reference of the window object, if you don't, the window will
@@ -37,7 +40,7 @@ app.on 'ready', ->
     # fullscreen: true
     icon: "#{__dirname}/../gfx/Dashy.ico"
     'web-preferences':
-      'plugins': true
+      '''plugins': true
     'always-on-top' : false
   webContents = mainWindow.webContents
   webContents.enableDeviceEmulation fitToView: true
