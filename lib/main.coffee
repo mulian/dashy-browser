@@ -11,7 +11,7 @@ packageFile = require '../package.json'
 
 {exec} = require 'child_process'
 
-// Report crashes to our server.
+# Report crashes to our server.
 require('crash-reporter').start();
 
 # Report crashes to our server.
