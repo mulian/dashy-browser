@@ -35,7 +35,7 @@ app.on 'window-all-closed', ->
 # console.log "funzt"
 app.on 'ready', ->
   # Create the browser window.
-  # console.log "#{__dirname}/gfx/Dashy.ico"
+  console.log "#{__dirname}/gfx/Dashy.ico"
   mainWindow = new BrowserWindow {} =
     width: 1920
     height: 1080
