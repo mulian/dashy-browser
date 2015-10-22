@@ -24,7 +24,7 @@ mainWindow = null
 
 flashPath = packageFile.flash.path
 flashVersion = packageFile.flash.version
-if process.platform != 'win32'
+if process.platform == 'win32'
   flashPath = "C:\\Users\\wii\\AppData\\Local\\Google\\Chrome\\User\ Data\\PepperFlash\\19.0.0.226\\pepflashplayer.dll"
 
 console.log "use ppapi-flash-path: #{flashPath}"
