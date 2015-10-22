@@ -9,6 +9,6 @@
   PW: Apfel!23
 
 ## Max
-* Touch events
+* Touch events ✓
 * Auto Login ✓
 * Save, name abfragen ✓
