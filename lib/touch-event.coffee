@@ -32,6 +32,11 @@ class TouchEvent
       bottom: window.innerHeight - e.avg.y
   touch: (e) =>
     if e.type != 'touchend'
+      if e.type == 'touchstart'
+        e.start=true
+        @startE = e
+      else #touchmove
+        e.move=true
       e.avg = @average e.touches
       if @startE?
         e.avg.diff =
@@ -39,15 +44,9 @@ class TouchEvent
           y: e.avg.y - @startE.avg.y
       @lastTouchE = e
       @addDirections e
-    switch e.type
-      when 'touchstart'
-        e.start=true
-        @startE = e
-      when 'touchmove'
-        e.move=true
-      when 'touchend'
-        e.end=true
-        e.lastTouchEvent=@lastTouchE
+    else #touchend
+      e.end=true
+      e.lastTouchEvent=@lastTouchE
 
 
     @startE=null if e.end

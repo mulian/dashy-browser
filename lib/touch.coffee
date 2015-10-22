@@ -10,7 +10,8 @@ class Touch
     @touchEvent = new TouchEvent @trigger
     @check = new TouchCheckConditions @setCall, @conditions
 
-  setCall: (@call) =>
+  setCall: (@call,e) =>
+    @call e
   call: null
   trigger: (e) =>
     if @call==null
