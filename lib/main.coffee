@@ -13,7 +13,6 @@ packageFile = require '../package.json'
 
 # Report crashes to our server.
 require('crash-reporter').start();
-console.log "Joo"
 
 # Report crashes to our server.
 # require('crash-reporter').start()
@@ -25,6 +24,7 @@ mainWindow = null
 flashPath = packageFile.flash.path
 flashVersion = packageFile.flash.version
 if process.platform == 'win32'
+  console.log "Joo"
   flashPath = "C:\\Users\\wii\\AppData\\Local\\Google\\Chrome\\User\ Data\\PepperFlash\\19.0.0.226\\pepflashplayer.dll"
 
 console.log "use ppapi-flash-path: #{flashPath}"
