@@ -98,12 +98,14 @@ class App extends View
         id : @id
         class : "app"
         src : @src
+        plugins: ''
         preload: @getPreload() if @getPreload?
       $('body').prepend @element #add to Dom
     else #check src, class
       @element.attr('preload',@getPreload()) if @getPreload?
       @element.attr('src',@src) if not @element.attr('src')?
       @element.addClass 'app' if not @element.hasClass 'app'
-    @element.attr('plugins','') if @withPlugins
+    # @element.attr('plugins','') if @withPlugins
+    @element.removeAttr('plugins') if not @withPlugins
     @element.attr('nodeintegration','') if @nodeintegration
     @dom = @element[0]
