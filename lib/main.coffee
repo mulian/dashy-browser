@@ -20,12 +20,18 @@ console.log "Joo"
 # Keep a global reference of the window object, if you don't, the window will
 # be closed automatically when the JavaScript object is garbage collected.
 mainWindow = null
-require "C:\\Users\\wii\\AppData\\Local\\Google\\Chrome\\User\ Data\\PepperFlash\\19.0.0.226\\manifest.json"
+# require "C:\\Users\\wii\\AppData\\Local\\Google\\Chrome\\User\ Data\\PepperFlash\\19.0.0.226\\manifest.json"
 
-console.log "use ppapi-flash-path: #{packageFile.flash.path}"
-console.log "use ppapi-flash-version: #{packageFile.flash.version}"
-app.commandLine.appendSwitch 'ppapi-flash-path', packageFile.flash.path
-app.commandLine.appendSwitch 'ppapi-flash-version', packageFile.flash.version
+flashPath = packageFile.flash.path
+flashVersion = packageFile.flash.version
+if process.platform != 'win32'
+  flashPath = "C:\\Users\\wii\\AppData\\Local\\Google\\Chrome\\User\ Data\\PepperFlash\\19.0.0.226\\pepflashplayer.dll"
+
+console.log "use ppapi-flash-path: #{flashPath}"
+console.log "use ppapi-flash-version: #{flashVersion}"
+if
+app.commandLine.appendSwitch 'ppapi-flash-path', flashPath
+app.commandLine.appendSwitch 'ppapi-flash-version', flashVersion
 # Quit when all windows are closed.
 app.on 'window-all-closed', ->
   # On OS X it is common for applications and their menu bar
