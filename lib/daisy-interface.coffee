@@ -1,12 +1,14 @@
-#Schnittstelle.getUserProjectCalendar user_id, showCalendar
+# daisy-interface.coffe
+# Wird in der App Daisy ausgefuert und stellt die Schnittstelle her.
 module.exports =
 class DaisyInterface
+  # registriert die Schnittstelle
   constructor: ->
     window.eventbus.on "DaisyInterface","uploadFile", @uploadFile
+
+  # Fragt Daisy (den Server mit CakePHP) an.
   callDaisy: (url, data_array, cb) ->
-    #DEBUG  ((a < b) ? 2 : 3);
-    # console.log 'DEBUG: DaisyInterface.callDaisy(url=' + url + ',data_array=' + JSON.stringify(data_array) + ',cb=' + (if cb == undefined then 'nicht vorhanden' else 'vorhanden') + ');'
-    console.log data_array.data.data.length
+    # console.log data_array.data.data.length
     url = '../FileUploads/' + url
     $.ajax(
       'url': url
@@ -38,8 +40,6 @@ class DaisyInterface
     options.upload = upload
     , (returnObj) ->
       options.return = returnObj
-      # options.data = 'deletet from daisy'
+      options.data = 'deletet from daisy'
       window.eventbus.fire "DaisyInterface","uploadFileReady", options
       # console.log JSON.stringify returnObj
-
-# console.log "interface!"

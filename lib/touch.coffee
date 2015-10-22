@@ -1,4 +1,8 @@
-# Touch
+# touch.coffee
+# Ist die Haupt Touch-Lib File
+# Diese Lib wird ein eigenes repositori bekommen!
+# Deswegen sind sie zur Zeit wenig kommentiert.
+
 TouchEvent = require './touch-event'
 TouchConditions = require './touch-conditions'
 TouchCheckConditions = require './touch-check-conditions'
@@ -33,7 +37,5 @@ class Touch
     con.element = element
     return con
 
-
-
-
+# Registriert touch global
 window.touch = new Touch()

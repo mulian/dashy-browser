@@ -1,27 +1,21 @@
-# Manage AppList, Open/Close, Show Menu
+# Managed die Apps
 
-#### Imports
-# View calls initialize on dom ready
 View = require './view'
-# Use Settings from package.json
 {settings} = require '../package.json'
-# Main Applikation
 MainApp = require './main-app'
-App = require './app'
 AppList = require './app-list'
-# GestureSide = require './gesture-side'
 ShowTouch = require './show-touch'
 SumoSave = require './sumo-save'
-StrutSave = require './strut-save'
 NativeAppStarter = require './native-app-starter'
 
-#### Class AppManager
 module.exports =
-class AppManager extends View
+class AppManager
   mainApp: null
   currentApp: null
+
+  #### Initial Funktionen
+
   constructor: ->
-    super
     @mainApp = new MainApp
       name: 'daisy'
       src: settings.url
@@ -31,63 +25,23 @@ class AppManager extends View
     @appList = new AppList()
     @appList.setMainApp @mainApp
     @showTouch = new ShowTouch()
+    @reqEventBus()
+    @startPlugins()
+
+  #registriere Funktionen beim EventBus
+  reqEventBus: ->
     window.eventbus.on "AppManager","changeApp", @changeApp
     window.eventbus.on "AppManager","closeCurrentWindow", @closeCurrentWindow
     window.eventbus.on "AppManager","closeWindow", @closeWindow
-    @startPlugins()
 
-    # window.eventbus.on "App","entryClick",@onClickApp
-    # window.eventbus.on 'AppManager','newApp',@newApp
-
+  #Starte Plugins
   startPlugins: ->
     @sumoSave = new SumoSave()
-    @strutSave = new StrutSave()
     @nativeAppStarter = new NativeAppStarter()
 
-  initialize: ->
-    # @gesture = new GestureSide
-    #   space: settings.guesture.space
-    #   minActivate: settings.guesture.minActivate
-    #   on:
-    #     left: @onLeft
-    #     top: @onTop
-    # @showTouch.showLeftAndRight()
+  #### EventBus Funktionen
 
-  leftAction: false
-  onLeft: (event) =>
-    if not @mainApp.element.is(":visible") or @leftAction
-      @leftAction=true
-      event.preventDefault()
-      # @mainApp.dom
-      left = event.left-@mainApp.element.width()
-      left += event.left*3
-      left = 0 if left>0
-      @mainApp.element.show()
-      @mainApp.element.css('left',left)
-      if event.end
-        if event.left>=80
-          @mainApp.element.removeAttr( 'style' );
-          @changeApp @mainApp
-        else
-          @mainApp.element.hide()
-        @leftAction=false
-
-
-  onTop: (event) =>
-    # if not @appList.dom.is(":visible")
-    event.preventDefault()
-    # console.log @appList.dom.width()
-    top = event.top-@appList.dom.height()
-    top = top+event.top*2
-    top = 0 if top>0
-    # console.log top
-    @appList.dom.show()
-    @appList.dom.css('top',top)
-    if event.end
-      if event.top > 80
-        @appList.dom.removeAttr('style')
-      else @appList.dom.hide()
-
+  #Wechselt die app. Versteckt die aktuelle und macht die neue Sichtbar.
   changeApp: (app) =>
     @currentApp.entry.removeClass('active')
     @currentApp.element.hide()
@@ -95,6 +49,7 @@ class AppManager extends View
     app.element.show()
     @currentApp = app
 
+  #Schliesst eine App.
   closeWindow: (app) =>
     if app.src == @mainApp.src
       window.eventbus.fire "Notifications","error","Die Hauptapplikation kann nicht geschlossen werden."
@@ -103,10 +58,13 @@ class AppManager extends View
       app.element.remove()
       window.eventbus.fire "AppManager","changeApp", @mainApp
 
+  #Schliesst die aktuelle App.
   closeCurrentWindow: =>
-    # console.log "REMOVE"
     @closeWindow @currentApp
 
+  #### Andere
+
+  #Erstellt eine Neue App, wenn es eine richtige URL ist. Falls es eine Nativ App Starter Url ist, oeffne die Native App.
   firstTime : true
   newApp: (event) =>
     nativeRE= /^([\w]*):$/
@@ -114,11 +72,11 @@ class AppManager extends View
     window.eventbus.fire "AppManager","newApp",event.url
     if not nativeRE.test event.url
       @appList.add event.url
-
       if @firstTime
         @firstTime=false
         @showTutorial()
 
+  #Zeigt das ShowTouch (aka. Tutorial) an
   showTutorial: ->
     setTimeout ->
       window.eventbus.fire 'ShowTouch','menu'

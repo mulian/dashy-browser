@@ -1,19 +1,19 @@
 {
   "name"    : "daisy-browser",
-  "description": "A Browser for Daisy Web-App. Used with an electronic Blackboard.",
+  "description": "A Browser for Daisy Web-App. Used with an Smartboard.",
   "version" : "0.1.0",
   "main"    : "main.js",
   "engines": {
-    "electron-prebuilt": ">=0.33.3"
+    "electron-prebuilt": "^0.^33.3"
   },
   "devDependencies": {
-    "docco": ">=0.7.0"
+    "docco": ">=0.7.0",
+    "coffee-script":">=1.10.0",
+    "less": ">=2.5.3"
   },
   "dependencies": {
-    "favicon-and-title": "git+https://github.com/mulian/node-favicon-and-title.git#0605a30",
-    "coffee-script":">=1.10.0",
-    "less": ">=2.5.3",
-    "jquery": ">=2.1.4"
+    "favicon": "0.0.2",
+    "jquery": "^2.1.4"
   },
   "flash": {
     "path": "/Applications/Google Chrome.app/Contents/Versions/45.0.2454.101/Google Chrome Framework.framework/Internet Plug-Ins/PepperFlash/PepperFlashPlayer.plugin",
@@ -22,10 +22,6 @@
   "settings": {
     "debug": true,
     "url":"http://localhost:8081/",
-    "guesture": {
-      "space": 20,
-      "minActivate": 40
-    },
     "showIntroduction": true,
     "dirUpload": {
       "enabled": true,

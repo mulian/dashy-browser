@@ -1,11 +1,13 @@
-$ = jQuery = require 'jquery'
-{settings} = require '../package.json'
+#main-app.coffee
 App = require './app'
 fs = require 'fs'
 
 # The Main App for AppManager
 module.exports =
 class MainApp extends App
+
+  #### Initial Funktionen
+
   # Constructor
   # * `options` {Object}
   #   * `name` {String} the name of app (like id)
@@ -24,17 +26,18 @@ class MainApp extends App
     # @initElements()
     window.eventbus.on 'MainApp','uploadFile', @uploadFile
 
+  # Fügt Folgendes JS zur Daisy App hinzu.
   getPreload: ->
     './src/daisy-execute.js'
 
   initialize: ->
     super
-    @initEvent()
+    @regEvents()
     @changeId @name,true
     @entryClose.remove() if @entryClose?
 
-
-  initEvent: ->
+  # Registriert die App-Events
+  regEvents: ->
     @dom.addEventListener 'new-window', @on.newWindow if @on.newWindow
     if @on.log
       @dom.addEventListener 'console-message', @on.log
@@ -42,29 +45,25 @@ class MainApp extends App
     @dom.addEventListener 'did-frame-finish-load', @finishLoad
     @dom.addEventListener 'ipc-message', @ipcMsg
 
+  #### IPC
 
-
+  # Bekomme die Nachricht, uploadReady
   ipcMsg: (event) =>
     if event.channel == 'uploadReady'
       console.log event
-      window.eventbus.fire "Notifications","info","UPLOAD READY!"
+      window.eventbus.fire "Notifications","info","Datei wurde hochgeladen? Muss noch überarbeitet werden! Du findest mich in main-app.coffee"
 
+  # sende etwas zur App
   ipcSend: (channel,args) ->
     @dom.send channel,args
 
+  # Lade Datei hoch
   uploadFile: (options) =>
     {appName,url,data,fileName,type} = options
     @ipcSend 'upload', options
 
-  # newWindow: (e) ->
-  #   console.log "new Window"
-  #   console.log e
+  # Pipt die App Logs zur Haupt App
   log: (e) =>
     console.log("#{@name}: #{e.message}")
-  finishLoad: (event, isMainFrame) =>
-    # @dom.executeJavaScript fs.readFileSync './src/daisy-interface.js','utf8'
-    console.log "finished loading"
-    # setTimeout =>
-    #   console.log "start upload?"
-    #   @dom.executeJavaScript "window.di.uploadFile('GeileApp','http://www.geileapp.de','DATA!','dateiname','type');"
-    # , 20*1000
+  # finishLoad: (event, isMainFrame) =>
+  #   console.log "finished loading"

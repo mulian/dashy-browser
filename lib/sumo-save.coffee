@@ -1,5 +1,6 @@
-View = require './view'
-$ = jQuery = require 'jquery'
+#sumo-save.coffee
+# Öffnet Sumo (per JS), und Speichert beim klicken auf "File > Save to Cloud"
+
 Save = require './save'
 
 module.exports =
@@ -19,6 +20,8 @@ class SumoSave extends Save
 
     else if @sumoUrlRE.test app.dom.getUrl()
       @onSumoStart app
+
+  # Speichert eine Datei auf Daisy
   saveFile: (name) =>
     @save
       appName: 'sumo'
@@ -26,12 +29,18 @@ class SumoSave extends Save
       data: ''
       fileName: name
       type: 'url'
+
+  # Rufe wieder den Editor auf
   insertSaveAction: (app) ->
     # console.log "var run = #{@getCode.toString()}; run()"
     app.dom.executeJavaScript "var run = #{@getCode.toString()}; run()"
+
+  # Wenn Sumo gestartet wurde, rufe den Editor auf.
   onSumoStart: (app) ->
     app.dom.executeJavaScript "sumopaint();"
-    window.eventbus.fire "Notifications",'info', "Um zu speichern auf: 'File > Save to Cloud' tippen."
+    setTimeout ->
+      window.eventbus.fire "Notifications",'info', "Um bei Sumo Paint eine Datei zu speichern tippe auf 'File > Save to Cloud'"
+    , 5*1000
 
   #Will be inserted on save
   #It search the editor URL and redirect to it, to get the URL on next afterPageLoad

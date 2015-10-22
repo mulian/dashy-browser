@@ -4,6 +4,9 @@
 $ = jQuery = require 'jquery'
 module.exports =
 class View
+
+  #### Initial Funktionen
+
   constructor: ->
     @initResize()
     @initInitialize()

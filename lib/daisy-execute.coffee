@@ -1,4 +1,6 @@
-#will be injected in to daisy
+# daisy-execute.coffee
+# Wird in Daisy 'eingespeisst' und intiialisiert wichtige Klassen.
+
 window.electron = true #set identificatin
 
 #load jquery for web app
@@ -9,5 +11,6 @@ DaisyInterface = require "./daisy-interface"
 DaisyIPC = require "./daisy-ipc"
 
 #run lib
+window.eventbus = new EventBus()
 daisyInterface = new DaisyInterface()
 daisyIPC = new DaisyIPC()

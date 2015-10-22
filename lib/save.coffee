@@ -1,5 +1,6 @@
-View = require './view'
-$ = jQuery = require 'jquery'
+#save.coffee
+# Dies ist eine Mutter Klasse für sumo-save.coffee
+# Ist Sinnvoll, falls weitere save Plugins hinzukommen.
 
 module.exports =
 class Save
