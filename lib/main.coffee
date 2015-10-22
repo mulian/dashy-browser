@@ -36,7 +36,8 @@ app.on 'ready', ->
     height: 1080
     # fullscreen: true
     icon: "#{__dirname}/../gfx/Dashy.ico"
-    'web-preferences': 'plugins': true
+    'web-preferences':
+      'plugins': true
     'always-on-top' : false
   webContents = mainWindow.webContents
   webContents.enableDeviceEmulation fitToView: true
