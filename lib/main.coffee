@@ -29,7 +29,7 @@ if process.platform == 'win32'
 
 console.log "use ppapi-flash-path: #{flashPath}"
 console.log "use ppapi-flash-version: #{flashVersion}"
-if
+
 app.commandLine.appendSwitch 'ppapi-flash-path', flashPath
 app.commandLine.appendSwitch 'ppapi-flash-version', flashVersion
 # Quit when all windows are closed.
