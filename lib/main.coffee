@@ -32,8 +32,8 @@ console.log "use ppapi-flash-path: #{flashPath}"
 console.log "use ppapi-flash-version: #{flashVersion}"
 
 # app.commandLine.appendSwitch 'register-pepper-plugins', ';application/x-shockwave-flash'
-# app.commandLine.appendSwitch 'ppapi-flash-path', flashPath
-# app.commandLine.appendSwitch 'ppapi-flash-version', flashVersion
+app.commandLine.appendSwitch 'ppapi-flash-path', flashPath
+app.commandLine.appendSwitch 'ppapi-flash-version', flashVersion
 
 # Quit when all windows are closed.
 app.on 'window-all-closed', ->
