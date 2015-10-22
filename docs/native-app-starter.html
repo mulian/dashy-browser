@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>native-app-starter.coffee</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page_wrapper">
+            <div id="jump_page">
+              
+                
+                <a class="source" href="app-list.html">
+                  app-list.coffee
+                </a>
+              
+                
+                <a class="source" href="app-manager.html">
+                  app-manager.coffee
+                </a>
+              
+                
+                <a class="source" href="app.html">
+                  app.coffee
+                </a>
+              
+                
+                <a class="source" href="client.html">
+                  client.coffee
+                </a>
+              
+                
+                <a class="source" href="daisy-execute.html">
+                  daisy-execute.coffee
+                </a>
+              
+                
+                <a class="source" href="daisy-interface.html">
+                  daisy-interface.coffee
+                </a>
+              
+                
+                <a class="source" href="daisy-ipc.html">
+                  daisy-ipc.coffee
+                </a>
+              
+                
+                <a class="source" href="directory-upload.html">
+                  directory-upload.coffee
+                </a>
+              
+                
+                <a class="source" href="event-bus.html">
+                  event-bus.coffee
+                </a>
+              
+                
+                <a class="source" href="main-app.html">
+                  main-app.coffee
+                </a>
+              
+                
+                <a class="source" href="main.html">
+                  main.coffee
+                </a>
+              
+                
+                <a class="source" href="native-app-starter.html">
+                  native-app-starter.coffee
+                </a>
+              
+                
+                <a class="source" href="notifications.html">
+                  notifications.coffee
+                </a>
+              
+                
+                <a class="source" href="save.html">
+                  save.coffee
+                </a>
+              
+                
+                <a class="source" href="show-touch.html">
+                  show-touch.coffee
+                </a>
+              
+                
+                <a class="source" href="sumo-save.html">
+                  sumo-save.coffee
+                </a>
+              
+                
+                <a class="source" href="touch-check-conditions.html">
+                  touch-check-conditions.coffee
+                </a>
+              
+                
+                <a class="source" href="touch-conditions.html">
+                  touch-conditions.coffee
+                </a>
+              
+                
+                <a class="source" href="touch-event.html">
+                  touch-event.coffee
+                </a>
+              
+                
+                <a class="source" href="touch.html">
+                  touch.coffee
+                </a>
+              
+                
+                <a class="source" href="view.html">
+                  view.coffee
+                </a>
+              
+            </div>
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>native-app-starter.coffee</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <p>native-app-starter.coffee
+Startet die Nativ Apps</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+{settings} = <span class="hljs-built_in">require</span> <span class="hljs-string">'../package.json'</span>
+{exec} = <span class="hljs-built_in">require</span> <span class="hljs-string">'child_process'</span>
+
+<span class="hljs-built_in">module</span>.exports =
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NativeAppStarter</span></span>
+  <span class="hljs-attribute">nativeRE</span>: <span class="hljs-regexp">/^([\w]*):$/</span>
+  <span class="hljs-attribute">constructor</span>: <span class="hljs-function">-&gt;</span>
+    <span class="hljs-built_in">window</span>.eventbus.<span class="hljs-literal">on</span> <span class="hljs-string">"AppManager"</span>,<span class="hljs-string">"newApp"</span>, <span class="hljs-property">@check</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>Prüft ob es eine Nativ App URL ist und filtert das : raus</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-attribute">check</span>: <span class="hljs-function"><span class="hljs-params">(url)</span> =&gt;</span>
+    <span class="hljs-keyword">if</span> <span class="hljs-property">@nativeRE</span>.test url
+      name = <span class="hljs-property">@nativeRE</span>.exec url
+      <span class="hljs-property">@run</span> name[<span class="hljs-number">1</span>]</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>Sucht den entsprechenden App-Path von settings.nativeApps</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-attribute">run</span>: <span class="hljs-function"><span class="hljs-params">(name)</span> -&gt;</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>console.log name
+console.log settings.nativeApps</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">if</span> settings.nativeApps[name]?
+      <span class="hljs-property">@execute</span> settings.nativeApps[name]
+    <span class="hljs-keyword">else</span>
+      <span class="hljs-built_in">window</span>.eventbus.fire <span class="hljs-string">"Notifications"</span>,<span class="hljs-string">"error"</span>,<span class="hljs-string">"Kein Pfard für <span class="hljs-subst">#{name}</span> hinterlegt."</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>Startet die Native App</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-attribute">execute</span>: <span class="hljs-function"><span class="hljs-params">(path)</span> -&gt;</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>console.log path</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    path = <span class="hljs-string">"open <span class="hljs-subst">#{path}</span>"</span> <span class="hljs-keyword">if</span> process.platform == <span class="hljs-string">'darwin'</span>
+    exec path, <span class="hljs-function"><span class="hljs-params">(error, stdout, stderr)</span> -&gt;</span>
+      <span class="hljs-built_in">console</span>.log <span class="hljs-string">"stdout: <span class="hljs-subst">#{stdout}</span>"</span>
+      <span class="hljs-built_in">console</span>.log <span class="hljs-string">"stderr: <span class="hljs-subst">#{stderr}</span>"</span>
+      <span class="hljs-keyword">if</span> error?
+        <span class="hljs-built_in">console</span>.log <span class="hljs-string">"exec error: <span class="hljs-subst">#{error}</span>"</span>
+        <span class="hljs-built_in">window</span>.eventbus.fire <span class="hljs-string">"Notifications"</span>,<span class="hljs-string">"error"</span>,error</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

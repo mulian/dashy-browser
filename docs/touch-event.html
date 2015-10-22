@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>touch-event.coffee</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page_wrapper">
+            <div id="jump_page">
+              
+                
+                <a class="source" href="app-list.html">
+                  app-list.coffee
+                </a>
+              
+                
+                <a class="source" href="app-manager.html">
+                  app-manager.coffee
+                </a>
+              
+                
+                <a class="source" href="app.html">
+                  app.coffee
+                </a>
+              
+                
+                <a class="source" href="client.html">
+                  client.coffee
+                </a>
+              
+                
+                <a class="source" href="daisy-execute.html">
+                  daisy-execute.coffee
+                </a>
+              
+                
+                <a class="source" href="daisy-interface.html">
+                  daisy-interface.coffee
+                </a>
+              
+                
+                <a class="source" href="daisy-ipc.html">
+                  daisy-ipc.coffee
+                </a>
+              
+                
+                <a class="source" href="directory-upload.html">
+                  directory-upload.coffee
+                </a>
+              
+                
+                <a class="source" href="event-bus.html">
+                  event-bus.coffee
+                </a>
+              
+                
+                <a class="source" href="main-app.html">
+                  main-app.coffee
+                </a>
+              
+                
+                <a class="source" href="main.html">
+                  main.coffee
+                </a>
+              
+                
+                <a class="source" href="native-app-starter.html">
+                  native-app-starter.coffee
+                </a>
+              
+                
+                <a class="source" href="notifications.html">
+                  notifications.coffee
+                </a>
+              
+                
+                <a class="source" href="save.html">
+                  save.coffee
+                </a>
+              
+                
+                <a class="source" href="show-touch.html">
+                  show-touch.coffee
+                </a>
+              
+                
+                <a class="source" href="sumo-save.html">
+                  sumo-save.coffee
+                </a>
+              
+                
+                <a class="source" href="touch-check-conditions.html">
+                  touch-check-conditions.coffee
+                </a>
+              
+                
+                <a class="source" href="touch-conditions.html">
+                  touch-conditions.coffee
+                </a>
+              
+                
+                <a class="source" href="touch-event.html">
+                  touch-event.coffee
+                </a>
+              
+                
+                <a class="source" href="touch.html">
+                  touch.coffee
+                </a>
+              
+                
+                <a class="source" href="view.html">
+                  view.coffee
+                </a>
+              
+            </div>
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>touch-event.coffee</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <p>touch-event.coffee
+Erweitert das event object und gibt es an touch.coffee zurück.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>$ = jQuery = <span class="hljs-built_in">require</span> <span class="hljs-string">'jquery'</span>
+<span class="hljs-built_in">module</span>.exports =
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TouchEvent</span></span>
+  <span class="hljs-attribute">constructor</span>: <span class="hljs-function"><span class="hljs-params">(<span class="hljs-property">@callBack</span>)</span> -&gt;</span>
+    $(<span class="hljs-built_in">document</span>).ready <span class="hljs-property">@init</span>
+
+  <span class="hljs-attribute">init</span>: <span class="hljs-function">=&gt;</span>
+    <span class="hljs-built_in">document</span>.body.addEventListener <span class="hljs-string">'touchstart'</span>,<span class="hljs-property">@touch</span>
+    <span class="hljs-built_in">document</span>.body.addEventListener <span class="hljs-string">'touchmove'</span>,<span class="hljs-property">@touch</span>
+    <span class="hljs-built_in">document</span>.body.addEventListener <span class="hljs-string">'touchend'</span>,<span class="hljs-property">@touch</span>
+    <span class="hljs-built_in">document</span>.body.addEventListener <span class="hljs-string">'touchcancel'</span>,<span class="hljs-property">@touch</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>calculate the x and y average</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-attribute">average</span>: <span class="hljs-function"><span class="hljs-params">(touches)</span> -&gt;</span>
+    x = <span class="hljs-number">0</span>
+    y = <span class="hljs-number">0</span>
+    <span class="hljs-keyword">for</span> touch <span class="hljs-keyword">in</span> touches
+      x+=touch.clientX
+      y+=touch.clientY
+    <span class="hljs-keyword">return</span> {} =
+      x : x/touches.length
+      y : y/touches.length
+
+  <span class="hljs-attribute">startE</span>: <span class="hljs-literal">null</span> <span class="hljs-comment">#startEvent</span>
+  <span class="hljs-attribute">lastTouchE</span>: <span class="hljs-literal">null</span> <span class="hljs-comment">#lst Touch Event</span>
+  <span class="hljs-attribute">addDirections</span>: <span class="hljs-function"><span class="hljs-params">(e)</span> -&gt;</span>
+    e.direction = {} =
+      <span class="hljs-attribute">left</span>: e.avg.x
+      <span class="hljs-attribute">right</span>: <span class="hljs-built_in">window</span>.innerWidth - e.avg.x
+      <span class="hljs-attribute">top</span>: e.avg.y
+      <span class="hljs-attribute">bottom</span>: <span class="hljs-built_in">window</span>.innerHeight - e.avg.y
+  <span class="hljs-attribute">touch</span>: <span class="hljs-function"><span class="hljs-params">(e)</span> =&gt;</span>
+    <span class="hljs-keyword">if</span> e.type != <span class="hljs-string">'touchend'</span>
+      <span class="hljs-keyword">if</span> e.type == <span class="hljs-string">'touchstart'</span>
+        e.start=<span class="hljs-literal">true</span>
+        <span class="hljs-property">@startE</span> = e
+      <span class="hljs-keyword">else</span> <span class="hljs-comment">#touchmove</span>
+        e.move=<span class="hljs-literal">true</span>
+      e.avg = <span class="hljs-property">@average</span> e.touches
+      <span class="hljs-keyword">if</span> <span class="hljs-property">@startE</span>?
+        e.avg.diff =
+          <span class="hljs-attribute">x</span>: e.avg.x - <span class="hljs-property">@startE</span>.avg.x
+          <span class="hljs-attribute">y</span>: e.avg.y - <span class="hljs-property">@startE</span>.avg.y
+      <span class="hljs-property">@lastTouchE</span> = e
+      <span class="hljs-property">@addDirections</span> e
+    <span class="hljs-keyword">else</span> <span class="hljs-comment">#touchend</span>
+      e.end=<span class="hljs-literal">true</span>
+      e.lastTouchEvent=<span class="hljs-property">@lastTouchE</span>
+
+
+    <span class="hljs-property">@startE</span>=<span class="hljs-literal">null</span> <span class="hljs-keyword">if</span> e.end
+
+    <span class="hljs-property">@callBack</span> e</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>run = (e) -&gt;
+  console.log “run”</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>$(document).ready -&gt;
+  console.log touch.on(document.body).fingers.eq(2).from.left(20).call(run)
+console.log touch.on(document.body).onStart().fingers.eq(1).onMove().fingers.betweene(1,0).move.X(30).call(run)</p>
+
+            </div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

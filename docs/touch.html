@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>touch.coffee</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page_wrapper">
+            <div id="jump_page">
+              
+                
+                <a class="source" href="app-list.html">
+                  app-list.coffee
+                </a>
+              
+                
+                <a class="source" href="app-manager.html">
+                  app-manager.coffee
+                </a>
+              
+                
+                <a class="source" href="app.html">
+                  app.coffee
+                </a>
+              
+                
+                <a class="source" href="client.html">
+                  client.coffee
+                </a>
+              
+                
+                <a class="source" href="daisy-execute.html">
+                  daisy-execute.coffee
+                </a>
+              
+                
+                <a class="source" href="daisy-interface.html">
+                  daisy-interface.coffee
+                </a>
+              
+                
+                <a class="source" href="daisy-ipc.html">
+                  daisy-ipc.coffee
+                </a>
+              
+                
+                <a class="source" href="directory-upload.html">
+                  directory-upload.coffee
+                </a>
+              
+                
+                <a class="source" href="event-bus.html">
+                  event-bus.coffee
+                </a>
+              
+                
+                <a class="source" href="main-app.html">
+                  main-app.coffee
+                </a>
+              
+                
+                <a class="source" href="main.html">
+                  main.coffee
+                </a>
+              
+                
+                <a class="source" href="native-app-starter.html">
+                  native-app-starter.coffee
+                </a>
+              
+                
+                <a class="source" href="notifications.html">
+                  notifications.coffee
+                </a>
+              
+                
+                <a class="source" href="save.html">
+                  save.coffee
+                </a>
+              
+                
+                <a class="source" href="show-touch.html">
+                  show-touch.coffee
+                </a>
+              
+                
+                <a class="source" href="sumo-save.html">
+                  sumo-save.coffee
+                </a>
+              
+                
+                <a class="source" href="touch-check-conditions.html">
+                  touch-check-conditions.coffee
+                </a>
+              
+                
+                <a class="source" href="touch-conditions.html">
+                  touch-conditions.coffee
+                </a>
+              
+                
+                <a class="source" href="touch-event.html">
+                  touch-event.coffee
+                </a>
+              
+                
+                <a class="source" href="touch.html">
+                  touch.coffee
+                </a>
+              
+                
+                <a class="source" href="view.html">
+                  view.coffee
+                </a>
+              
+            </div>
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>touch.coffee</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <p>touch.coffee
+Ist die Haupt Touch-Lib File
+Diese Lib wird ein eigenes repositori bekommen!
+Deswegen sind sie zur Zeit wenig kommentiert.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+TouchEvent = <span class="hljs-built_in">require</span> <span class="hljs-string">'./touch-event'</span>
+TouchConditions = <span class="hljs-built_in">require</span> <span class="hljs-string">'./touch-conditions'</span>
+TouchCheckConditions = <span class="hljs-built_in">require</span> <span class="hljs-string">'./touch-check-conditions'</span>
+
+<span class="hljs-built_in">module</span>.exports =
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Touch</span></span>
+  <span class="hljs-attribute">conditions</span>: []
+  <span class="hljs-attribute">constructor</span>: <span class="hljs-function">-&gt;</span>
+    <span class="hljs-property">@touchEvent</span> = <span class="hljs-keyword">new</span> TouchEvent <span class="hljs-property">@trigger</span>
+    <span class="hljs-property">@check</span> = <span class="hljs-keyword">new</span> TouchCheckConditions <span class="hljs-property">@setCall</span>, <span class="hljs-property">@conditions</span>
+
+  <span class="hljs-attribute">setCall</span>: <span class="hljs-function"><span class="hljs-params">(<span class="hljs-property">@call</span>,e)</span> =&gt;</span>
+    <span class="hljs-property">@call</span> e
+  <span class="hljs-attribute">call</span>: <span class="hljs-literal">null</span>
+  <span class="hljs-attribute">trigger</span>: <span class="hljs-function"><span class="hljs-params">(e)</span> =&gt;</span>
+    <span class="hljs-keyword">if</span> <span class="hljs-property">@call</span>==<span class="hljs-literal">null</span>
+      <span class="hljs-property">@check</span>.allConditionsCheck e <span class="hljs-keyword">if</span> e.start
+    <span class="hljs-keyword">else</span>
+      <span class="hljs-property">@call</span> e
+
+    <span class="hljs-keyword">if</span> e.end
+      <span class="hljs-property">@call</span> = <span class="hljs-literal">null</span>
+      <span class="hljs-property">@check</span>.resetConditions()</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>console.log e</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+  <span class="hljs-attribute">newCondition</span>: <span class="hljs-function">-&gt;</span>
+    con = <span class="hljs-keyword">new</span> TouchConditions()
+    <span class="hljs-property">@conditions</span>.push con
+    <span class="hljs-keyword">return</span> con
+  <span class="hljs-attribute">on</span>: <span class="hljs-function"><span class="hljs-params">(element)</span> -&gt;</span>
+    con = <span class="hljs-property">@newCondition</span>()
+    con.element = element
+    <span class="hljs-keyword">return</span> con</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>Registriert touch global</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">window</span>.touch = <span class="hljs-keyword">new</span> Touch()</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

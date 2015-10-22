@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>main-app.coffee</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page_wrapper">
+            <div id="jump_page">
+              
+                
+                <a class="source" href="app-list.html">
+                  app-list.coffee
+                </a>
+              
+                
+                <a class="source" href="app-manager.html">
+                  app-manager.coffee
+                </a>
+              
+                
+                <a class="source" href="app.html">
+                  app.coffee
+                </a>
+              
+                
+                <a class="source" href="client.html">
+                  client.coffee
+                </a>
+              
+                
+                <a class="source" href="daisy-execute.html">
+                  daisy-execute.coffee
+                </a>
+              
+                
+                <a class="source" href="daisy-interface.html">
+                  daisy-interface.coffee
+                </a>
+              
+                
+                <a class="source" href="daisy-ipc.html">
+                  daisy-ipc.coffee
+                </a>
+              
+                
+                <a class="source" href="directory-upload.html">
+                  directory-upload.coffee
+                </a>
+              
+                
+                <a class="source" href="event-bus.html">
+                  event-bus.coffee
+                </a>
+              
+                
+                <a class="source" href="main-app.html">
+                  main-app.coffee
+                </a>
+              
+                
+                <a class="source" href="main.html">
+                  main.coffee
+                </a>
+              
+                
+                <a class="source" href="native-app-starter.html">
+                  native-app-starter.coffee
+                </a>
+              
+                
+                <a class="source" href="notifications.html">
+                  notifications.coffee
+                </a>
+              
+                
+                <a class="source" href="save.html">
+                  save.coffee
+                </a>
+              
+                
+                <a class="source" href="show-touch.html">
+                  show-touch.coffee
+                </a>
+              
+                
+                <a class="source" href="sumo-save.html">
+                  sumo-save.coffee
+                </a>
+              
+                
+                <a class="source" href="touch-check-conditions.html">
+                  touch-check-conditions.coffee
+                </a>
+              
+                
+                <a class="source" href="touch-conditions.html">
+                  touch-conditions.coffee
+                </a>
+              
+                
+                <a class="source" href="touch-event.html">
+                  touch-event.coffee
+                </a>
+              
+                
+                <a class="source" href="touch.html">
+                  touch.coffee
+                </a>
+              
+                
+                <a class="source" href="view.html">
+                  view.coffee
+                </a>
+              
+            </div>
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>main-app.coffee</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <p>main-app.coffee</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>App = <span class="hljs-built_in">require</span> <span class="hljs-string">'./app'</span>
+fs = <span class="hljs-built_in">require</span> <span class="hljs-string">'fs'</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>The Main App for AppManager</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">module</span>.exports =
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainApp</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">App</span></span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <h3 id="initial-funktionen">Initial Funktionen</h3>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>Constructor</p>
+<ul>
+<li><code>options</code> {Object}<ul>
+<li><code>name</code> {String} the name of app (like id)</li>
+<li>`on’ {Object}<ul>
+<li><code>newWindow</code> {Function}<ul>
+<li><code>event</code> {Object}</li>
+</ul>
+</li>
+<li><code>log</code> {Function}<ul>
+<li><code>event</code> {Object}</li>
+</ul>
+</li>
+<li><code>finishLoad</code> {Function}<ul>
+<li><code>event</code> {Object}</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-attribute">constructor</span>: <span class="hljs-function"><span class="hljs-params">(options={})</span> -&gt;</span>
+    {<span class="hljs-property">@on</span>,<span class="hljs-property">@name</span>} = options
+    options.withPlugins = <span class="hljs-literal">false</span>
+    options.nodeintegration=<span class="hljs-literal">true</span>
+    <span class="hljs-keyword">super</span> options</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>@initElements()</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-built_in">window</span>.eventbus.<span class="hljs-literal">on</span> <span class="hljs-string">'MainApp'</span>,<span class="hljs-string">'uploadFile'</span>, <span class="hljs-property">@uploadFile</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>Fügt Folgendes JS zur Daisy App hinzu.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-attribute">getPreload</span>: <span class="hljs-function">-&gt;</span>
+    <span class="hljs-string">'./src/daisy-execute.js'</span>
+
+  <span class="hljs-attribute">initialize</span>: <span class="hljs-function">-&gt;</span>
+    <span class="hljs-keyword">super</span>
+    <span class="hljs-property">@regEvents</span>()
+    <span class="hljs-property">@changeId</span> <span class="hljs-property">@name</span>,<span class="hljs-literal">true</span>
+    <span class="hljs-property">@entryClose</span>.remove() <span class="hljs-keyword">if</span> <span class="hljs-property">@entryClose</span>?</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>Registriert die App-Events</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-attribute">regEvents</span>: <span class="hljs-function">-&gt;</span>
+    <span class="hljs-property">@dom</span>.addEventListener <span class="hljs-string">'new-window'</span>, <span class="hljs-property">@on</span>.newWindow <span class="hljs-keyword">if</span> <span class="hljs-property">@on</span>.newWindow
+    <span class="hljs-keyword">if</span> <span class="hljs-property">@on</span>.log
+      <span class="hljs-property">@dom</span>.addEventListener <span class="hljs-string">'console-message'</span>, <span class="hljs-property">@on</span>.log
+    <span class="hljs-keyword">else</span> <span class="hljs-property">@dom</span>.addEventListener <span class="hljs-string">'console-message'</span>, <span class="hljs-property">@log</span>
+    <span class="hljs-property">@dom</span>.addEventListener <span class="hljs-string">'did-frame-finish-load'</span>, <span class="hljs-property">@finishLoad</span>
+    <span class="hljs-property">@dom</span>.addEventListener <span class="hljs-string">'ipc-message'</span>, <span class="hljs-property">@ipcMsg</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <h3 id="ipc">IPC</h3>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>Bekomme die Nachricht, uploadReady</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-attribute">ipcMsg</span>: <span class="hljs-function"><span class="hljs-params">(event)</span> =&gt;</span>
+    <span class="hljs-keyword">if</span> event.channel == <span class="hljs-string">'uploadReady'</span>
+      <span class="hljs-built_in">console</span>.log event
+      <span class="hljs-built_in">window</span>.eventbus.fire <span class="hljs-string">"Notifications"</span>,<span class="hljs-string">"info"</span>,<span class="hljs-string">"Datei wurde hochgeladen? Muss noch überarbeitet werden! Du findest mich in main-app.coffee"</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>sende etwas zur App</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-attribute">ipcSend</span>: <span class="hljs-function"><span class="hljs-params">(channel,args)</span> -&gt;</span>
+    <span class="hljs-property">@dom</span>.send channel,args</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>Lade Datei hoch</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-attribute">uploadFile</span>: <span class="hljs-function"><span class="hljs-params">(options)</span> =&gt;</span>
+    {appName,url,data,fileName,type} = options
+    <span class="hljs-property">@ipcSend</span> <span class="hljs-string">'upload'</span>, options</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>Pipt die App Logs zur Haupt App</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-attribute">log</span>: <span class="hljs-function"><span class="hljs-params">(e)</span> =&gt;</span>
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"<span class="hljs-subst">#{<span class="hljs-property">@name</span>}</span>: <span class="hljs-subst">#{e.message}</span>"</span>)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>finishLoad: (event, isMainFrame) =&gt;
+  console.log “finished loading”</p>
+
+            </div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

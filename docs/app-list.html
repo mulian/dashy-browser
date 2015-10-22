@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>app-list.coffee</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page_wrapper">
+            <div id="jump_page">
+              
+                
+                <a class="source" href="app-list.html">
+                  app-list.coffee
+                </a>
+              
+                
+                <a class="source" href="app-manager.html">
+                  app-manager.coffee
+                </a>
+              
+                
+                <a class="source" href="app.html">
+                  app.coffee
+                </a>
+              
+                
+                <a class="source" href="client.html">
+                  client.coffee
+                </a>
+              
+                
+                <a class="source" href="daisy-execute.html">
+                  daisy-execute.coffee
+                </a>
+              
+                
+                <a class="source" href="daisy-interface.html">
+                  daisy-interface.coffee
+                </a>
+              
+                
+                <a class="source" href="daisy-ipc.html">
+                  daisy-ipc.coffee
+                </a>
+              
+                
+                <a class="source" href="directory-upload.html">
+                  directory-upload.coffee
+                </a>
+              
+                
+                <a class="source" href="event-bus.html">
+                  event-bus.coffee
+                </a>
+              
+                
+                <a class="source" href="main-app.html">
+                  main-app.coffee
+                </a>
+              
+                
+                <a class="source" href="main.html">
+                  main.coffee
+                </a>
+              
+                
+                <a class="source" href="native-app-starter.html">
+                  native-app-starter.coffee
+                </a>
+              
+                
+                <a class="source" href="notifications.html">
+                  notifications.coffee
+                </a>
+              
+                
+                <a class="source" href="save.html">
+                  save.coffee
+                </a>
+              
+                
+                <a class="source" href="show-touch.html">
+                  show-touch.coffee
+                </a>
+              
+                
+                <a class="source" href="sumo-save.html">
+                  sumo-save.coffee
+                </a>
+              
+                
+                <a class="source" href="touch-check-conditions.html">
+                  touch-check-conditions.coffee
+                </a>
+              
+                
+                <a class="source" href="touch-conditions.html">
+                  touch-conditions.coffee
+                </a>
+              
+                
+                <a class="source" href="touch-event.html">
+                  touch-event.coffee
+                </a>
+              
+                
+                <a class="source" href="touch.html">
+                  touch.coffee
+                </a>
+              
+                
+                <a class="source" href="view.html">
+                  view.coffee
+                </a>
+              
+            </div>
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>app-list.coffee</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <p>app-list.coffee
+Hier wird die Applist definiert.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>$ = jQuery = <span class="hljs-built_in">require</span> <span class="hljs-string">'jquery'</span>
+View = <span class="hljs-built_in">require</span> <span class="hljs-string">'./view'</span>
+App = <span class="hljs-built_in">require</span> <span class="hljs-string">'./app'</span>
+Touch = <span class="hljs-built_in">require</span> <span class="hljs-string">'./touch'</span>
+{settings} = <span class="hljs-built_in">require</span> <span class="hljs-string">'../package.json'</span>
+
+<span class="hljs-built_in">module</span>.exports =
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AppList</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">View</span></span>
+  <span class="hljs-attribute">list</span>: []
+  <span class="hljs-attribute">dom</span>: <span class="hljs-literal">null</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <h3 id="initial-funktionen">Initial Funktionen</h3>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+  <span class="hljs-attribute">constructor</span>: <span class="hljs-function">-&gt;</span>
+    <span class="hljs-keyword">super</span>
+    <span class="hljs-built_in">window</span>.eventbus.<span class="hljs-literal">on</span> <span class="hljs-string">"AppManager"</span>,<span class="hljs-string">"changeApp"</span>, <span class="hljs-function"><span class="hljs-params">(app)</span> =&gt;</span>
+      <span class="hljs-property">@currentApp</span> = app</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>Wird erst nach dem Dom geladen ist ausgefuehrt.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-attribute">initialize</span>: <span class="hljs-function">-&gt;</span>
+    <span class="hljs-property">@initDom</span>()
+    touch.<span class="hljs-literal">on</span>(<span class="hljs-built_in">document</span>.body).fingers.eq(<span class="hljs-number">1</span>).call(<span class="hljs-property">@touchDown</span>)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>Erstellt die App-Liste im DOM</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-attribute">initDom</span>: <span class="hljs-function">-&gt;</span>
+    <span class="hljs-property">@dom</span> = $ <span class="hljs-string">'&lt;div /&gt;'</span>, {} =
+      <span class="hljs-attribute">id</span>: <span class="hljs-string">'app_liste'</span>
+    <span class="hljs-property">@dom</span>.hide()
+    <span class="hljs-property">@initNavigation</span>()
+    <span class="hljs-property">@domList</span> = $(<span class="hljs-string">'&lt;ul /&gt;'</span>)
+    <span class="hljs-property">@dom</span>.append <span class="hljs-property">@domList</span>
+    $(<span class="hljs-string">'body'</span>).append <span class="hljs-property">@dom</span>
+
+    <span class="hljs-property">@mainApp</span>.entry.attr <span class="hljs-string">'id'</span>,<span class="hljs-string">'listMainApp'</span>
+    <span class="hljs-property">@domList</span>.append <span class="hljs-property">@mainApp</span>.entry
+    <span class="hljs-property">@initEndButton</span>()</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>Initalisiert die Navigationsbutton</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-attribute">initNavigation</span>: <span class="hljs-function">-&gt;</span>
+    <span class="hljs-property">@navigation</span> = $ <span class="hljs-string">'&lt;div /&gt;'</span>, {} =
+      <span class="hljs-attribute">id</span>: <span class="hljs-string">'appListNavigation'</span>
+    <span class="hljs-property">@back</span> = $ <span class="hljs-string">'&lt;button /&gt;'</span>, {} =
+      <span class="hljs-attribute">text</span>: <span class="hljs-string">'Zurück'</span>
+    <span class="hljs-property">@forward</span> = $ <span class="hljs-string">'&lt;button /&gt;'</span>, {} =
+      <span class="hljs-attribute">text</span>: <span class="hljs-string">'Vor'</span>
+    <span class="hljs-property">@back</span>.click =&gt;
+      <span class="hljs-property">@currentApp</span>.dom.goBack()
+    <span class="hljs-property">@forward</span>.click =&gt;
+      <span class="hljs-property">@currentApp</span>.dom.goForward()
+    <span class="hljs-property">@navigation</span>.append <span class="hljs-property">@back</span>
+    <span class="hljs-property">@navigation</span>.append <span class="hljs-property">@forward</span>
+    <span class="hljs-property">@dom</span>.append <span class="hljs-property">@navigation</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>Initialisiert den Ende Button, der zur Zeit ausgeblendet wird durch css</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-attribute">initEndButton</span>: <span class="hljs-function">-&gt;</span>
+    <span class="hljs-property">@endButton</span> = $ <span class="hljs-string">'&lt;button /&gt;'</span>, {} =
+      <span class="hljs-attribute">text</span>: <span class="hljs-string">'Beenden'</span>
+      <span class="hljs-attribute">id</span>: <span class="hljs-string">'end'</span>
+    <span class="hljs-property">@endButton</span>.click -&gt;
+      <span class="hljs-built_in">window</span>.close() <span class="hljs-comment">#<span class="hljs-doctag">TODO:</span> Nur die Seite ist geschlossen?</span>
+    <span class="hljs-property">@dom</span>.append <span class="hljs-property">@endButton</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>Setzt die Main App</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-attribute">setMainApp</span>: <span class="hljs-function"><span class="hljs-params">(<span class="hljs-property">@mainApp</span>)</span>-&gt;</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <h3 id="touch-functionen">TOUCH Functionen</h3>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>Wird ausgefuehrt, wenn 3 Finger gedrueckt wurden</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-attribute">touchDown</span>: <span class="hljs-function"><span class="hljs-params">(e)</span> =&gt;</span>
+    e.preventDefault()
+    <span class="hljs-keyword">if</span> e.start
+      <span class="hljs-property">@setTouchDirection</span>()
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> e.end <span class="hljs-keyword">or</span> e.start
+      <span class="hljs-property">@touchFunction</span> e.avg.diff.x
+    <span class="hljs-keyword">else</span>
+      left = e.lastTouchEvent.avg.diff.x * -<span class="hljs-number">1</span>
+      <span class="hljs-property">@touchFunction</span> e.lastTouchEvent.avg.diff.x, <span class="hljs-literal">true</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>Feststelle, welche richtung ausgefuehrt wird.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-attribute">setTouchDirection</span>: <span class="hljs-function">-&gt;</span>
+    <span class="hljs-property">@domWidth</span> = <span class="hljs-property">@dom</span>.width()
+    <span class="hljs-keyword">if</span> <span class="hljs-property">@dom</span>.<span class="hljs-keyword">is</span>(<span class="hljs-string">':visible'</span>) <span class="hljs-comment">#hide</span>
+      <span class="hljs-property">@touchFunction</span> = <span class="hljs-property">@leftToRight</span>
+    <span class="hljs-keyword">else</span>
+      <span class="hljs-property">@dom</span>.show()
+      <span class="hljs-property">@touchFunction</span> = <span class="hljs-property">@rightToLeft</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>Wenn es von links nach recht geht</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-attribute">leftToRight</span>: <span class="hljs-function"><span class="hljs-params">(x,end=<span class="hljs-literal">false</span>)</span> -&gt;</span>
+    right = x*-<span class="hljs-number">1</span>
+    <span class="hljs-keyword">if</span> right&lt;<span class="hljs-number">0</span>
+      <span class="hljs-property">@dom</span>.css <span class="hljs-string">'right'</span>, right
+    <span class="hljs-keyword">if</span> end
+      <span class="hljs-keyword">if</span> (x)&gt;(<span class="hljs-property">@domWidth</span>/<span class="hljs-number">2</span>)
+        <span class="hljs-property">@dom</span>.hide()
+      <span class="hljs-keyword">else</span>
+        <span class="hljs-property">@dom</span>.css <span class="hljs-string">'right'</span>, <span class="hljs-number">0</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>Wenn es von recht nach links geht</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-attribute">rightToLeft</span>: <span class="hljs-function"><span class="hljs-params">(x,end=<span class="hljs-literal">false</span>)</span> -&gt;</span>
+    right = x*-<span class="hljs-number">1</span>-<span class="hljs-property">@domWidth</span>
+    <span class="hljs-keyword">if</span> right&lt;<span class="hljs-number">0</span>
+      <span class="hljs-property">@dom</span>.css <span class="hljs-string">'right'</span>, right
+    <span class="hljs-keyword">else</span>
+      <span class="hljs-property">@dom</span>.css <span class="hljs-string">'right'</span>, <span class="hljs-number">0</span>
+
+    <span class="hljs-keyword">if</span> end
+      <span class="hljs-keyword">if</span> (right*-<span class="hljs-number">1</span>)&gt;(<span class="hljs-property">@domWidth</span>/<span class="hljs-number">2</span>)
+        <span class="hljs-property">@dom</span>.hide()
+      <span class="hljs-keyword">else</span>
+        <span class="hljs-property">@dom</span>.css <span class="hljs-string">'right'</span>, <span class="hljs-number">0</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <h3 id="app-listen-funktionen">App Listen Funktionen</h3>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <p>Findet herraus ob die App mit entsprechender URL schon vorhanden und gibt sie ggf. zurueck</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-attribute">isAppInAppList</span>: <span class="hljs-function"><span class="hljs-params">(url)</span> -&gt;</span>
+    <span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> <span class="hljs-property">@list</span>
+      <span class="hljs-keyword">if</span> item.getSrcId() == url
+        <span class="hljs-keyword">return</span> item
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <p>Loescht die uebergebene App aus der @list</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-attribute">remove</span>: <span class="hljs-function"><span class="hljs-params">(app)</span> -&gt;</span>
+    <span class="hljs-keyword">for</span> item, pos <span class="hljs-keyword">in</span> <span class="hljs-property">@list</span>
+      <span class="hljs-keyword">if</span> app.src == item.src
+        app.entry.remove()
+        <span class="hljs-property">@list</span>.splice pos,<span class="hljs-number">1</span>
+        <span class="hljs-keyword">return</span>
+    <span class="hljs-built_in">console</span>.log <span class="hljs-string">"there is no app to close"</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              <p>Initalisiert neue App mit url, falls die URL noch nicht vorhanden ist.
+Ansonsten wird die vorhanden App angezeigt</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-attribute">add</span>: <span class="hljs-function"><span class="hljs-params">(url)</span> -&gt;</span>
+    app = <span class="hljs-property">@isAppInAppList</span>(url)
+    <span class="hljs-keyword">if</span> app==<span class="hljs-literal">false</span>
+      app = <span class="hljs-keyword">new</span> App {<span class="hljs-attribute">src</span>: url}
+      <span class="hljs-property">@list</span>.push app
+      <span class="hljs-property">@domList</span>.append app.entry</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-17">&#182;</a>
+              </div>
+              <p>console.log name</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-built_in">window</span>.eventbus.fire <span class="hljs-string">"AppManager"</span>,<span class="hljs-string">"changeApp"</span>,app</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

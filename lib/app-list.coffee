@@ -118,7 +118,7 @@ class AppList extends View
         return item
     return false
 
-  #Loescht die uebergebene App aus der @list
+  #Loescht die uebergebene App aus der list
   remove: (app) ->
     for item, pos in @list
       if app.src == item.src

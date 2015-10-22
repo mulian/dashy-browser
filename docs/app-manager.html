@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>app-manager.coffee</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page_wrapper">
+            <div id="jump_page">
+              
+                
+                <a class="source" href="app-list.html">
+                  app-list.coffee
+                </a>
+              
+                
+                <a class="source" href="app-manager.html">
+                  app-manager.coffee
+                </a>
+              
+                
+                <a class="source" href="app.html">
+                  app.coffee
+                </a>
+              
+                
+                <a class="source" href="client.html">
+                  client.coffee
+                </a>
+              
+                
+                <a class="source" href="daisy-execute.html">
+                  daisy-execute.coffee
+                </a>
+              
+                
+                <a class="source" href="daisy-interface.html">
+                  daisy-interface.coffee
+                </a>
+              
+                
+                <a class="source" href="daisy-ipc.html">
+                  daisy-ipc.coffee
+                </a>
+              
+                
+                <a class="source" href="directory-upload.html">
+                  directory-upload.coffee
+                </a>
+              
+                
+                <a class="source" href="event-bus.html">
+                  event-bus.coffee
+                </a>
+              
+                
+                <a class="source" href="main-app.html">
+                  main-app.coffee
+                </a>
+              
+                
+                <a class="source" href="main.html">
+                  main.coffee
+                </a>
+              
+                
+                <a class="source" href="native-app-starter.html">
+                  native-app-starter.coffee
+                </a>
+              
+                
+                <a class="source" href="notifications.html">
+                  notifications.coffee
+                </a>
+              
+                
+                <a class="source" href="save.html">
+                  save.coffee
+                </a>
+              
+                
+                <a class="source" href="show-touch.html">
+                  show-touch.coffee
+                </a>
+              
+                
+                <a class="source" href="sumo-save.html">
+                  sumo-save.coffee
+                </a>
+              
+                
+                <a class="source" href="touch-check-conditions.html">
+                  touch-check-conditions.coffee
+                </a>
+              
+                
+                <a class="source" href="touch-conditions.html">
+                  touch-conditions.coffee
+                </a>
+              
+                
+                <a class="source" href="touch-event.html">
+                  touch-event.coffee
+                </a>
+              
+                
+                <a class="source" href="touch.html">
+                  touch.coffee
+                </a>
+              
+                
+                <a class="source" href="view.html">
+                  view.coffee
+                </a>
+              
+            </div>
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>app-manager.coffee</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <p>Managed die Apps</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+View = <span class="hljs-built_in">require</span> <span class="hljs-string">'./view'</span>
+{settings} = <span class="hljs-built_in">require</span> <span class="hljs-string">'../package.json'</span>
+MainApp = <span class="hljs-built_in">require</span> <span class="hljs-string">'./main-app'</span>
+AppList = <span class="hljs-built_in">require</span> <span class="hljs-string">'./app-list'</span>
+ShowTouch = <span class="hljs-built_in">require</span> <span class="hljs-string">'./show-touch'</span>
+SumoSave = <span class="hljs-built_in">require</span> <span class="hljs-string">'./sumo-save'</span>
+NativeAppStarter = <span class="hljs-built_in">require</span> <span class="hljs-string">'./native-app-starter'</span>
+
+<span class="hljs-built_in">module</span>.exports =
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AppManager</span></span>
+  <span class="hljs-attribute">mainApp</span>: <span class="hljs-literal">null</span>
+  <span class="hljs-attribute">currentApp</span>: <span class="hljs-literal">null</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <h3 id="initial-funktionen">Initial Funktionen</h3>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+  <span class="hljs-attribute">constructor</span>: <span class="hljs-function">-&gt;</span>
+    <span class="hljs-property">@mainApp</span> = <span class="hljs-keyword">new</span> MainApp
+      <span class="hljs-attribute">name</span>: <span class="hljs-string">'daisy'</span>
+      <span class="hljs-attribute">src</span>: settings.url
+      <span class="hljs-attribute">on</span>:
+        <span class="hljs-attribute">newWindow</span>: <span class="hljs-property">@newApp</span>
+    <span class="hljs-property">@currentApp</span> = <span class="hljs-property">@mainApp</span>
+    <span class="hljs-property">@appList</span> = <span class="hljs-keyword">new</span> AppList()
+    <span class="hljs-property">@appList</span>.setMainApp <span class="hljs-property">@mainApp</span>
+    <span class="hljs-property">@showTouch</span> = <span class="hljs-keyword">new</span> ShowTouch()
+    <span class="hljs-property">@reqEventBus</span>()
+    <span class="hljs-property">@startPlugins</span>()</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>registriere Funktionen beim EventBus</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-attribute">reqEventBus</span>: <span class="hljs-function">-&gt;</span>
+    <span class="hljs-built_in">window</span>.eventbus.<span class="hljs-literal">on</span> <span class="hljs-string">"AppManager"</span>,<span class="hljs-string">"changeApp"</span>, <span class="hljs-property">@changeApp</span>
+    <span class="hljs-built_in">window</span>.eventbus.<span class="hljs-literal">on</span> <span class="hljs-string">"AppManager"</span>,<span class="hljs-string">"closeCurrentWindow"</span>, <span class="hljs-property">@closeCurrentWindow</span>
+    <span class="hljs-built_in">window</span>.eventbus.<span class="hljs-literal">on</span> <span class="hljs-string">"AppManager"</span>,<span class="hljs-string">"closeWindow"</span>, <span class="hljs-property">@closeWindow</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>Starte Plugins</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-attribute">startPlugins</span>: <span class="hljs-function">-&gt;</span>
+    <span class="hljs-property">@sumoSave</span> = <span class="hljs-keyword">new</span> SumoSave()
+    <span class="hljs-property">@nativeAppStarter</span> = <span class="hljs-keyword">new</span> NativeAppStarter()</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <h3 id="eventbus-funktionen">EventBus Funktionen</h3>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>Wechselt die app. Versteckt die aktuelle und macht die neue Sichtbar.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-attribute">changeApp</span>: <span class="hljs-function"><span class="hljs-params">(app)</span> =&gt;</span>
+    <span class="hljs-property">@currentApp</span>.entry.removeClass(<span class="hljs-string">'active'</span>)
+    <span class="hljs-property">@currentApp</span>.element.hide()
+    app.entry.addClass(<span class="hljs-string">'active'</span>)
+    app.element.show()
+    <span class="hljs-property">@currentApp</span> = app</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>Schliesst eine App.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-attribute">closeWindow</span>: <span class="hljs-function"><span class="hljs-params">(app)</span> =&gt;</span>
+    <span class="hljs-keyword">if</span> app.src == <span class="hljs-property">@mainApp</span>.src
+      <span class="hljs-built_in">window</span>.eventbus.fire <span class="hljs-string">"Notifications"</span>,<span class="hljs-string">"error"</span>,<span class="hljs-string">"Die Hauptapplikation kann nicht geschlossen werden."</span>
+    <span class="hljs-keyword">else</span>
+      <span class="hljs-property">@appList</span>.remove app
+      app.element.remove()
+      <span class="hljs-built_in">window</span>.eventbus.fire <span class="hljs-string">"AppManager"</span>,<span class="hljs-string">"changeApp"</span>, <span class="hljs-property">@mainApp</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>Schliesst die aktuelle App.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-attribute">closeCurrentWindow</span>: <span class="hljs-function">=&gt;</span>
+    <span class="hljs-property">@closeWindow</span> <span class="hljs-property">@currentApp</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <h3 id="andere">Andere</h3>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>Erstellt eine Neue App, wenn es eine richtige URL ist. Falls es eine Nativ App Starter Url ist, oeffne die Native App.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  firstTime : <span class="hljs-literal">true</span>
+  <span class="hljs-attribute">newApp</span>: <span class="hljs-function"><span class="hljs-params">(event)</span> =&gt;</span>
+    nativeRE= <span class="hljs-regexp">/^([\w]*):$/</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>console.log @appList</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-built_in">window</span>.eventbus.fire <span class="hljs-string">"AppManager"</span>,<span class="hljs-string">"newApp"</span>,event.url
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> nativeRE.test event.url
+      <span class="hljs-property">@appList</span>.add event.url
+      <span class="hljs-keyword">if</span> <span class="hljs-property">@firstTime</span>
+        <span class="hljs-property">@firstTime</span>=<span class="hljs-literal">false</span>
+        <span class="hljs-property">@showTutorial</span>()</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>Zeigt das ShowTouch (aka. Tutorial) an</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-attribute">showTutorial</span>: <span class="hljs-function">-&gt;</span>
+    setTimeout -&gt;
+      <span class="hljs-built_in">window</span>.eventbus.fire <span class="hljs-string">'ShowTouch'</span>,<span class="hljs-string">'menu'</span>
+    , <span class="hljs-number">3</span>*<span class="hljs-number">1000</span></pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
