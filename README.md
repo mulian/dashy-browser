@@ -60,4 +60,7 @@ Dies wird vom Dashy-Browser abgefangen, nach einem entsprechenden Pfad in ´sett
 
 Eintrag: `'call_name' : 'run_file_path'`
 
-## [Documentation](http://rawgit.com/mulian/daisy-browser/master/docs/main.html)
+## [Dokumentation](http://rawgit.com/mulian/daisy-browser/master/docs/main.html)
+Diese Dokumentation wurde mit [docco](https://jashkenas.github.io/docco/) erstellt.
+
+Sie können mit `JUMP TO` (rechts oben) eine andere Datei auswählen.
