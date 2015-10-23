@@ -51,7 +51,7 @@ Wenn `settings.showIntroduction` auf true steht, wird die Finger-Demo und eine N
 #### Dir Upload
 Deaktiviert den Upload wenn `settings.dirUpload.enable` auf false steht.
 
-Mit `settings.dirUpload.dir` wird der Überordner des up-/download Ordners angegeben. Normalerweiße sollte ´dir´ auf den Desktop zeigen.
+Mit `settings.dirUpload.dir` wird der Überordner des **up-/download** Ordners angegeben. Normalerweiße sollte ´dir´ auf den Desktop zeigen.
 
 #### Nativ Apps
 Hier wird für jede Nativen-Applikation ein entsprechender Pfad hinterlegt.
