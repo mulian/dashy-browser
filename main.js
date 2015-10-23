@@ -10,6 +10,11 @@ if (settings.debug) {
   var fs = require('fs')
   var coffee = require('coffee-script');
 
+  var createDirIfNotExist = function(dir) {
+    if (fs.existsSync(dir)==false)
+      fs.mkdirSync(dir);
+  };
+
   //compiles the file_path from coffeescript to js and write it to jsPath+file_name
   compileToCoffe = function(file_path,file_name) {
     var file_name_js = file_name.slice(0,file_name.length-6)+'js';
@@ -19,6 +24,7 @@ if (settings.debug) {
 
   //Scan all files in cofeescript dir
   files = fs.readdirSync(coffeePath);
+  createDirIfNotExist(jsPath);
   for(var i=0;i<files.length;i++) {
     var file = files[i];
     compileToCoffe(coffeePath+file,file);
@@ -28,6 +34,7 @@ if (settings.debug) {
   var lessPath=__dirname+'/less/', cssPath=__dirname+'/css/'
   var less = require('less');
   files = fs.readdirSync(lessPath);
+  createDirIfNotExist(cssPath);
   for(var i=0;i<files.length;i++) {
     var file = files[i];
     var cssFile = file.slice(0,file.length-4)+'css';
