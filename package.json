@@ -1,6 +1,6 @@
 {
   "name"    : "daisy-browser",
-  "description": "A Browser for Daisy Web-App. Used with an Smartboard.",
+  "description": "A Browser for Daisy Web-App.",
   "version" : "1.0.0",
   "main"    : "main.js",
   "engines": {
