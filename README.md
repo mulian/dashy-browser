@@ -30,7 +30,7 @@ Die Einstellungen werden in der `package.json` vorgenommen.
 Es wird Chrome's build in PepperFlash benutzt. Chrome muss dafür seperat installiert werden.
 
 Rufen Sie in Chrome `chrome://plugins` auf und lesen den Flash Pfad und die Flash Version aus.
-Diese Informationen werden entsprechend zu `package.json` -> `flash.path` und `flash.version`´hinzugefügt.
+Diese Informationen werden entsprechend zu `package.json` -> `flash.path` und `flash.version` hinzugefügt.
 
 **Wichtig:** Aktuell wird Flash nur von Electron's ia32 Build's unterstützt. Nicht von x64.
 
@@ -43,18 +43,21 @@ Wenn `Settings.debug` auf true gesetzt ist, wird die Console geöffnet und Coffe
 **Wichtig:** Muss beim ersten Start (nach checkout) aktiviert sein. Damit die CoffeeScript Sourcen zu Javascript kompiliert werden.
 
 #### Url
-Gibt die Url der Applikation [daisy](https://github.com/ratze90/daisy) an.
+Gibt die Url der installierten Applikation [daisy](https://github.com/ratze90/daisy) an.
 
 #### Zeige Demo
 Wenn `settings.showIntroduction` auf true steht, wird die Finger-Demo und eine Nachricht zum Dateiupload für Sumo Paint angezeigt.
 
 #### Dir Upload
 Deaktiviert den Upload wenn `settings.dirUpload.enable` auf false steht.
+
 Mit `settings.dirUpload.dir` wird der Überordner des up-/download Ordners angegeben. Normalerweiße sollte ´dir´ auf den Desktop zeigen.
 
 #### Nativ Apps
 Hier wird für jede Nativen-Applikations ein entsprechender Pfad hinterlegt. Die Haupt App wird (über a.href) `<call_name>:` ausführen.
+
 Dies wird vom daisy-browser abgefangen, nach einem entsprechenden Pfad in ´settings.nativApps´ gesucht und danach ausgeführt.
+
 Jeder eintrag sieht folgendermaßen aus: 'call_name' : 'run_file_path'
 
 ## [Documentation](http://rawgit.com/mulian/daisy-browser/master/docs/main.html)
