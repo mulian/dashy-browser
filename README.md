@@ -1,6 +1,6 @@
 # Dashy-Browser
 Dies ist ein Projekt für die TU-Braunschweig.
-Es baut auf dem [daisy](https://github.com/ratze90/daisy) Projekt auf.
+Es wurde entwickelt um die Funktionen Web-App [daisy](https://github.com/ratze90/daisy) zu erweitern.
 
 ## Installation
 * Electron herunterladen
@@ -36,7 +36,7 @@ Im folgenden werden die Einstellungen von `package.json > Settings` erklärt.
 Wenn `Settings.debug` auf true gesetzt ist, wird die Console geöffnet und CoffeScript sowie Less kompiliert.
 **Wichtig:** Muss beim ersten Start (nach checkout) aktiviert sein. Damit die CoffeeScript Sourcen zu Javascript kompiliert werden.
 #### Url
-Gibt die Url der Haupt Applikation.
+Gibt die Url der Applikation [daisy](https://github.com/ratze90/daisy) an.
 #### Zeige Demo
 Wenn `settings.showIntroduction` auf true steht, wird die Finger-Demo und eine Nachricht zum Dateiupload für Sumo Paint angezeigt.
 #### Dir Upload
