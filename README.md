@@ -3,21 +3,21 @@ Dies ist ein Projekt für die TU-Braunschweig.
 Es baut auf dem [daisy](https://github.com/ratze90/daisy) Projekt auf.
 
 ## Installation
-1. Electron herunterladen
+* Electron herunterladen
 
 Dieses Projekt baut auf [Electron](http://electron.atom.io) auf.
 Die neueste Electron Version kann von [Electron Release](https://github.com/atom/electron/releases) herunter geladen werden.
 Erfolgreich getestet wurde dieses Projekt mit `electron v0.34.0 win32 ia32`.
 
-2. Projekt hinzufügen
+* Projekt hinzufügen
 
 Nachdem Electron heruntergeladen und entpackt wurde. Wird dieses Projekt direkt zu dem Unterordner `electron/resources/app` eingefügt.
 
-3. Einstellungen
+* Einstellungen
 
 Vor Ausführeung müssen noch die Einstellungen (siehe `Informationen zu den Einstellungen`) angepasst werden.
 
-4. Ausführen
+* Ausführen
 
 Nun wird die ´electron.exe´ vom Electron-Root Ordner ausgeführt. - Zack Fertig
 
