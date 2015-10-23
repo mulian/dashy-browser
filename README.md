@@ -1,5 +1,6 @@
-# daisy-browser (Dashboard Browser)
+# Dashy-Browser
 Dies ist ein Projekt für die TU-Braunschweig.
+Es baut auf dem [daisy](https://github.com/ratze90/daisy) Projekt auf.
 
 ## Installation
 * Electron herunterladen
