@@ -54,10 +54,10 @@ Deaktiviert den Upload wenn `settings.dirUpload.enable` auf false steht.
 Mit `settings.dirUpload.dir` wird der Überordner des up-/download Ordners angegeben. Normalerweiße sollte ´dir´ auf den Desktop zeigen.
 
 #### Nativ Apps
-Hier wird für jede Nativen-Applikations ein entsprechender Pfad hinterlegt. Die Haupt App wird (über a.href) `<call_name>:` ausführen.
+Hier wird für jede Nativen-Applikations ein entsprechender Pfad hinterlegt. Die Haupt App wird ein `a.href=<call_name>:` ausführen.
 
-Dies wird vom daisy-browser abgefangen, nach einem entsprechenden Pfad in ´settings.nativApps´ gesucht und danach ausgeführt.
+Dies wird vom Dashy-Browser abgefangen, nach einem entsprechenden Pfad in ´settings.nativApps´ gesucht und danach ausgeführt.
 
-Jeder eintrag sieht folgendermaßen aus: 'call_name' : 'run_file_path'
+Eintrag: `'call_name' : 'run_file_path'`
 
 ## [Documentation](http://rawgit.com/mulian/daisy-browser/master/docs/main.html)
