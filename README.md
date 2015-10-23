@@ -40,7 +40,7 @@ Im folgenden werden die Einstellungen von `package.json > Settings` erklärt.
 #### Debug
 Wenn `Settings.debug` auf true gesetzt ist, wird die Console geöffnet und CoffeScript sowie Less kompiliert.
 
-**Wichtig:** Muss beim ersten Start (nach checkout) aktiviert sein. Damit die CoffeeScript Sourcen zu Javascript kompiliert werden.
+**Wichtig:** Muss beim ersten Start (nach checkout) aktiviert sein. Damit die [CoffeeScript](http://coffeescript.org) Sourcen zu Javascript kompiliert werden.
 
 #### Url
 Gibt die Url der installierten Applikation [daisy](https://github.com/ratze90/daisy) an.
