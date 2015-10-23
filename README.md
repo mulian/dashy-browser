@@ -1,6 +1,6 @@
 # Dashy-Browser
 Dies ist ein Projekt für die TU-Braunschweig.
-Es wurde entwickelt um die Funktionen Web-App [daisy](https://github.com/ratze90/daisy) zu erweitern.
+Es wurde entwickelt um die Funktionen der Web-App [daisy](https://github.com/ratze90/daisy) zu erweitern.
 
 ## Installation
 * Electron herunterladen
