@@ -29,8 +29,8 @@ Die Einstellungen werden in der `package.json` vorgenommen.
 ### Flash
 Es wird Chrome's build in PepperFlash benutzt. Chrome muss dafür seperat installiert werden.
 
-Rufen Sie in Chrome ´chrome://plugins´ auf und lesen den Flash Pfad und die Flash Version aus.
-Diese Informationen werden entsprechend zu ´package.json´ -> ´flash.path´ und ´flash.version´ hinzugefügt.
+Rufen Sie in Chrome `chrome://plugins` auf und lesen den Flash Pfad und die Flash Version aus.
+Diese Informationen werden entsprechend zu `package.json` -> `flash.path` und `flash.version`´hinzugefügt.
 
 **Wichtig:** Aktuell wird Flash nur von Electron's ia32 Build's unterstützt. Nicht von x64.
 
