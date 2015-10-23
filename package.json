@@ -1,15 +1,15 @@
 {
   "name"    : "daisy-browser",
   "description": "A Browser for Daisy Web-App. Used with an Smartboard.",
-  "version" : "0.1.0",
+  "version" : "1.0.0",
   "main"    : "main.js",
   "engines": {
     "electron-prebuilt": "^0.^33.3"
   },
   "devDependencies": {
-    "docco": ">=0.7.0",
-    "coffee-script":">=1.10.0",
-    "less": ">=2.5.3"
+    "docco": "0.7.0",
+    "coffee-script":"^1.10.0",
+    "less": "^2.5.3"
   },
   "dependencies": {
     "favicon": "0.0.2",
