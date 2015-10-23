@@ -6,8 +6,7 @@ Es baut auf dem [daisy](https://github.com/ratze90/daisy) Projekt auf.
 1. Electron herunterladen
 
 Dieses Projekt baut auf [Electron](http://electron.atom.io) auf.
-Deswegen muss vorerst das neuste [Electron Release](https://github.com/atom/electron/releases) herunter geladen werden.
-
+Die neueste Electron Version kann von [Electron Release](https://github.com/atom/electron/releases) herunter geladen werden.
 Erfolgreich getestet wurde dieses Projekt mit `electron v0.34.0 win32 ia32`.
 
 2. Projekt hinzufügen
