@@ -3,21 +3,28 @@ Dies ist ein Projekt für die TU-Braunschweig.
 Es baut auf dem [daisy](https://github.com/ratze90/daisy) Projekt auf.
 
 ## Installation
-* Electron herunterladen
+1. Electron herunterladen
+
 Dieses Projekt baut auf [Electron](http://electron.atom.io) auf.
 Deswegen muss vorerst das neuste [Electron Release](https://github.com/atom/electron/releases) herunter geladen werden.
 
 Erfolgreich getestet wurde dieses Projekt mit `electron v0.34.0 win32 ia32`.
 
-* Projekt hinzufügen
+2. Projekt hinzufügen
+
 Nachdem Electron heruntergeladen und entpackt wurde. Wird dieses Projekt direkt zu dem Unterordner `electron/resources/app` eingefügt.
 
-* Ausführen
-Nun wird die ´electron.exe´ vom Electron-Root Ordner ausgeführt. - Zack fertig
+3. Einstellungen
+
+Vor Ausführeung müssen noch die Einstellungen (siehe `Informationen zu den Einstellungen`) angepasst werden.
+
+4. Ausführen
+
+Nun wird die ´electron.exe´ vom Electron-Root Ordner ausgeführt. - Zack Fertig
 
 
 ## Informationen zu den Einstellungen
-Die Einstellungen werden vorwiegend in der `package.json` vorgenommen.
+Die Einstellungen werden in der `package.json` vorgenommen.
 
 ### Flash
 Es wird Chrome's build in Flash benutzt. Dafür rufen Sie in Chrome ´chrome://plugins´ auf und lesen den Flash Pfad und die Flash Version aus.
