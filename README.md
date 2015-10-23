@@ -64,3 +64,5 @@ Eintrag: `'call_name' : 'run_file_path'`
 Diese [Dokumentation](http://rawgit.com/mulian/daisy-browser/master/docs/main.html) wurde mit [docco](https://jashkenas.github.io/docco/) erstellt.
 
 Sie können mit `JUMP TO` (rechts oben) eine andere Datei auswählen.
+
+Die `main.coffee` wird auch vom Dashy-Browser als erstes aufgerufen.
