@@ -20,7 +20,7 @@ Vor Ausführeung müssen die Einstellungen (siehe `Informationen zu den Einstell
 
 * Ausführen
 
-Nun wird die ´electron.exe´ vom Electron-Root Ordner ausgeführt. - Zack Fertig
+Nun wird die `electron.exe` vom Electron-Root Ordner ausgeführt. - Zack Fertig
 
 
 ## Informationen zu den Einstellungen
