@@ -1,25 +1,43 @@
 # daisy-browser (Dashboard Browser)
+Dies ist ein Projekt für die TU-Braunschweig.
 
-## [Documentation](http://rawgit.com/mulian/daisy-browser/master/docs/app-list.html)
+## Installation
+* Electron herunterladen
+Dieses Projekt baut auf [Electron](http://electron.atom.io) auf.
+Deswegen muss vorerst das neuste [Electron Release](https://github.com/atom/electron/releases) herunter geladen werden.
 
-## Informationen zu package.json
+Erfolgreich getestet wurde dieses Projekt mit `electron v0.34.0 win32 ia32`.
+
+* Projekt hinzufügen
+Nachdem Electron heruntergeladen und entpackt wurde. Wird dieses Projekt direkt zu dem Unterordner `electron/resources/app` eingefügt.
+
+* Ausführen
+Nun wird die ´electron.exe´ vom Electron-Root Ordner ausgeführt. - Zack fertig
+
+
+## Informationen zu den Einstellungen
+Die Einstellungen werden vorwiegend in der `package.json` vorgenommen.
 
 ### Flash
-change package.json -> **flash.path** and **flash.version** with your installed chrome Browser's Version (chrome://plugins/).
-Note: This will currently not work with Electron- Windowsx64 Build. Only with ia32.
+Es wird Chrome's build in Flash benutzt. Dafür rufen Sie in Chrome ´chrome://plugins´ auf und lesen den Flash Pfad und die Flash Version aus.
+Diese Informationen werden entsprechend zu ´package.json´ -> ´flash.path´ und ´flash.version´ hinzugefügt.
+**Wichtig:** Aktuell wird Flash nur von Electron's ia32 Build's unterstützt. Nicht von x64.
 
 ### Settings
-Hier finden sie die Informationen welche einstellungen bei package.json > Settings gemacht werden können.
+Im folgenden werden die Einstellungen von `package.json > Settings` erklärt.
 #### Debug
-Wenn Settings.debug true ist, wird die console geöffnet und coffescript+less compiliert.
-Wichtig: Dies muss beim ersten Applikations start auf true stehen!
+Wenn `Settings.debug` auf true gesetzt ist, wird die Console geöffnet und CoffeScript sowie Less kompiliert.
+**Wichtig:** Muss beim ersten Start (nach checkout) aktiviert sein. Damit die CoffeeScript Sourcen zu Javascript kompiliert werden.
 #### Url
-Die Url der Haupt Applikation.
+Gibt die Url der Haupt Applikation.
 #### Zeige Demo
-Wenn settings.showIntroduction==true, wird die Finger-Demo und eine Nachricht zum Dateiupload angezeigt.
+Wenn `settings.showIntroduction` auf true steht, wird die Finger-Demo und eine Nachricht zum Dateiupload für Sumo Paint angezeigt.
 #### Dir Upload
-Deaktiviert den Upload wenn settings.dirUpload.enable=false.
-Mit settings.dirUpload.dir wird der Überordner des up-/download Ordners angegeben.
+Deaktiviert den Upload wenn `settings.dirUpload.enable` auf false steht.
+Mit `settings.dirUpload.dir` wird der Überordner des up-/download Ordners angegeben. Normalerweiße sollte ´dir´ auf den Desktop zeigen.
 #### Nativ Apps
-Hier werden die Nativen Applikations Dateien hinterlegt. Die Haupt App wird <call_name>: ausführen.
-Jeder eintrag sieht so aus: 'call_name' : 'run_file_path'
+Hier wird für jede Nativen-Applikations ein entsprechender Pfad hinterlegt. Die Haupt App wird (über a.href) `<call_name>:` ausführen.
+Dies wird vom daisy-browser abgefangen, nach einem entsprechenden Pfad in ´settings.nativApps´ gesucht und danach ausgeführt.
+Jeder eintrag sieht folgendermaßen aus: 'call_name' : 'run_file_path'
+
+## [Documentation](http://rawgit.com/mulian/daisy-browser/master/docs/main.html)
