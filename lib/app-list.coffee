@@ -78,7 +78,7 @@ class AppList extends View
       @_start=false
       @setTouchDirection()
     if not e.end
-      @touchFunction e.avg.diff.x
+      @touchFunction e.avg.diff.x*2
     else
       @_start=true
       @end()
