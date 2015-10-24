@@ -3,7 +3,8 @@
 $ = jQuery = require 'jquery'
 View = require './view'
 App = require './app'
-Touch = require './touch'
+# Touch = require './touch'
+Touch = require 'smart-touch'
 {settings} = require '../package.json'
 
 module.exports =
@@ -17,11 +18,13 @@ class AppList extends View
     super
     window.eventbus.on "AppManager","changeApp", (app) =>
       @currentApp = app
+    @touch = new Touch()
 
   #Wird erst nach dem Dom geladen ist ausgefuehrt.
   initialize: ->
     @initDom()
-    touch.on(document.body).fingers.eq(1).call(@touchDown)
+
+    console.log @touch.on().fingers.eq(1).call(@touchDown)
 
   #Erstellt die App-Liste im DOM
   initDom: ->
@@ -68,15 +71,27 @@ class AppList extends View
   #### TOUCH Functionen
 
   #Wird ausgefuehrt, wenn 3 Finger gedrueckt wurden
+  _start:true
   touchDown: (e) =>
     e.preventDefault()
-    if e.start
+    if e.start and @_start
+      @_start=false
       @setTouchDirection()
-    if not e.end or e.start
+    if not e.end
       @touchFunction e.avg.diff.x
     else
-      left = e.lastTouchEvent.avg.diff.x * -1
-      @touchFunction e.lastTouchEvent.avg.diff.x, true
+      @_start=true
+      @end()
+  end: ->
+    left = @dom.css('right')
+    left = left.slice(0,left.length-3)
+    left = parseInt(left)*-1
+
+    if left>(@domWidth/2)
+      @dom.hide()
+    else
+      @dom.css 'right', 0
+
   #Feststelle, welche richtung ausgefuehrt wird.
   setTouchDirection: ->
     @domWidth = @dom.width()
@@ -86,28 +101,19 @@ class AppList extends View
       @dom.show()
       @touchFunction = @rightToLeft
   #Wenn es von links nach recht geht
-  leftToRight: (x,end=false) ->
+  leftToRight: (x) ->
+    # console.log "no: #{x}"
     right = x*-1
     if right<0
       @dom.css 'right', right
-    if end
-      if (x)>(@domWidth/2)
-        @dom.hide()
-      else
-        @dom.css 'right', 0
   #Wenn es von recht nach links geht
-  rightToLeft: (x,end=false) ->
+  rightToLeft: (x) ->
+    # console.log "jo: #{x}"
     right = x*-1-@domWidth
     if right<0
       @dom.css 'right', right
     else
       @dom.css 'right', 0
-
-    if end
-      if (right*-1)>(@domWidth/2)
-        @dom.hide()
-      else
-        @dom.css 'right', 0
 
   #### App Listen Funktionen
 

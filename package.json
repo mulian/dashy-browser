@@ -1,19 +1,20 @@
 {
-  "name"    : "daisy-browser",
+  "name": "daisy-browser",
   "description": "A Browser for Daisy Web-App.",
-  "version" : "1.0.0",
-  "main"    : "main.js",
+  "version": "1.0.0",
+  "main": "main.js",
   "engines": {
     "electron-prebuilt": "^0.^33.3"
   },
   "devDependencies": {
     "docco": "0.7.0",
-    "coffee-script":"^1.10.0",
+    "coffee-script": "^1.10.0",
     "less": "^2.5.3"
   },
   "dependencies": {
     "favicon": "0.0.2",
-    "jquery": "^2.1.4"
+    "jquery": "^2.1.4",
+    "smart-touch": "0.0.4"
   },
   "flash": {
     "path": "/Applications/Google Chrome.app/Contents/Versions/45.0.2454.101/Google Chrome Framework.framework/Internet Plug-Ins/PepperFlash/PepperFlashPlayer.plugin",
@@ -21,15 +22,15 @@
   },
   "settings": {
     "debug": true,
-    "url":"http://localhost:8081/",
+    "url": "http://localhost:8081/",
     "showIntroduction": true,
     "dirUpload": {
       "enabled": true,
       "dir": "/Users/maxh/Desktop"
     },
-    "nativeApps" : {
-      "visio" : "/path/to/Visio",
-      "calc" : "/Applications/Calculator.app"
+    "nativeApps": {
+      "visio": "/path/to/Visio",
+      "calc": "/Applications/Calculator.app"
     }
   },
   "scripts": {
