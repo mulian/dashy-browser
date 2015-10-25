@@ -9,6 +9,9 @@ Notifications = require './src/notifications'
 DirectoryUpload = require './src/directory-upload'
 ipc = require 'ipc'
 
+require 'smart-touch'
+# require '/Users/maxh/Workspaces/Projekte/Andere/smart-touch/lib/boundle.js'
+
 class Client extends View
   constructor: ->
     super

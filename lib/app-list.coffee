@@ -3,9 +3,7 @@
 $ = jQuery = require 'jquery'
 View = require './view'
 App = require './app'
-# Touch = require './touch'
-require 'smart-touch'
-# require '/Users/maxh/Workspaces/Projekte/Andere/smart-touch/lib/boundle.js'
+
 {settings} = require '../package.json'
 
 module.exports =

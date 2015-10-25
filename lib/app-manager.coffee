@@ -27,6 +27,32 @@ class AppManager
     @showTouch = new ShowTouch()
     @reqEventBus()
     @startPlugins()
+    touch.on().pinch.in().fingers.between(4,5).call @pinchIn
+
+  # TODO: TEST
+  _maxPitch: 999
+  _lastPercent: 100
+  _start: false
+  pinchIn: (e) =>
+    if e.start and not @mainApp.is(':visible') and not @_start
+      @_start=true
+      @mainApp.show()
+      @_maxPitch = e.avg.pitch
+      @_lastPercent= 100
+    if @_start
+      if not e.end?
+        percent = (e.avg.diff.pitch*-1)/(@_maxPitch/100)
+        @_lastPercent=percent if e.touches.length>=4
+        if @_lastPercent<80
+          @mainApp.css 'left',"#{@_lastPercent-80}%"
+        else @mainApp.css 'left',"0px"
+      else #aka. on e.end==ture
+        @_start=false
+        @mainApp.css 'left',"0px"
+        if @_lastPercent>60
+          @closeCurrentWindow()
+        else
+          @mainApp.hide()
 
   #registriere Funktionen beim EventBus
   reqEventBus: ->
