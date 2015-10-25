@@ -40,6 +40,7 @@ class AppManager
       @_maxPitch = e.avg.pitch
       @_lastPercent= 100
     if @_start
+      e.preventDefault()
       if not e.end?
         percent = (e.avg.diff.pitch*-1)/(@_maxPitch/100)
         @_lastPercent=percent if e.touches.length>=4

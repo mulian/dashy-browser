@@ -66,3 +66,6 @@ Diese [Dokumentation](http://rawgit.com/mulian/daisy-browser/master/docs/main.ht
 Sie können mit `JUMP TO` (rechts oben) eine andere Datei auswählen.
 
 Die `main.coffee` wird auch vom Dashy-Browser als erstes aufgerufen.
+
+# Weitere Informationen
+Diese App benutzt die [smart-touch](https://www.npmjs.com/package/smart-touch) Lib. für alle touch Gesten. 
