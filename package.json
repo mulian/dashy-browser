@@ -14,7 +14,7 @@
   "dependencies": {
     "favicon": "0.0.2",
     "jquery": "^2.1.4",
-    "smart-touch": "0.0.4"
+    "smart-touch": "0.1.0"
   },
   "flash": {
     "path": "/Applications/Google Chrome.app/Contents/Versions/45.0.2454.101/Google Chrome Framework.framework/Internet Plug-Ins/PepperFlash/PepperFlashPlayer.plugin",

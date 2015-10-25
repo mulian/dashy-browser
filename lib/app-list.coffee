@@ -4,7 +4,8 @@ $ = jQuery = require 'jquery'
 View = require './view'
 App = require './app'
 # Touch = require './touch'
-Touch = require 'smart-touch'
+require 'smart-touch'
+# require '/Users/maxh/Workspaces/Projekte/Andere/smart-touch/lib/boundle.js'
 {settings} = require '../package.json'
 
 module.exports =
@@ -18,13 +19,13 @@ class AppList extends View
     super
     window.eventbus.on "AppManager","changeApp", (app) =>
       @currentApp = app
-    @touch = new Touch()
+    # @touch = new Touch()
 
   #Wird erst nach dem Dom geladen ist ausgefuehrt.
   initialize: ->
     @initDom()
 
-    console.log @touch.on().fingers.eq(1).call(@touchDown)
+    console.log touch.on().fingers.eq(1).call(@touchDown)
 
   #Erstellt die App-Liste im DOM
   initDom: ->
