@@ -7,9 +7,10 @@ module.exports =
 class SumoSave extends Save
   saveStartUrlRE: /https?:\/\/www\.sumopaint\.com\/act\/saved\.php/
   sumoUrlRE: /https?:\/\/www\.sumopaint\.com/
-  saveUrlRE: /https?:\/\/www\.sumopaint\.com\/paint\/\?url=https?:\/\/www\.sumopaint\.com\/images\/temp\/([\w]*)\.png&target=\/act\/saved\.php/
+  saveUrlRE: /https?:\/\/www\.sumopaint\.com\/paint\/\?url=https?:\/\/www\.sumopaint\.com\/images\/temp\/([\w]*)\.png&target=\/act\/saved\.php$/
 
   #Will call if after every page load
+  _sumoStart: true
   check: (app) =>
     appUrl = app.dom.getUrl()
     if @saveStartUrlRE.test appUrl
@@ -17,22 +18,23 @@ class SumoSave extends Save
     else if @saveUrlRE.test appUrl
       @saveUrl = appUrl
       eventbus.fire 'Notifications','getName','Dateiname:',@saveFile
-
-    else if @sumoUrlRE.test app.dom.getUrl()
+    else if @_sumoStart and @sumoUrlRE.test app.dom.getUrl()
       @onSumoStart app
+      @_sumoStart = false
 
   # Speichert eine Datei auf Daisy
   saveFile: (name) =>
+    # {appName,url,data,fileName,type}
     @save
       appName: 'sumo'
-      url: @saveUrl
-      data: ''
-      fileName: name
-      type: 'url'
+      #reload wird angehangen und nicht beim aufruf der Datei wieder zu speichern
+      url: "#{@saveUrl}&reload=true"
+      data: null
+      filename: name
+      type: 'sumo'
 
   # Rufe wieder den Editor auf
   insertSaveAction: (app) ->
-    # console.log "var run = #{@getCode.toString()}; run()"
     app.dom.executeJavaScript "var run = #{@getCode.toString()}; run()"
 
   # Wenn Sumo gestartet wurde, rufe den Editor auf.
