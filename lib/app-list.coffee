@@ -23,7 +23,7 @@ class AppList extends View
   initialize: ->
     @initDom()
 
-    console.log touch.on().fingers.between(3,5).call @touchDown
+    touch.on().fingers.betweene(3,5).call @touchDown
 
   #Erstellt die App-Liste im DOM
   initDom: ->

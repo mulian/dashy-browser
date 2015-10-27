@@ -27,7 +27,7 @@ class AppManager
     @showTouch = new ShowTouch()
     @reqEventBus()
     @startPlugins()
-    touch.on().pinch.in().fingers.between(4,5).call @pinchIn
+    touch.on().pinch.in().fingers.betweene(4,5).call @pinchIn
 
   # TODO: TEST
   _maxPitch: 999

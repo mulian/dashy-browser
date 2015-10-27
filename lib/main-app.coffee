@@ -51,7 +51,12 @@ class MainApp extends App
   ipcMsg: (event) =>
     if event.channel == 'uploadReady'
       console.log event
-      window.eventbus.fire "Notifications","info","Datei wurde hochgeladen? Muss noch überarbeitet werden! Du findest mich in main-app.coffee"
+      filename = event.args[0].filename
+      if event.args[0].return.status == 'Heilige Mutter Teresa'
+        eventbus.fire "Notifications","info","Die Datei #{filename} wurde erfolgreich Hochgeladen."
+      else
+        eventbus.fire "Notifications","error","Die Datei #{filename} konnte nicht hochgeladen werden."
+      # window.eventbus.fire "Notifications","info","Datei wurde hochgeladen? Muss noch überarbeitet werden! Du findest mich in main-app.coffee"
 
   # sende etwas zur App
   ipcSend: (channel,args) ->

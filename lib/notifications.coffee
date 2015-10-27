@@ -9,7 +9,7 @@ class Notifications extends View
   que: []
   dom: null
   # Die Zeit in Sekunden, wie lange die Nachricht angezeigt wird.
-  time: 4
+  time: 6
   nextActive: false
 
   #### Initial Funktionen
@@ -89,4 +89,4 @@ class Notifications extends View
       type: type
       msg: msg
       callback: callback
-    @_next() if not @nextActive
+    @_next() if not @_nextActive

@@ -13,16 +13,17 @@
   },
   "dependencies": {
     "favicon": "0.0.2",
+    "istextorbinary": "^1.0.2",
     "jquery": "^2.1.4",
-    "smart-touch": "0.1.0"
+    "smart-touch": "^0.1.2"
   },
   "flash": {
-    "path": "/Applications/Google Chrome.app/Contents/Versions/45.0.2454.101/Google Chrome Framework.framework/Internet Plug-Ins/PepperFlash/PepperFlashPlayer.plugin",
-    "version": "19.0.0.185"
+    "path": "PepperFlash/PepperFlashPlayer.plugin",
+    "version": "19.0.0.226"
   },
   "settings": {
     "debug": true,
-    "url": "http://localhost:8081/",
+    "url": "http://dashy.wi2.phil.tu-bs.de/",
     "showIntroduction": true,
     "dirUpload": {
       "enabled": true,

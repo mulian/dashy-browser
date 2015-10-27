@@ -4,6 +4,7 @@
 
 {settings} = require '../package.json'
 fs = require 'fs'
+isTextOrBinary = require('istextorbinary')
 
 module.exports =
 class DirectoryUpload
@@ -27,7 +28,8 @@ class DirectoryUpload
     # console.log "upload Dir: #{@uploadDir}"
     if settings.showIntroduction
       setTimeout ->
-        eventbus.fire "Notifications","info","Wenn Sie eine Datei zu dem Desktop-Ordner 'upload' hinzfügen, wird diese Datei automatisch zur ihren Account hinzugefügt. Wenn sie Eingeloggt sind."
+        eventbus.fire "Notifications","info","Wenn Sie eine Office-/Text-Datei zu dem Desktop-Ordner 'upload' hinzfügen, wird diese Datei automatisch zur ihren Account hinzugefügt. Wenn sie Eingeloggt sind."
+        eventbus.fire "Notifications","info","Bild Datein und andere Binary Dateien können über Dateien->Neue Datei anlegen hochgeladen werden."
       , 10*1000
     if not fs.existsSync @uploadDir
       fs.mkdirSync @uploadDir
@@ -52,14 +54,21 @@ class DirectoryUpload
 
   #Lade die Datei ueber Daisy hoch
   upload: (filename) ->
-    content = fs.readFileSync "#{@uploadDir}/#{filename}", 'utf8'
-    file = @splitFileName filename
-    window.eventbus.fire 'MainApp','uploadFile', {} =
-      appName: file.type
-      url: 'none'
-      data: content
-      filename: file.name
-      type: file.type
+    filePath = "#{@uploadDir}/#{filename}"
+    if fs.existsSync filePath
+      if isTextOrBinary.isTextSync filePath
+        content = fs.readFileSync "#{@uploadDir}/#{filename}",'utf8'
+        file = @splitFileName filename
+
+        # eventbus.fire "Notifications","info", "Die Datei #{filename} wird hochgeladen."
+        window.eventbus.fire 'MainApp','uploadFile', {} =
+          appName: file.type
+          url: 'none'
+          data: content
+          filename: file.name
+          type: file.type
+      else
+        eventbus.fire "Notifications","info","Die Datei '#{filename}' ist keine Text-/Office-Datei."
 
   #Teile den Dateinamen in name und type auf.
   splitFileName: (filename) ->

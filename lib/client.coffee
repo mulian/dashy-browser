@@ -10,7 +10,8 @@ DirectoryUpload = require './src/directory-upload'
 ipc = require 'ipc'
 
 require 'smart-touch'
-# require '/Users/maxh/Workspaces/Projekte/Andere/smart-touch/lib/boundle.js'
+# require '/Users/maxh/Workspaces/Projekte/Andere/smart-touch'
+# console.log window.touch
 
 class Client extends View
   constructor: ->
