@@ -7,7 +7,7 @@ fs = require 'fs'
 {exec} = require 'child_process'
 
 packageFile = require '../package.json'
-settings = packageFile.settings
+{settings} = packageFile
 
 # Report crashes to our server.
 require('crash-reporter').start();
@@ -69,7 +69,12 @@ app.on 'ready', ->
 
   # on file Download
   session.on 'will-download', (event, item, downloadWebContents) ->
-    downloadFolder = "#{settings.dirUpload.dir}/download"
+    event.preventDefault();
+    downloadFolder = "#{settings.dirUpload.dir}/download/"
+    if not fs.existsSync downloadFolder
+      fs.mkdirSync downloadFolder
+    item.setSavePath "#{downloadFolder}/#{item.getFilename()}"
+
     item.on 'done', (e, state) ->
       if (state == "completed")
         webContents.send "info", "#{item.getFilename()} erfolgreich heruntergeladen."
@@ -77,9 +82,6 @@ app.on 'ready', ->
         executeFile "#{downloadFolder}/#{item.getFilename()}"
       else
         webContents.send "error", "beim herunterladen von #{item.getFilename()}."
-    if not fs.existsSync downloadFolder
-      fs.mkdirSync downloadFolder
-    item.setSavePath "#{downloadFolder}/#{item.getFilename()}"
 
     webContents.send "closeCurrentWindow"
 
