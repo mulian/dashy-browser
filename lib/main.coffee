@@ -69,7 +69,7 @@ app.on 'ready', ->
 
   # on file Download
   session.on 'will-download', (event, item, downloadWebContents) ->
-    # event.preventDefault();
+    event.preventDefault();
     downloadFolder = "#{settings.dirUpload.dir}\\download"
     if not fs.existsSync downloadFolder
       fs.mkdirSync downloadFolder
