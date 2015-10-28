@@ -29,7 +29,6 @@ class DirectoryUpload
     if settings.showIntroduction
       setTimeout ->
         eventbus.fire "Notifications","info","Wenn Sie eine Office-/Text-Datei zu dem Desktop-Ordner 'upload' hinzfügen, wird diese Datei automatisch zur ihren Account hinzugefügt. Wenn sie Eingeloggt sind."
-        eventbus.fire "Notifications","info","Bild Datein und andere Binary Dateien können über Dateien->Neue Datei anlegen hochgeladen werden."
       , 10*1000
     if not fs.existsSync @uploadDir
       fs.mkdirSync @uploadDir
@@ -69,6 +68,7 @@ class DirectoryUpload
           type: file.type
       else
         eventbus.fire "Notifications","info","Die Datei '#{filename}' ist keine Text-/Office-Datei."
+        eventbus.fire "Notifications","info","Bild Datein und andere Binary Dateien können über 'Daisy->Dateien->Neue Datei anlegen' hochgeladen werden."
 
   #Teile den Dateinamen in name und type auf.
   splitFileName: (filename) ->

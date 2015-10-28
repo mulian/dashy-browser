@@ -19,8 +19,11 @@ require('crash-reporter').start();
 mainWindow = null
 # require "C:\\Users\\wii\\AppData\\Local\\Google\\Chrome\\User\ Data\\PepperFlash\\19.0.0.226\\manifest.json"
 
+console.log "#{__dirname}/#{packageFile.flash.path}"
+console.log packageFile.flash.version
+
 # initiate Flash
-app.commandLine.appendSwitch 'ppapi-flash-path', packageFile.flash.path
+app.commandLine.appendSwitch 'ppapi-flash-path', "#{__dirname}/#{packageFile.flash.path}"
 app.commandLine.appendSwitch 'ppapi-flash-version', packageFile.flash.version
 
 # Quit when all windows are closed.
