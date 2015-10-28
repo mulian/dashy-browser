@@ -39,6 +39,7 @@ class DaisyInterface
     @callDaisy 'uploadFile',
     options.upload = upload
     , (returnObj) ->
+      # console.log options.data
       options.return = returnObj
       options.data = 'deletet from daisy'
       window.eventbus.fire "DaisyInterface","uploadFileReady", options

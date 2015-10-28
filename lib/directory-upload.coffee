@@ -53,10 +53,11 @@ class DirectoryUpload
 
   #Lade die Datei ueber Daisy hoch
   upload: (filename) ->
-    filePath = "#{@uploadDir}\\#{filename}"
+    filePath = "#{@uploadDir}/#{filename}"
     if fs.existsSync filePath
       # if isTextOrBinary.isTextSync filePath
-      content = fs.readFileSync "#{@uploadDir}\\#{filename}",'utf8'
+      content = fs.readFileSync "#{@uploadDir}/#{filename}",'utf8'
+
       file = @splitFileName filename
 
       # eventbus.fire "Notifications","info", "Die Datei #{filename} wird hochgeladen."
@@ -69,6 +70,15 @@ class DirectoryUpload
       # else
       #   eventbus.fire "Notifications","info","Die Datei '#{filename}' ist keine Text-/Office-Datei."
       #   eventbus.fire "Notifications","info","Bild Datein und andere Binary Dateien können über 'Daisy->Dateien->Neue Datei anlegen' hochgeladen werden."
+
+  # readFile: (filePath) ->
+  #   fs.open filePath, 'r', (status, fd) ->
+  #       if (status)
+  #           console.log(status.message)
+  #           return
+  #       buffer = new Buffer(9999);
+  #       fs.read fd, buffer, 0, 100, 0, (err, num) ->
+  #           console.log buffer.toString('utf-8', 0, num)
 
   #Teile den Dateinamen in name und type auf.
   splitFileName: (filename) ->

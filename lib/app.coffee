@@ -24,8 +24,8 @@ class App extends View
     @dom.addEventListener 'did-finish-load', @afterPageLoad
     @dom.addEventListener 'plugin-crashed', @onCrash if @withPlugins
     # Für das Debuggen von jedem Tab:
-    # @dom.addEventListener "dom-ready", =>
-    #   @dom.openDevTools()
+    @dom.addEventListener "dom-ready", =>
+      @dom.openDevTools()
 
   #Gibt eine Information herraus, dass Flash abgestuerzt ist.
   onCrash: (event) ->
