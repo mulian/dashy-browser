@@ -59,10 +59,10 @@ app.on 'ready', ->
   executeFile = (path) ->
     path = "open #{path}" if process.platform == 'darwin'
     exec path, (error, stdout, stderr) ->
-      console.log "stdout: #{stdout}"
-      console.log "stderr: #{stderr}"
+      # console.log "stdout: #{stdout}"
+      # console.log "stderr: #{stderr}"
       if error?
-        console.log "exec error: #{error}"
+        # console.log "exec error: #{error}"
         webContents.send "error","Beim ausführen von #{path}."
       else
         webContents.send "info","Datei #{path} wird ausgeführt."
@@ -78,7 +78,7 @@ app.on 'ready', ->
     item.on 'done', (e, state) ->
       if (state == "completed")
         webContents.send "info", "Die Datei #{item.getFilename()} wurde erfolgreich heruntergeladen und wird geöffnet."
-        console.log("Download successfully");
+        # console.log("Download successfully");
         executeFile "#{downloadFolder}/#{item.getFilename()}"
         event.preventDefault();
       else
