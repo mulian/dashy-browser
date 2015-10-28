@@ -145,4 +145,5 @@ class AppList extends View
     window.eventbus.fire "AppManager","changeApp",app
 
   close: =>
+    console.log "close!"
     @dom.hide()
