@@ -55,17 +55,17 @@ class DirectoryUpload
   upload: (filename) ->
     filePath = "#{@uploadDir}/#{filename}"
     if fs.existsSync filePath
-      if isTextOrBinary.isTextSync filePath
-        content = fs.readFileSync "#{@uploadDir}/#{filename}",'utf8'
-        file = @splitFileName filename
+      # if isTextOrBinary.isTextSync filePath
+      content = fs.readFileSync "#{@uploadDir}/#{filename}",'utf8'
+      file = @splitFileName filename
 
-        # eventbus.fire "Notifications","info", "Die Datei #{filename} wird hochgeladen."
-        window.eventbus.fire 'MainApp','uploadFile', {} =
-          appName: file.type
-          url: 'none'
-          data: content
-          filename: file.name
-          type: file.type
+      # eventbus.fire "Notifications","info", "Die Datei #{filename} wird hochgeladen."
+      window.eventbus.fire 'MainApp','uploadFile', {} =
+        appName: file.type
+        url: 'none'
+        data: content
+        filename: file.name
+        type: file.type
       else
         eventbus.fire "Notifications","info","Die Datei '#{filename}' ist keine Text-/Office-Datei."
         eventbus.fire "Notifications","info","Bild Datein und andere Binary Dateien können über 'Daisy->Dateien->Neue Datei anlegen' hochgeladen werden."
