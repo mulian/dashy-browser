@@ -17,6 +17,7 @@ class AppList extends View
     super
     window.eventbus.on "AppManager","changeApp", (app) =>
       @currentApp = app
+    eventbus.on "AppList","close", @close
     # @touch = new Touch()
 
   #Wird erst nach dem Dom geladen ist ausgefuehrt.
@@ -142,3 +143,6 @@ class AppList extends View
       @domList.append app.entry
       # console.log name
     window.eventbus.fire "AppManager","changeApp",app
+
+  close: =>
+    @dom.hide()

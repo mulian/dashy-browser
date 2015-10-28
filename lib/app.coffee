@@ -97,6 +97,7 @@ class App extends View
     @entry.append @entryClose
     @entry.click =>
       window.eventbus.fire "AppManager",'changeApp',@
+      eventbus.fire "AppList","close"
     @entryClose.click =>
       window.eventbus.fire "AppManager","closeWindow", @
 
