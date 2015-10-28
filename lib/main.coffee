@@ -84,6 +84,7 @@ app.on 'ready', ->
         webContents.send "error", "beim herunterladen von #{item.getFilename()}."
         console.log e
         console.log state
+        console.log "#{downloadFolder}/#{item.getFilename()}"
 
     webContents.send "closeCurrentWindow"
 
