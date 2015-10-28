@@ -7,6 +7,7 @@ AppList = require './app-list'
 ShowTouch = require './show-touch'
 SumoSave = require './sumo-save'
 NativeAppStarter = require './native-app-starter'
+ProwisePlugin = require './prowise-plugin'
 
 module.exports =
 class AppManager
@@ -67,6 +68,7 @@ class AppManager
   startPlugins: ->
     @sumoSave = new SumoSave()
     @nativeAppStarter = new NativeAppStarter()
+    @prowisePlugin = new ProwisePlugin()
 
   #### EventBus Funktionen
 

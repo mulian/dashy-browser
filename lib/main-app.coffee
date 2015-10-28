@@ -53,7 +53,7 @@ class MainApp extends App
       # console.log event
       filename = event.args[0].filename
       if event.args[0].return.status == 'Heilige Mutter Teresa' # aka. successfully
-        eventbus.fire "Notifications","info","Die Datei #{filename} wurde erfolgreich Hochgeladen."
+        eventbus.fire "Notifications","info","Die Datei #{filename} wurde erfolgreich Hochgeladen, falls sie Eingeloggt sind."
       else
         eventbus.fire "Notifications","error","Die Datei #{filename} konnte nicht hochgeladen werden."
 
