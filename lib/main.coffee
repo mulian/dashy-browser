@@ -70,21 +70,21 @@ app.on 'ready', ->
   # on file Download
   session.on 'will-download', (event, item, downloadWebContents) ->
     # event.preventDefault();
-    downloadFolder = "#{settings.dirUpload.dir}/download"
+    downloadFolder = "#{settings.dirUpload.dir}\\download"
     if not fs.existsSync downloadFolder
       fs.mkdirSync downloadFolder
-    item.setSavePath "#{downloadFolder}/#{item.getFilename()}"
+    item.setSavePath "#{downloadFolder}\\#{item.getFilename()}"
 
     item.on 'done', (e, state) ->
       if (state == "completed")
         webContents.send "info", "#{item.getFilename()} erfolgreich heruntergeladen."
         console.log("Download successfully");
-        executeFile "#{downloadFolder}/#{item.getFilename()}"
+        executeFile "#{downloadFolder}\\#{item.getFilename()}"
       else
         webContents.send "error", "beim herunterladen von #{item.getFilename()}."
         console.log e
         console.log state
-        console.log "#{downloadFolder}/#{item.getFilename()}"
+        console.log "#{downloadFolder}\\#{item.getFilename()}"
 
     webContents.send "closeCurrentWindow"
 
