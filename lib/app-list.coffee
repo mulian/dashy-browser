@@ -23,7 +23,6 @@ class AppList extends View
   #Wird erst nach dem Dom geladen ist ausgefuehrt.
   initialize: ->
     @initDom()
-
     touch.on().fingers.betweene(3,5).call @touchDown
 
   #Erstellt die App-Liste im DOM
@@ -145,5 +144,4 @@ class AppList extends View
     window.eventbus.fire "AppManager","changeApp",app
 
   close: =>
-    console.log "close!"
     @dom.hide()

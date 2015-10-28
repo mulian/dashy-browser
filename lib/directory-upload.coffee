@@ -53,10 +53,10 @@ class DirectoryUpload
 
   #Lade die Datei ueber Daisy hoch
   upload: (filename) ->
-    filePath = "#{@uploadDir}/#{filename}"
+    filePath = "#{@uploadDir}\\#{filename}"
     if fs.existsSync filePath
       # if isTextOrBinary.isTextSync filePath
-      content = fs.readFileSync "#{@uploadDir}/#{filename}",'utf8'
+      content = fs.readFileSync "#{@uploadDir}\\#{filename}",'utf8'
       file = @splitFileName filename
 
       # eventbus.fire "Notifications","info", "Die Datei #{filename} wird hochgeladen."
