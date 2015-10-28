@@ -66,6 +66,7 @@ class Notifications extends View
     if @dom?
       if @que.length>0
         note = @que.shift()
+        console.log "note: #{note.msg}"
 
         @text.text note.msg
         @dom.addClass note.type
