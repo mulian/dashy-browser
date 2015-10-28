@@ -77,14 +77,14 @@ app.on 'ready', ->
 
     item.on 'done', (e, state) ->
       if (state == "completed")
-        webContents.send "info", "#{item.getFilename()} erfolgreich heruntergeladen."
+        webContents.send "info", "Die Datei #{item.getFilename()} wurde erfolgreich heruntergeladen und wird geöffnet."
         console.log("Download successfully");
         executeFile "#{downloadFolder}\\#{item.getFilename()}"
       else
         webContents.send "error", "beim herunterladen von #{item.getFilename()}."
-        console.log e
-        console.log state
-        console.log "#{downloadFolder}\\#{item.getFilename()}"
+        # console.log e
+        # console.log state
+        # console.log "#{downloadFolder}\\#{item.getFilename()}"
 
     webContents.send "closeCurrentWindow"
 
