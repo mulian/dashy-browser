@@ -82,6 +82,8 @@ app.on 'ready', ->
         executeFile "#{downloadFolder}/#{item.getFilename()}"
       else
         webContents.send "error", "beim herunterladen von #{item.getFilename()}."
+        console.log e
+        console.log state
 
     webContents.send "closeCurrentWindow"
 
