@@ -27,13 +27,14 @@ class AppManager
     @showTouch = new ShowTouch()
     @reqEventBus()
     @startPlugins()
-    touch.on().pinch.in().fingers.betweene(4,5).call @pinchIn
+    touch.on().pinch.in().fingers.betweene(4,10).call @pinchIn
 
   # TODO: TEST
   _maxPitch: 999
   _lastPercent: 100
   _start: false
   pinchIn: (e) =>
+    console.log "pinch in?"
     if e.start and not @mainApp.is(':visible') and not @_start
       @_start=true
       @mainApp.show()
