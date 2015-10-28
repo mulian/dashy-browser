@@ -66,9 +66,9 @@ class DirectoryUpload
         data: content
         filename: file.name
         type: file.type
-      else
-        eventbus.fire "Notifications","info","Die Datei '#{filename}' ist keine Text-/Office-Datei."
-        eventbus.fire "Notifications","info","Bild Datein und andere Binary Dateien können über 'Daisy->Dateien->Neue Datei anlegen' hochgeladen werden."
+      # else
+      #   eventbus.fire "Notifications","info","Die Datei '#{filename}' ist keine Text-/Office-Datei."
+      #   eventbus.fire "Notifications","info","Bild Datein und andere Binary Dateien können über 'Daisy->Dateien->Neue Datei anlegen' hochgeladen werden."
 
   #Teile den Dateinamen in name und type auf.
   splitFileName: (filename) ->
