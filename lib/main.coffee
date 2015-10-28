@@ -23,7 +23,7 @@ console.log "#{__dirname}/#{packageFile.flash.path}"
 console.log packageFile.flash.version
 
 # initiate Flash
-app.commandLine.appendSwitch 'ppapi-flash-path', "#{__dirname}/#{packageFile.flash.path}"
+app.commandLine.appendSwitch 'ppapi-flash-path', "#{__dirname}/../#{packageFile.flash.path}"
 app.commandLine.appendSwitch 'ppapi-flash-version', packageFile.flash.version
 
 # Quit when all windows are closed.
