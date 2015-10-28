@@ -35,6 +35,7 @@ class AppManager
   _start: false
   pinchIn: (e) =>
     console.log "pinch in?"
+    console.log e
     if e.start and not @mainApp.is(':visible') and not @_start
       @_start=true
       @mainApp.show()
