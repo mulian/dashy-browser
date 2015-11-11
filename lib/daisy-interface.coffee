@@ -18,6 +18,13 @@ class DaisyInterface
       'async': true
       'cache': false).always cb
 
+  getUserId: =>
+    console.log "und?"
+    @callDaisy 'get_user_id',{}, (data,data2) ->
+      console.log "get_user_id"
+      console.log data
+      console.log data2
+
   #Upload file to Daisy
   # The Data will be saved as filename.type with url from app and appName
   #
@@ -28,19 +35,19 @@ class DaisyInterface
   #   * fileName {String}
   #   * type {string}
   uploadFile: (options) =>
-    {appName,url,data,filename,type} = options
-    upload = {} =
-      appname: appName
-      url: url
-      data:
-        data: data
-        name: filename
-        type: type
-    @callDaisy 'uploadFile',
-    options.upload = upload
-    , (returnObj) ->
-      # console.log options.data
-      options.return = returnObj
-      options.data = 'deletet from daisy'
-      window.eventbus.fire "DaisyInterface","uploadFileReady", options
+    @getUserId()
+    # {appName,url,data,filename,type} = options
+    # upload = {} =
+    #   appname: appName
+    #   url: url
+    #   data:
+    #     data: data
+    #     name: filename
+    #     type: type
+    # @callDaisy 'uploadFile',
+    # options.upload = upload
+    # , (returnObj) =>
+    #   options.return = returnObj
+    #   options.data = 'deletet from daisy'
+    #   window.eventbus.fire "DaisyInterface","uploadFileReady", options
       # console.log JSON.stringify returnObj
