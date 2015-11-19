@@ -9,6 +9,7 @@ class DaisyIPC
     @ipc = require 'ipc'
     @ipc.on 'upload', @upload
     window.eventbus.on "DaisyInterface","uploadFileReady", @uploadReady
+    window.eventbus.on "DaisyInterface","sendLogin", @sendLogin
 
   # Gibt die Datei an das DaisyInterface weiter
   upload: (options) =>
@@ -17,3 +18,7 @@ class DaisyIPC
   #Wenn ein Upload fertig ist.
   uploadReady: (data) =>
     @ipc.sendToHost 'uploadReady', data
+
+  sendLogin: (id) ->
+    console.log "User #{id} logged in."
+    @ipc.sendToHost 'sendLogin', id

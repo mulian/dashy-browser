@@ -8,6 +8,7 @@ EventBus = require './src/event-bus'
 Notifications = require './src/notifications'
 DirectoryUpload = require './src/directory-upload'
 ipc = require 'ipc'
+Login = require './src/login'
 
 require 'smart-touch'
 # require '/Users/maxh/Workspaces/Projekte/Andere/smart-touch'
@@ -21,6 +22,7 @@ class Client extends View
     @appManager = new AppManager()
     @directoryUpload = new DirectoryUpload()
     @regIPC()
+    new Login()
 
 
   #Registriere die IPC Calls die von aussen (App Schale) kommen koennen

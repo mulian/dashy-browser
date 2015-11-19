@@ -15,6 +15,7 @@
     "favicon": "0.0.2",
     "istextorbinary": "^1.0.2",
     "jquery": "^2.1.4",
+    "mysql": "^2.9.0",
     "smart-touch": "^0.1.2"
   },
   "flash": {
@@ -24,6 +25,7 @@
   "settings": {
     "debug": true,
     "url": "http://dashy.wi2.phil.tu-bs.de/",
+    "url2": "http://localhost:7001",
     "showIntroduction": true,
     "dirUpload": {
       "enabled": true,
@@ -33,6 +35,13 @@
       "visio": "/path/to/Visio",
       "calc": "/Applications/Calculator.app"
     }
+  },
+  "database": {
+    "host": "localhost",
+    "database": "daisy",
+    "user": "daisyMySQL",
+    "password": "h70rkyi7UL0cowBF",
+    "port": 3306
   },
   "scripts": {
     "start": "electron ./",

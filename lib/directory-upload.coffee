@@ -4,12 +4,14 @@
 
 {settings} = require '../package.json'
 fs = require 'fs'
-isTextOrBinary = require('istextorbinary')
+# isTextOrBinary = require('istextorbinary')
+MySQL = require './mysql'
 
 module.exports =
 class DirectoryUpload
   uploadDir: null
   constructor: ->
+    new MySQL()
     @uploadDir = settings.dirUpload.dir
     @createSubDir()
     @watch()
@@ -49,24 +51,37 @@ class DirectoryUpload
 
   #Wenn sich etwas am Ordner veraendert hat.
   onDirChange: (event,filename) =>
-    @upload filename
+    console.log event
+    console.log filename
+    change=false
+    change=true if event=='change'
+    @upload filename,change
 
   #Lade die Datei ueber Daisy hoch
-  upload: (filename) ->
+  upload: (filename,change) ->
     filePath = "#{@uploadDir}/#{filename}"
     if fs.existsSync filePath
       # if isTextOrBinary.isTextSync filePath
-      content = fs.readFileSync "#{@uploadDir}/#{filename}",'utf8'
+      content = fs.readFileSync "#{@uploadDir}/#{filename}"
 
       file = @splitFileName filename
+      console.log file
 
       # eventbus.fire "Notifications","info", "Die Datei #{filename} wird hochgeladen."
-      window.eventbus.fire 'MainApp','uploadFile', {} =
+
+      # window.eventbus.fire 'MainApp','uploadFile', {} =
+      #   appName: file.type
+      #   url: 'none'
+      #   data: content
+      #   filename: file.name
+      #   type: file.type
+      eventbus.fire 'MySQL', 'insertFile', {} =
         appName: file.type
         url: 'none'
         data: content
         filename: file.name
         type: file.type
+        update: true if change
       # else
       #   eventbus.fire "Notifications","info","Die Datei '#{filename}' ist keine Text-/Office-Datei."
       #   eventbus.fire "Notifications","info","Bild Datein und andere Binary Dateien können über 'Daisy->Dateien->Neue Datei anlegen' hochgeladen werden."

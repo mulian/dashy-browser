@@ -4,26 +4,25 @@ module.exports =
 class DaisyInterface
   # registriert die Schnittstelle
   constructor: ->
-    window.eventbus.on "DaisyInterface","uploadFile", @uploadFile
-
+    # window.eventbus.on "DaisyInterface","uploadFile", @uploadFile
+    @getUserId()
   # Fragt Daisy (den Server mit CakePHP) an.
   callDaisy: (url, data_array, cb) ->
     # console.log data_array.data.data.length
     url = '../FileUploads/' + url
     $.ajax(
-      'url': url
-      'type': 'POST'
-      'data': data_array
-      'dataType': 'json'
-      'async': true
-      'cache': false).always cb
+      url: url
+      type: 'POST'
+      data: data_array
+      dataType: 'json'
+      async: true
+      cache: false
+      ).always cb
 
   getUserId: =>
-    console.log "und?"
-    @callDaisy 'get_user_id',{}, (data,data2) ->
-      console.log "get_user_id"
-      console.log data
-      console.log data2
+    @callDaisy 'get_user_id',{}, (data) ->
+      if data.status=='success'
+        console.log "user_id:#{data.user_id}"
 
   #Upload file to Daisy
   # The Data will be saved as filename.type with url from app and appName
@@ -51,3 +50,10 @@ class DaisyInterface
     #   options.data = 'deletet from daisy'
     #   window.eventbus.fire "DaisyInterface","uploadFileReady", options
       # console.log JSON.stringify returnObj
+
+console.log "inserted"
+document.addEventListener "DOMContentLoaded", ->
+  # console.log "run, #{document.readyState}"
+  # if document.readyState == "complete"
+  document.removeEventListener( "onreadystatechange", arguments.callee )
+  daisyInterface = new DaisyInterface()

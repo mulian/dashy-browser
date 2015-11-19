@@ -21,14 +21,15 @@ class MainApp extends App
   constructor: (options={}) ->
     {@on,@name} = options
     options.withPlugins = false
-    options.nodeintegration=true
+    # options.nodeintegration=true
     super options
     # @initElements()
     window.eventbus.on 'MainApp','uploadFile', @uploadFile
 
   # Fügt Folgendes JS zur Daisy App hinzu.
   getPreload: ->
-    './src/daisy-execute.js'
+    # './src/daisy-execute.js'
+    './src/daisy-interface.js'
 
   initialize: ->
     super
@@ -67,7 +68,14 @@ class MainApp extends App
     @ipcSend 'upload', options
 
   # Pipt die App Logs zur Haupt App
+  loginRE: /^user_id:(\d+)$/
   log: (e) =>
-    console.log("#{@name}: #{e.message}")
+    # console.log("#{@name}: #{e.message}")
+    if match = @loginRE.exec e.message
+      console.log match
+      id=match[1]
+      console.log id
+      eventbus.fire 'Login','setId',parseInt id
+      # console.log "logged in! with id:#{id}"
   # finishLoad: (event, isMainFrame) =>
   #   console.log "finished loading"

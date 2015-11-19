@@ -8,4 +8,5 @@ class Save
     window.eventbus.on "App","afterPageLoad", @check
 
   save: (options) ->
-    window.eventbus.fire 'MainApp','uploadFile', options
+    eventbus.fire 'MySQL','insertFile',options
+    # window.eventbus.fire 'MainApp','uploadFile', options
