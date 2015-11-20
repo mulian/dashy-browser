@@ -55,8 +55,8 @@ class DirectoryUpload
     # console.log filename
     change=false
     change=true if event=='change'
-    if filename? and filename.indexOf '~$$'<0 and filename.indexOf '.tmp'<0
-      and filename == 'Thumbs.db' #filename dosnt contain ~$$
+    if filename? and filename.indexOf '~$$'<0 and filename.indexOf '.tmp'<0 and filename == 'Thumbs.db' #filename dosnt contain ~$$
+      console.log "File: #{filename}"
       @upload filename,change
 
   #Lade die Datei ueber Daisy hoch
