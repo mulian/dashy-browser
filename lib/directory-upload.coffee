@@ -60,7 +60,7 @@ class DirectoryUpload
   #Lade die Datei ueber Daisy hoch
   upload: (filename,change) ->
     filePath = "#{@uploadDir}/#{filename}"
-    if fs.existsSync filePath and filename.indexOf '~$$'<0 #filename dosnt contain ~$$
+    if filename? and fs.existsSync filePath and filename.indexOf '~$$'<0 #filename dosnt contain ~$$
       # if isTextOrBinary.isTextSync filePath
       content = fs.readFileSync "#{@uploadDir}/#{filename}"
 
