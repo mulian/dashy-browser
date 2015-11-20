@@ -55,13 +55,15 @@ class DirectoryUpload
     # console.log filename
     change=false
     change=true if event=='change'
-    @upload filename,change
+    if filename? and filename.indexOf '~$$'<0 and filename.indexOf '.tmp'<0
+      and filename == 'Thumbs.db' #filename dosnt contain ~$$
+      @upload filename,change
 
   #Lade die Datei ueber Daisy hoch
   lastFilename:null
   upload: (filename,change) ->
     filePath = "#{@uploadDir}/#{filename}"
-    if filename? and @lastFilename!=filename and fs.existsSync filePath and filename.indexOf '~$$'<0 and filename.indexOf '.tmp'<0 and filename.indexOf 'Thumbs.db'<0 #filename dosnt contain ~$$
+    if @lastFilename!=filename and fs.existsSync filePath
       @lastFilename=filename
       setTimeout =>
         @lastFilename = null
