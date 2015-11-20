@@ -1,7 +1,7 @@
 $ = jQuery = require 'jquery'
 View = require './view'
 favicon = require 'favicon'
-{settings} = packageFile
+{settings} = require '../package.json'
 
 module.exports =
 class App extends View
