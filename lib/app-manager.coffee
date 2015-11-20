@@ -100,7 +100,7 @@ class AppManager
   newApp: (event) =>
     nativeRE= /^([\w]*):$/
     # console.log @appList
-    window.eventbus.fire "AppManager","newApp",event.url
+    # window.eventbus.fire "AppManager","newApp",event.url
     if not nativeRE.test event.url
       @appList.add event.url
       if @firstTime

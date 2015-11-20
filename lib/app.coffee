@@ -1,6 +1,7 @@
 $ = jQuery = require 'jquery'
 View = require './view'
 favicon = require 'favicon'
+{settings} = packageFile
 
 module.exports =
 class App extends View
@@ -25,7 +26,7 @@ class App extends View
     @dom.addEventListener 'plugin-crashed', @onCrash if @withPlugins
     # Für das Debuggen von jedem Tab:
     @dom.addEventListener "dom-ready", =>
-      @dom.openDevTools()
+      @dom.openDevTools() if settings.debug
 
   #Gibt eine Information herraus, dass Flash abgestuerzt ist.
   onCrash: (event) ->
