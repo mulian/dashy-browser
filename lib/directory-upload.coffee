@@ -83,6 +83,7 @@ class DirectoryUpload
       #   data: content
       #   filename: file.name
       #   type: file.type
+      console.log content
       eventbus.fire 'MySQL', 'insertFile', {} =
         appName: file.type
         url: 'none'
