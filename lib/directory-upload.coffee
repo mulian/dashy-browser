@@ -55,19 +55,20 @@ class DirectoryUpload
     # console.log filename
     change=false
     change=true if event=='change'
-    if filename? and filename.indexOf '~$$'<0 and filename.indexOf '.tmp'<0 and filename == 'Thumbs.db' #filename dosnt contain ~$$
+    if filename? and @lastFilename!=filename and filename.indexOf '~$$'<0 and filename.indexOf '.tmp'<0 and filename == 'Thumbs.db' #filename dosnt contain ~$$
       console.log "File: #{filename}"
+      @lastFilename=filename
+      clearTimeout x
+      x = setTimeout =>
+        @lastFilename = null
+      , 200
       @upload filename,change
 
   #Lade die Datei ueber Daisy hoch
   lastFilename:null
   upload: (filename,change) ->
     filePath = "#{@uploadDir}/#{filename}"
-    if @lastFilename!=filename and fs.existsSync filePath
-      @lastFilename=filename
-      setTimeout =>
-        @lastFilename = null
-      , 200
+    if fs.existsSync filePath
       # if isTextOrBinary.isTextSync filePath
       content = fs.readFileSync "#{@uploadDir}/#{filename}"
 
